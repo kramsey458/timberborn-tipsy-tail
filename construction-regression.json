@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "version": "0.2.0.0",
+  "construction": {
+    "children": [
+      "ConstructionBase"
+    ],
+    "thresholds": [],
+    "stage_selection": "PASS"
+  },
+  "native_model": "ConstructionBase5x5.Model",
+  "scaled_size": [
+    5,
+    0.1,
+    6
+  ]
+}

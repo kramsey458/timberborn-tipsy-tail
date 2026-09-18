@@ -1,0 +1,8 @@
+{
+  "Name": "The Tipsy Tail",
+  "Version": "0.2.0.0",
+  "Id": "Kyler.TipsyTail",
+  "MinimumGameVersion": "1.1.2.4",
+  "Description": "A self-contained swim-up pool bar for both factions. A two-block underground basin, teal fountain water, beaver-height counter and stock dirt-and-stakes construction site. Eight guests, hauled water and continuous evaporation while operating.",
+  "RequiredMods": []
+}

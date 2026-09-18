@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "basin_floor_bottom": -2,
+  "floor_planks": 68,
+  "counter_top": 0.51,
+  "bar_seat_anchor": 0.19,
+  "counter_above_seated_anchor": 0.32,
+  "entrance_tread_tops": [
+    0.09000000357627869,
+    0.18000000715255737
+  ],
+  "deck_top": 0.17999999225139618,
+  "ladder_treads": 10,
+  "hanging_ornament_removed": true,
+  "test_type": "Offline geometric checks; game animations and shaders need user playtest"
+}
