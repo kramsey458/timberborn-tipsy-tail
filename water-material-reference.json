@@ -1,0 +1,857 @@
+{
+ "note": "Read from the installed game with UnityPy; not an in-game measurement.",
+ "game_version_file": "1.1.2.4-52e959e-sw",
+ "lake_to_fountain_tiling_ratio": {
+  "albedo": 0.12,
+  "bump1": 0.1,
+  "bump2": 0.07,
+  "gloss": 0.16
+ },
+ "ratio_min": 0.07,
+ "ratio_max": 0.16,
+ "ratio_median": 0.11,
+ "fountain_water_emission_color": [
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "lake_deep_water_color": [
+  0.0,
+  0.0588,
+  0.2824,
+  1.0
+ ],
+ "shared_textures": {
+  "_BumpMap1": "Water_N",
+  "_BumpMap2": "Water_N",
+  "_MainTex": "PhysicalWaterAlbedo",
+  "_MetallicGlossMap": "WaterMetalAndGloss",
+  "_NoiseMap": "PerlinNoise3"
+ },
+ "materials": {
+  "FountainWater": {
+   "render_queue": 3000,
+   "colors": {
+    "_Albedo_Speed": [
+     0.003,
+     -0.001,
+     0.0,
+     0.0
+    ],
+    "_Albedo_Speed2": [
+     -0.0075,
+     0.004,
+     0.0,
+     0.0
+    ],
+    "_BaseAlbedoColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_BlendColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_BumpMap1Speed": [
+     0.001,
+     0.0015,
+     0.0,
+     0.0
+    ],
+    "_BumpMap2Speed": [
+     -0.0011,
+     -0.001,
+     0.0,
+     0.0
+    ],
+    "_Color": [
+     0.1647,
+     0.4824,
+     0.549,
+     1.0
+    ],
+    "_EmissionColor": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "_FoamColor": [
+     0.1294,
+     0.3451,
+     0.3686,
+     1.0
+    ],
+    "_SplatAlbedoColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "floats": {
+    "_BaseNormalMapScale": 1.0,
+    "_BumpMap1Strength": 0.8,
+    "_BumpMap1Tiling": 1.0,
+    "_BumpMap2Strength": 0.87,
+    "_BumpMap2Tiling": 2.0,
+    "_BumpScale": 0.5,
+    "_BumpScale1": 0.05,
+    "_BumpScale2": 0.5,
+    "_BumpSpeedX1": 0.001,
+    "_BumpSpeedX2": -0.001,
+    "_BumpSpeedY1": 0.001,
+    "_BumpSpeedY2": -0.001,
+    "_Cutoff": 0.5,
+    "_DetailAlbedoTexTiling": 0.02187,
+    "_DetailNormalMapScale": 1.0,
+    "_DstBlend": 0.0,
+    "_FadeLimit": 0.229,
+    "_FoamDepth": 0.12,
+    "_FoamIntensity": 1.0,
+    "_FoamOffset": 0.01,
+    "_FoamRotationRadius": 0.5,
+    "_FoamRotationRadius1": 2.0,
+    "_FoamRotationRadius2": 2.0,
+    "_FoamRotationSpeed": 0.5,
+    "_FoamRotationSpeed1": 0.03,
+    "_FoamRotationSpeed2": -0.025,
+    "_GlossMapScale": 0.9,
+    "_Glossiness": 0.5,
+    "_GlossyReflections": 1.0,
+    "_Grayscale": 0.0,
+    "_InvFade": 0.72,
+    "_MainTexTiling": 0.5,
+    "_MainTexTiling2": 0.2,
+    "_MaskedFoamDepth": 0.2,
+    "_MaskedFoamOffset": 0.12,
+    "_Metallic": 0.0,
+    "_MetallicGlossMapTiling": 0.0625,
+    "_MetallicMapScale": 1.0,
+    "_Mode": 0.0,
+    "_OcclusionStrength": 1.0,
+    "_Parallax": 0.02,
+    "_PlainFoamDepth": 0.212,
+    "_PlainFoamOffset": 0.034,
+    "_PlainFoamThreshold": 0.0,
+    "_QueueControl": 1.0,
+    "_QueueOffset": 0.0,
+    "_ShorelineThreshold": 0.9,
+    "_Smoothness": 0.672,
+    "_SmoothnessTextureChannel": 0.0,
+    "_SpecularHighlights": 1.0,
+    "_SplatFilterInvert": 0.0,
+    "_SplatNormalMapScale": 1.0,
+    "_SrcBlend": 1.0,
+    "_TransparencyDepth": 0.0,
+    "_TransparencyDepthOffset": 0.0,
+    "_UVSec": 0.0,
+    "_WaterRippleSpeed": 0.1,
+    "_Water_Movement_Speed": 1.0,
+    "_WaveAmplitude": 0.0,
+    "_WaveLength": 1.0,
+    "_WaveSpeed": 1.0,
+    "_ZWrite": 1.0
+   },
+   "textures": {
+    "_BumpMap1": "Water_N",
+    "_BumpMap2": "Water_N",
+    "_MainTex": "PhysicalWaterAlbedo",
+    "_MetallicGlossMap": "WaterMetalAndGloss",
+    "_NoiseMap": "PerlinNoise3"
+   }
+  },
+  "PhysicalWater_Opaque": {
+   "render_queue": 3000,
+   "colors": {
+    "_AlbedoAtMaxDepth": [
+     0.0,
+     0.0588,
+     0.2824,
+     1.0
+    ],
+    "_BaseAlbedoColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_Base_Contamination_Color_A": [
+     0.02,
+     0.0199,
+     0.0196,
+     0.0
+    ],
+    "_Base_Contamination_Color_B": [
+     0.5,
+     0.1223,
+     0.0448,
+     0.0
+    ],
+    "_BlendColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_BumpMap1Speed": [
+     0.01,
+     0.008,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_1": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_3": [
+     -0.008,
+     -0.002,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_4": [
+     0.03,
+     0.008,
+     0.0,
+     0.0
+    ],
+    "_BumpMap2Speed": [
+     -0.008,
+     -0.01,
+     0.0,
+     0.0
+    ],
+    "_Color": [
+     0.2656,
+     0.4223,
+     0.4434,
+     1.0
+    ],
+    "_Contamination_Source_Color": [
+     0.6698,
+     0.6493,
+     0.6287,
+     1.0
+    ],
+    "_DetailAlbedoSpeed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_Detail_Contamination_Color_A": [
+     0.851,
+     0.564,
+     0.3255,
+     0.0
+    ],
+    "_Detail_Contamination_Color_B": [
+     0.88,
+     0.6111,
+     0.396,
+     0.0
+    ],
+    "_DistortionDistanceFalloff": [
+     40.0,
+     60.0,
+     0.0,
+     0.0
+    ],
+    "_DistortionWeights": [
+     0.003,
+     0.004,
+     0.0,
+     0.0
+    ],
+    "_EmissionColor": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "_FoamColor": [
+     0.1177,
+     0.8829,
+     0.9245,
+     1.0
+    ],
+    "_FoamNoiseScale": [
+     0.35,
+     0.02,
+     0.0,
+     0.0
+    ],
+    "_FoamSmoothstep": [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    "_MetallicGlossMapSpeed": [
+     -0.008,
+     -0.002,
+     0.0,
+     0.0
+    ],
+    "_MetallicGlossMapSpeed2": [
+     0.01,
+     0.004,
+     0.0,
+     0.0
+    ],
+    "_PollutionColorA": [
+     1.0,
+     0.0,
+     0.3651,
+     1.0
+    ],
+    "_PollutionColorB": [
+     0.0538,
+     0.0019,
+     0.0,
+     1.0
+    ],
+    "_PollutionEmissionColor": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_SplatAlbedoColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_TransparencyColor": [
+     0.0,
+     0.8289,
+     1.0,
+     1.0
+    ],
+    "_Vector4": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_Water_Source_Color": [
+     0.6706,
+     0.651,
+     0.6275,
+     1.0
+    ],
+    "_WaterfallColor": [
+     0.5804,
+     0.7669,
+     0.7922,
+     1.0
+    ],
+    "_WaterfallNoiseScale": [
+     0.26,
+     0.07,
+     0.0,
+     0.0
+    ]
+   },
+   "floats": {
+    "CALCULATE_OUTFLOWS": 1.0,
+    "_AlbedoFlowSpeed": 0.4,
+    "_AlbedoFlowStrength": 2.0,
+    "_AlphaClip": 0.0,
+    "_AlphaToMask": 0.0,
+    "_BaseNormalMapScale": 1.0,
+    "_Base_Contamination_Intensity_High": 1.0,
+    "_Base_Contamination_Intensity_Low": 1.75,
+    "_Blend": 0.0,
+    "_BlendModePreserveSpecular": 0.0,
+    "_BumpMap1Strength": 0.5,
+    "_BumpMap1Tiling": 0.1,
+    "_BumpMap2Strength": 0.75,
+    "_BumpMap2Tiling": 0.14,
+    "_BumpScale": 0.5,
+    "_BumpScale1": 0.05,
+    "_BumpScale2": 0.5,
+    "_BumpSpeedX1": 0.001,
+    "_BumpSpeedX2": -0.001,
+    "_BumpSpeedY1": 0.001,
+    "_BumpSpeedY2": -0.001,
+    "_CALCULATE_OUTFLOWS": 1.0,
+    "_CastShadows": 0.0,
+    "_ClearReflectionIntensity": 1.1,
+    "_ContaminatedReflectionIntensity": 0.4,
+    "_ContaminationNonlinearity": 0.25,
+    "_Contamination_Flow_Distortion": 0.00125,
+    "_Contamination_Metallic": 0.0,
+    "_Contamination_Normal_Strength": 2.0,
+    "_Contamination_Smoothness": 0.15,
+    "_Contamination_Source_Scale": 8.0,
+    "_Contamination_Source_Strength": 0.8,
+    "_Cull": 0.0,
+    "_Cutoff": 0.5,
+    "_DetailAlbedoTexTiling": 0.015,
+    "_DetailNormalMapScale": 1.0,
+    "_Detail_Contamination_Intensity_High": 1.2,
+    "_Detail_Contamination_Intensity_Low": 4.5,
+    "_DistortionScale": 1.1,
+    "_DistortionSpeed": 0.075,
+    "_DownTilt": 0.15,
+    "_DstBlend": 10.0,
+    "_FadeLimit": 0.229,
+    "_FlowSpeed": 1.13,
+    "_FlowStrength": 0.5,
+    "_FlowTest": 0.0,
+    "_FlowTiling": 0.1,
+    "_FoamBlur": 0.14,
+    "_FoamDepth": 9.0,
+    "_FoamIntensity": 0.0,
+    "_FoamNoiseScale": 0.24,
+    "_FoamOffset": -0.5,
+    "_FoamRotationRadius": 0.5,
+    "_FoamRotationRadius1": 2.0,
+    "_FoamRotationRadius2": 2.0,
+    "_FoamRotationSpeed": 0.5,
+    "_FoamRotationSpeed1": 0.03,
+    "_FoamRotationSpeed2": -0.025,
+    "_FoamSlopeMax": 0.67,
+    "_FoamSlopeMin": 0.091,
+    "_FoamSmoothstepMax": 1.0,
+    "_FoamSmoothstepMin": 0.0,
+    "_FoamSpeed": 8.41,
+    "_FresnelPower": 5.0,
+    "_FresnelWrap": 0.4,
+    "_GlossMapScale": 1.0,
+    "_Glossiness": 0.5,
+    "_GlossyReflections": 1.0,
+    "_HighlightMaskLimit": 0.4,
+    "_HorizonBias": 0.15,
+    "_ISENABLED": 0.0,
+    "_InvFade": 0.72,
+    "_Layer": 0.0,
+    "_LevelVisibilityMaskTiling": 1.0,
+    "_LightHorizonBias": 0.9,
+    "_LightTilt": 0.2,
+    "_MainTexTiling": 0.06,
+    "_MaskedFoamDepth": 0.2,
+    "_MaskedFoamOffset": 0.12,
+    "_MaxContaminationBlendingMargin": 0.5,
+    "_MaxContaminationThreshold": 1.0,
+    "_MaxDepth": 5.0,
+    "_MaxPollutionBlendingMargin": 0.5,
+    "_MaxPollutionThreshold": 1.0,
+    "_Metallic": 0.0,
+    "_MetallicGlossMapTiling": 0.01,
+    "_MetallicGlossMapTiling2": 0.01,
+    "_MetallicGlossMapTiling_1": 0.2,
+    "_MetallicMapScale": 1.0,
+    "_MinContaminationBlendingMargin": 0.45,
+    "_MinContaminationThreshold": 0.01,
+    "_MinPollutionBlendingMargin": 0.45,
+    "_MinPollutionThreshold": 0.01,
+    "_MinimumPollutionIntensity": 0.3,
+    "_MinimumPollutionIntensity_1": 0.3,
+    "_Mode": 0.0,
+    "_NormalBoost": 4.0,
+    "_OcclusionStrength": 1.0,
+    "_OutflowsLimit": 0.035,
+    "_Parallax": 0.02,
+    "_PlainFoamDepth": 0.212,
+    "_PlainFoamOffset": 0.034,
+    "_PlainFoamThreshold": 0.0,
+    "_PollutionBlendingMargin": 0.5,
+    "_PollutionCurveModifier": 0.975,
+    "_PollutionDetailContrast": 0.0,
+    "_PollutionIntensityThreshold": 0.1,
+    "_PollutionIntensityThreshold_1": 0.0,
+    "_PollutionNonlinearity": 0.25,
+    "_PolutionDetailIntensity": 10.0,
+    "_QueueControl": 1.0,
+    "_QueueOffset": -14.0,
+    "_ReceiveShadows": 1.0,
+    "_ShorelineThreshold": 0.9,
+    "_Smoothness": 0.672,
+    "_SmoothnessTextureChannel": 0.0,
+    "_SpecularExponent": 150.0,
+    "_SpecularHighlights": 1.0,
+    "_SpecularIntensity": 1.6,
+    "_SpecularStrength": 100.0,
+    "_SplatFilterInvert": 0.0,
+    "_SplatNormalMapScale": 1.0,
+    "_SrcBlend": 5.0,
+    "_Surface": 1.0,
+    "_TransparencyBlending": 0.8,
+    "_TransparencyDepth": 0.35,
+    "_TransparencyDepthModifier": 0.5,
+    "_TransparencyDepthOffset": 0.0,
+    "_TransparencyDepthWaterfall": 0.0,
+    "_TransparencyOpacity": 0.0,
+    "_TransparencySaturation": 0.3,
+    "_TransparencyWaterfallDepth": 0.2,
+    "_UVSec": 0.0,
+    "_Water_Source_Strength": 0.8,
+    "_WaterfallJaggedEdge": 1.18,
+    "_WaterfallNoiseThreshold": 0.022,
+    "_WaterfallSpeed": 2.5,
+    "_WaterfallStrength": 0.19,
+    "_WaterfallThresholdMax": 0.12,
+    "_WaterfallThresholdMin": 0.1,
+    "_WaveAmplitude": 0.0,
+    "_WaveLength": 1.0,
+    "_WaveSpeed": 1.0,
+    "_WorkflowMode": 1.0,
+    "_ZTest": 4.0,
+    "_ZWrite": 0.0,
+    "_ZWriteControl": 0.0
+   },
+   "textures": {
+    "_BumpMap": "Water_N",
+    "_ContaminationAlbedoEmissionSource": "WaterContaminationAlbedoEmissionSource",
+    "_ContaminationBlendingMarginNoise": "WaterContaminationBlendingMarginNoise",
+    "_ContaminationVisualizationNoise": "PerlinNoise3",
+    "_DepthGradients": "DepthGradients",
+    "_DetailAlbedoTex": "PhysicalWaterDetailAlbedo",
+    "_LevelVisibilityMask": "LevelVisibilityMask",
+    "_MainTex": "PhysicalWaterAlbedo",
+    "_MetallicGlossMap": "WaterMetalAndGloss",
+    "_Water_Source_Shape": "WaterSourceShape"
+   }
+  },
+  "PhysicalWater_Transparent": {
+   "render_queue": 3000,
+   "colors": {
+    "_AlbedoAtMaxDepth": [
+     0.1945,
+     0.2384,
+     0.3585,
+     1.0
+    ],
+    "_BaseAlbedoColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_Base_Contamination_Color_A": [
+     0.02,
+     0.0199,
+     0.0196,
+     0.0
+    ],
+    "_Base_Contamination_Color_B": [
+     0.5098,
+     0.1531,
+     0.0902,
+     0.0
+    ],
+    "_BlendColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_BumpMap1Speed": [
+     0.01,
+     0.008,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_1": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_2": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_3": [
+     -0.008,
+     -0.002,
+     0.0,
+     0.0
+    ],
+    "_BumpMap1Speed_4": [
+     0.03,
+     0.008,
+     0.0,
+     0.0
+    ],
+    "_BumpMap2Speed": [
+     -0.008,
+     -0.01,
+     0.0,
+     0.0
+    ],
+    "_Color": [
+     0.4314,
+     0.5843,
+     0.5294,
+     1.0
+    ],
+    "_Contamination_Source_Color": [
+     0.6698,
+     0.6493,
+     0.6287,
+     1.0
+    ],
+    "_DetailAlbedoSpeed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_Detail_Contamination_Color_A": [
+     0.851,
+     0.564,
+     0.3255,
+     0.0
+    ],
+    "_Detail_Contamination_Color_B": [
+     0.88,
+     0.6111,
+     0.396,
+     0.0
+    ],
+    "_EmissionColor": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "_FoamColor": [
+     0.1177,
+     0.8829,
+     0.9245,
+     1.0
+    ],
+    "_FoamNoiseScale": [
+     0.35,
+     0.02,
+     0.0,
+     0.0
+    ],
+    "_FoamSmoothstep": [
+     0.0,
+     1.0,
+     0.0,
+     0.0
+    ],
+    "_MetallicGlossMapSpeed": [
+     -0.008,
+     -0.002,
+     0.0,
+     0.0
+    ],
+    "_MetallicGlossMapSpeed2": [
+     0.01,
+     0.004,
+     0.0,
+     0.0
+    ],
+    "_PollutionColorA": [
+     1.0,
+     0.0,
+     0.3651,
+     1.0
+    ],
+    "_PollutionColorB": [
+     0.0538,
+     0.0019,
+     0.0,
+     1.0
+    ],
+    "_PollutionEmissionColor": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_SplatAlbedoColor": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "_Vector4": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "_Water_Source_Color": [
+     0.6706,
+     0.651,
+     0.6275,
+     1.0
+    ],
+    "_WaterfallColor": [
+     0.5804,
+     0.7669,
+     0.7922,
+     1.0
+    ],
+    "_WaterfallNoiseScale": [
+     0.26,
+     0.07,
+     0.0,
+     0.0
+    ]
+   },
+   "floats": {
+    "_AlbedoFlowSpeed": 0.4,
+    "_AlbedoFlowStrength": 2.0,
+    "_AlphaClip": 0.0,
+    "_AlphaToMask": 0.0,
+    "_BaseNormalMapScale": 1.0,
+    "_Base_Contamination_Intensity_High": 1.0,
+    "_Base_Contamination_Intensity_Low": 1.75,
+    "_Blend": 0.0,
+    "_BlendModePreserveSpecular": 0.0,
+    "_BumpMap1Strength": 0.5,
+    "_BumpMap1Tiling": 0.1,
+    "_BumpMap2Strength": 0.75,
+    "_BumpMap2Tiling": 0.14,
+    "_BumpScale": 0.5,
+    "_BumpScale1": 0.05,
+    "_BumpScale2": 0.5,
+    "_BumpSpeedX1": 0.001,
+    "_BumpSpeedX2": -0.001,
+    "_BumpSpeedY1": 0.001,
+    "_BumpSpeedY2": -0.001,
+    "_CALCULATE_OUTFLOWS": 1.0,
+    "_CastShadows": 0.0,
+    "_ContaminationNonlinearity": 0.25,
+    "_Contamination_Flow_Distortion": 0.00125,
+    "_Contamination_Metallic": 0.0,
+    "_Contamination_Normal_Strength": 4.0,
+    "_Contamination_Smoothness": 0.15,
+    "_Contamination_Source_Scale": 8.0,
+    "_Contamination_Source_Strength": 0.8,
+    "_Cull": 0.0,
+    "_Cutoff": 0.5,
+    "_DetailAlbedoTexTiling": 0.015,
+    "_DetailNormalMapScale": 1.0,
+    "_Detail_Contamination_Intensity_High": 1.2,
+    "_Detail_Contamination_Intensity_Low": 4.5,
+    "_DstBlend": 10.0,
+    "_FadeLimit": 0.229,
+    "_FlowSpeed": 1.13,
+    "_FlowStrength": 0.5,
+    "_FlowTest": 0.0,
+    "_FlowTiling": 0.1,
+    "_FoamBlur": 0.14,
+    "_FoamDepth": 9.0,
+    "_FoamIntensity": 0.0,
+    "_FoamNoiseScale": 0.24,
+    "_FoamOffset": -0.5,
+    "_FoamRotationRadius": 0.5,
+    "_FoamRotationRadius1": 2.0,
+    "_FoamRotationRadius2": 2.0,
+    "_FoamRotationSpeed": 0.5,
+    "_FoamRotationSpeed1": 0.03,
+    "_FoamRotationSpeed2": -0.025,
+    "_FoamSlopeMax": 0.67,
+    "_FoamSlopeMin": 0.091,
+    "_FoamSmoothstepMax": 1.0,
+    "_FoamSmoothstepMin": 0.0,
+    "_FoamSpeed": 8.41,
+    "_GlossMapScale": 1.0,
+    "_Glossiness": 0.5,
+    "_GlossyReflections": 1.0,
+    "_InvFade": 0.72,
+    "_Layer": 0.0,
+    "_LevelVisibilityMaskTiling": 1.0,
+    "_MainTexTiling": 0.06,
+    "_MaskedFoamDepth": 0.2,
+    "_MaskedFoamOffset": 0.12,
+    "_MaxContaminationBlendingMargin": 0.5,
+    "_MaxContaminationThreshold": 1.0,
+    "_MaxDepth": 4.0,
+    "_MaxPollutionBlendingMargin": 0.5,
+    "_MaxPollutionThreshold": 1.0,
+    "_Metallic": 0.0,
+    "_MetallicGlossMapTiling": 0.01,
+    "_MetallicGlossMapTiling2": 0.01,
+    "_MetallicGlossMapTiling_1": 0.2,
+    "_MetallicMapScale": 1.0,
+    "_MinContaminationBlendingMargin": 0.45,
+    "_MinContaminationThreshold": 0.01,
+    "_MinPollutionBlendingMargin": 0.45,
+    "_MinPollutionThreshold": 0.01,
+    "_MinimumPollutionIntensity": 0.3,
+    "_MinimumPollutionIntensity_1": 0.3,
+    "_Mode": 0.0,
+    "_OcclusionStrength": 1.0,
+    "_OutflowsLimit": 0.035,
+    "_Parallax": 0.02,
+    "_PlainFoamDepth": 0.212,
+    "_PlainFoamOffset": 0.034,
+    "_PlainFoamThreshold": 0.0,
+    "_PollutionBlendingMargin": 0.5,
+    "_PollutionCurveModifier": 0.975,
+    "_PollutionDetailContrast": 0.0,
+    "_PollutionIntensityThreshold": 0.1,
+    "_PollutionIntensityThreshold_1": 0.0,
+    "_PollutionNonlinearity": 0.25,
+    "_PolutionDetailIntensity": 10.0,
+    "_QueueControl": 1.0,
+    "_QueueOffset": -14.0,
+    "_ReceiveShadows": 1.0,
+    "_ShorelineThreshold": 0.9,
+    "_Smoothness": 0.672,
+    "_SmoothnessTextureChannel": 0.0,
+    "_SpecularHighlights": 1.0,
+    "_SplatFilterInvert": 0.0,
+    "_SplatNormalMapScale": 1.0,
+    "_SrcBlend": 5.0,
+    "_Surface": 1.0,
+    "_TransparencyDepth": 0.0,
+    "_TransparencyDepthOffset": 0.0,
+    "_UVSec": 0.0,
+    "_Water_Source_Strength": 0.8,
+    "_WaterfallJaggedEdge": 1.18,
+    "_WaterfallNoiseThreshold": 0.022,
+    "_WaterfallSpeed": 2.5,
+    "_WaterfallStrength": 0.19,
+    "_WaterfallThresholdMax": 0.12,
+    "_WaterfallThresholdMin": 0.1,
+    "_WaveAmplitude": 0.0,
+    "_WaveLength": 1.0,
+    "_WaveSpeed": 1.0,
+    "_WorkflowMode": 1.0,
+    "_ZTest": 4.0,
+    "_ZWrite": 0.0,
+    "_ZWriteControl": 0.0
+   },
+   "textures": {
+    "_BumpMap": "Water_N",
+    "_ContaminationAlbedoEmissionSource": "WaterContaminationAlbedoEmissionSource",
+    "_ContaminationBlendingMarginNoise": "WaterContaminationBlendingMarginNoise",
+    "_ContaminationVisualizationNoise": "PerlinNoise3",
+    "_DepthGradients": "DepthGradients",
+    "_DetailAlbedoTex": "PhysicalWaterDetailAlbedo",
+    "_LevelVisibilityMask": "LevelVisibilityMask",
+    "_MainTex": "PhysicalWaterAlbedo",
+    "_MetallicGlossMap": "WaterMetalAndGloss",
+    "_Water_Source_Shape": "WaterSourceShape"
+   }
+  }
+ }
+}

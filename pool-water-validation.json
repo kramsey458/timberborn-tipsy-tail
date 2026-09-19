@@ -1,65 +1,39 @@
 {
   "status": "PASS",
-  "test_type": "Offline evaluation against the installed game shader graph and the C# source; not an in-game rendering test",
+  "test_type": "Offline checks against the installed game shader graph, the exported model and the C# source; not an in-game rendering test",
   "shader": "Shader Graphs/FountainWaterURP",
   "shader_facts": {
     "surface_type": "Opaque",
-    "receive_shadows_off_default": true,
-    "detail_x2_constants": 2
+    "uv_channels_read": [
+      1
+    ]
   },
+  "exported_pool_surface_vertex_channels": [
+    "normal",
+    "position",
+    "tangent",
+    "uv0"
+  ],
+  "runtime_supplies_uv1": true,
   "properties_overridden": [
-    "_Albedo_Speed",
-    "_Albedo_Speed2",
     "_BumpMap1Speed",
-    "_BumpMap1Strength",
     "_BumpMap2Speed",
-    "_BumpMap2Strength",
     "_Color",
-    "_DetailAlbedoTex",
     "_FoamColor",
-    "_FoamDepth",
-    "_FoamIntensity",
-    "_FoamOffset",
-    "_GlossMapScale",
-    "_Grayscale",
-    "_MainTex",
-    "_MetallicGlossMap",
-    "_MetallicMapScale",
     "_WaterRippleSpeed"
   ],
   "all_properties_exist_in_shader": true,
-  "water_tint_gamma_rgb": [
-    0.197,
-    0.573,
-    0.708
+  "default_uv1_scale": 0.14,
+  "lake_to_fountain_tiling_ratio_range": [
+    0.07,
+    0.16
   ],
-  "smoothness": 0.7,
-  "foam": {
-    "offset": -1.0,
-    "intensity": 1.0,
-    "depth": 0.05,
-    "mask_at_tested_depths": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ]
-  },
-  "resolved_albedo_rgb": [
-    0.1978,
-    0.5752,
-    0.7108
+  "tint_gamma_rgb": [
+    0.09,
+    0.27,
+    0.61
   ],
-  "flat_normals": true,
-  "metallic": 0.0,
-  "scope": "Per-material-index property blocks on #PoolWater only; shared material untouched",
+  "scope": "Per-material-index property blocks and a replacement quad on #PoolWater only; shared material and mesh assets untouched",
   "bar_seats": 4,
   "swimming_lanes": 4
 }
