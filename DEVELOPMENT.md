@@ -1,6 +1,11 @@
-# The Tipsy Tail — prototype 0.2.1
+# The Tipsy Tail — prototype 0.2.2
 
 A timber-and-thatch swim-up pool bar for **Timberborn 1.1.2.4 public**, both factions.
+
+## What's new in v0.2.2
+
+Calm pool water: scrolling textures, ripple motion and foam are disabled for the pool only, with much gentler surface distortion. The two corner seats are removed. Eight visitors now use four bar seats and four swimming lanes. Restart the game and reload your save after updating.
+
 
 ## 0.2.1 demolition fix
 

@@ -2,19 +2,24 @@
 
 A self-contained swim-up pool bar for **Timberborn**. Built from timber and thatch, supplied by haulers, and made for eight beavers to unwind.
 
-**[Download v0.2.1](https://github.com/kramsey458/timberborn-tipsy-tail/releases/download/v0.2.1/TipsyTail-v0.2.1-mod.zip) Â· [Project website](https://kramsey458.github.io/timberborn-tipsy-tail/) Â· [Report a bug](https://github.com/kramsey458/timberborn-tipsy-tail/issues/new/choose)**
+**[Download v0.2.2](https://github.com/kramsey458/timberborn-tipsy-tail/releases/download/v0.2.2/TipsyTail-v0.2.2-mod.zip) Â· [Project website](https://kramsey458.github.io/timberborn-tipsy-tail/) Â· [Report a bug](https://github.com/kramsey458/timberborn-tipsy-tail/issues/new/choose)**
 
 ![The Tipsy Tail model preview](docs/images/TipsyTail-preview.png)
 
 *Blender model preview with approximate water. The lower basin is buried in normal placement.*
 
+## What's new in v0.2.2
+
+Calm pool water: scrolling textures, ripple motion and foam are disabled for the pool only, with much gentler surface distortion. The two corner seats are removed. Eight visitors now use four bar seats and four swimming lanes. Restart the game and reload your save after updating.
+
+
 ## Prototype status
 
-**v0.2.1 is a prerelease targeting Timberborn 1.1.2.4.** Offline asset, blueprint, material and geometry checks pass. This release has not yet been verified in-game; water rendering, terrain cutouts, beaver alignment and save/reload need playtesting. Compatibility with other patches and multiplayer is unverified.
+**v0.2.2 is a prerelease targeting Timberborn 1.1.2.4.** Offline asset, blueprint, material and geometry checks pass. This release has not yet been verified in-game; water rendering, terrain cutouts, beaver alignment and save/reload need playtesting. Compatibility with other patches and multiplayer is unverified.
 
 ## Features
 
-- A 5 Ã— 6 pool with an attached bar, four bar seats, two soaking seats and two swimming lanes.
+- A 5 Ã— 6 pool with an attached bar, four bar seats and four swimming lanes.
 - A basin extending two blocks underground, with individually mapped wooden floor planks and an entry ladder.
 - Water hauled from your settlement: 60-unit reserve, draining 12 units per day while operating.
 - Recreation stops when dry; water and recreation return when supplies arrive.
@@ -23,7 +28,7 @@ A self-contained swim-up pool bar for **Timberborn**. Built from timber and that
 
 ## Install
 
-1. Download **TipsyTail-v0.2.1-mod.zip** from [Releases](https://github.com/kramsey458/timberborn-tipsy-tail/releases/tag/v0.2.1), rather than GitHub's automatic source-code archive.
+1. Download **TipsyTail-v0.2.2-mod.zip** from [Releases](https://github.com/kramsey458/timberborn-tipsy-tail/releases/tag/v0.2.2), rather than GitHub's automatic source-code archive.
 2. Close Timberborn and extract the included **TipsyTail** folder into your `Documents/Timberborn/Mods` folder. `manifest.json` must be directly inside `Mods/TipsyTail`.
 3. Enable **The Tipsy Tail** in Mod Manager and restart when prompted.
 4. Start with a separate test save. Unlock the building under Well-being, connect the front entrance to a path, and provide a staffed Hauling Post with access to water.

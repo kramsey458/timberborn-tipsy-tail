@@ -28,6 +28,7 @@ b['BlockObjectSpec']['Blocks']=[{'MatterBelow':'Ground' if h==2 else 'Any','Occu
 # are surface-relative because BlockObject.UpdateTransform adds BaseZ itself.
 b.pop('BuildingTerrainCutoutSpec',None)
 b['TipsyTailTerrainCutoutSpec']={'CutoutTiles':[{'X':x,'Y':z,'Z':2} for x in range(5) for z in range(6)]}
+b['TipsyTailPoolWaterSpec']={}
 b['UndergroundDepthDescriberSpec']={'Depth':2}
 b['BuildingAccessibleSpec'].update(LocalAccess={'X':2.5,'Y':2.0,'Z':0.08},ForceOneFinalAccess=False)
 b['PlaceableBlockObjectSpec']['ToolOrder']=85
@@ -74,7 +75,7 @@ need=read('Needs/Need.Beaver.Campfire.blueprint.json')
 need['NeedSpec'].update(Id='TipsyTail',Order=45,DisplayNameLocKey='Building.TipsyTail.DisplayName',FavorableWellbeing=2)
 write(Path('Needs/Need.Beaver.TipsyTail.blueprint.json'),need)
 write(Path('Buildings/Wellbeing/TipsyTail/TipsyTailIcon.png.meta.json'),{'isSprite':True})
-write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':'0.2.1.0','Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. Two-block underground basin, hauled water, and eight visitors. Includes scoped terrain-cutout cleanup so demolition reveals the original ground.','RequiredMods':[]})
+write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':'0.2.2.0','Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. Two-block underground basin, hauled water, and eight visitors. Includes scoped terrain-cutout cleanup so demolition reveals the original ground.','RequiredMods':[]})
 loc=MOD/'Localizations';loc.mkdir(exist_ok=True)
 with (loc/'enUS.csv').open('w',newline='',encoding='utf-8') as f:
     w=csv.writer(f);w.writerow(['ID','Text','Comment'])

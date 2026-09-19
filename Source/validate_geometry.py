@@ -15,6 +15,8 @@ floor=named('Basin floor plank')
 assert len(floor)==68
 assert all(abs(heights(o)[0]+2)<1e-5 for o in floor)
 assert not named('Carved beaver tail') and not named('Sign hanger') and not named('Tail carving')
+assert not named('Soaking')
+assert len(named('#Slot#BarSeat'))==4 and len(named('#Slot#Swimming'))==4
 counter=max(heights(o)[1] for o in named('Thick split-plank counter'))
 seats=[o for o in named('#Slot#BarSeat') if int(o.name[-1])<4]
 assert len(seats)==4

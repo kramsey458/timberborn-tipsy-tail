@@ -92,6 +92,7 @@ namespace Kyler.TipsyTail
         protected override void Configure()
         {
             Bind<TipsyTailTerrainCutout>().AsTransient();
+            Bind<TipsyTailPoolWater>().AsTransient();
             MultiBind<TemplateModule>().ToProvider(CreateModule).AsSingleton();
         }
 
@@ -99,6 +100,7 @@ namespace Kyler.TipsyTail
         {
             var builder = new TemplateModule.Builder();
             builder.AddDecorator<TipsyTailTerrainCutoutSpec, TipsyTailTerrainCutout>();
+            builder.AddDecorator<TipsyTailPoolWaterSpec, TipsyTailPoolWater>();
             return builder.Build();
         }
     }

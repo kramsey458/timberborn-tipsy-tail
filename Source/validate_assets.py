@@ -35,6 +35,8 @@ pool=next(n for n in m.nodes if n.name=='#PoolWater')
 check(abs(pool.rotation.x)+abs(pool.rotation.y)+abs(pool.rotation.z)<1e-6,'Pool surface is level')
 seats=[n for n in m.nodes if n.name.startswith('#Slot#BarSeat')]
 lanes=[(i,n) for i,n in enumerate(m.nodes) if n.name.startswith('#Slot#Swimming')]
+check(len(seats)==4 and len(lanes)==4,'Only four bar seats and four swimming lanes; no corner seats')
+check('TipsyTailPoolWaterSpec' in b,'Scoped calm-water controller attached')
 check(len(seats)+len(lanes)==b['EnterableSpec']['CapacityFinished']==8,'Eight usable visitor slots')
 for i,n in lanes:
     child=[c.name for c in m.nodes if c.parent==i]

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "test_type": "Offline comparison against installed game shader property definitions; not an in-game rendering test",
+  "shader": "Shader Graphs/FountainWaterURP",
+  "zero_motion_controls": [
+    "_Albedo_Speed",
+    "_Albedo_Speed2",
+    "_BumpMap1Speed",
+    "_BumpMap2Speed",
+    "_WaterRippleSpeed"
+  ],
+  "float_overrides": {
+    "_WaterRippleSpeed": 0.0,
+    "_FoamIntensity": 0.0,
+    "_BumpMap1Strength": 0.08,
+    "_BumpMap2Strength": 0.08
+  },
+  "scope": "Per-material-index property blocks on #PoolWater only; shared material untouched",
+  "bar_seats": 4,
+  "swimming_lanes": 4
+}

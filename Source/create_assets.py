@@ -178,14 +178,11 @@ for i,x in enumerate((1.15,2.05,2.95,3.85)):
     cyl('Tankard',(x,1.08,4.51),.075,.19,dark,8)
     cyl('Tankard rim',(x,1.18,4.51),.078,.025,metal,8)
     beam('Tankard handle',(x+.065,1.00,4.51),(x+.065,1.10,4.51),.02,dark)
-# Two swimming lanes, plus two relaxation seats: total eight occupants.
-for i,z in enumerate((2.25,3.10)):
+# Four swimming lanes and four bar seats: total eight occupants.
+for i,z in enumerate((1.95,2.50,3.05,3.60)):
     lane=empty('#Slot#Swimming'+str(i),(0,0,0))
     empty('#MiscStart'+str(i),(1.05,.64,z),lane)
     empty('#MiscEnd'+str(i),(3.95,.64,z),lane)
-for i,x in enumerate((1.15,3.85)):
-    box('Soaking bench',(x,.43,1.55),(.67,.13,.33),wood,.025)
-    empty('#Slot#BarSeat'+str(i+4),(x,.50,1.55))
 empty('#Slot#Entrance',(2.5,.53,.08))
 
 for x in (.72,4.28):
@@ -198,9 +195,6 @@ for x in (.72,4.28):
 # Shift top-level objects once. Lane endpoints inherit their parent translation.
 for o in set(col.objects)-upper_start:
     if not o.parent:o.location.z-=.48
-# Bench brackets support the submerged seats without loose floating geometry.
-for x in (1.15,3.85):
-    for offset in (-.22,.22):beam('Soaking seat bracket',(x+offset,-.16,1.04),(x+offset,-.16,1.70),.04,dark)
 # Basin-only model for Timberborn's underground/slice display, with no slots/water.
 underground=bpy.data.collections.new('TipsyTail.Underground')
 bpy.context.scene.collection.children.link(underground)
