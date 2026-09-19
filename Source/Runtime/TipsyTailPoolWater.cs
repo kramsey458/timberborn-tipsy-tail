@@ -17,10 +17,11 @@ namespace Kyler.TipsyTail
 
     // Override this renderer only; never mutate the shared FountainWater material.
     //
-    // FountainWater already uses the lake's own albedo, normal and gloss textures and animates them
-    // slowly, so the pool keeps that native motion and texture. Only the tint changes: the fountain's
-    // teal becomes the lake's deep blue. The albedo texture is dark, so the tint is deliberately a
-    // dark blue; a bright tint blows out (v0.2.3 did exactly that).
+    // FountainWater already uses the lake's own albedo, normal and gloss textures. The pool keeps them and changes
+    // three things: a slate teal-blue tint (the albedo texture is dark, so a bright tint blows out, as v0.2.3 did),
+    // a proper UV1 on the surface mesh (see ApplyMesh), and where the motion comes from. Every shader clock is
+    // switched off and the mod slides UV1 itself each frame (see TipsyTailWaterMesh.Animate), because the shader's
+    // own clocks either jitter (raw Time) or are a hidden game global that did not move the pool (_NonlinearTime).
     public sealed class TipsyTailPoolWater : BaseComponent, IAwakableComponent,
         IInitializablePreview, IPostInitializableEntity
     {
@@ -53,9 +54,20 @@ namespace Kyler.TipsyTail
             }
         }
 
+        private readonly List<Renderer> _renderers = new List<Renderer>();
+
+        // True while any of this pool's water renderers is on screen. Used to skip the per-frame ripple update.
+        internal bool AnyVisible()
+        {
+            for (int i = 0; i < _renderers.Count; i++)
+                if (_renderers[i] != null && _renderers[i].isVisible) return true;
+            return false;
+        }
+
         internal void Apply()
         {
             if (!IsAlive) return;
+            _renderers.Clear();
             foreach (var node in GameObject.GetComponentsInChildren<Transform>(true))
             {
                 if (node.name != "#PoolWater") continue;
@@ -75,17 +87,20 @@ namespace Kyler.TipsyTail
                             block.SetColor("_FoamColor", FoamColor);
                             if (TipsyTailWaterTuner.FixUv1)
                             {
-                                // Still lake: the texture, gloss and noise stay put. Raw Unity Time drives the
-                                // albedo drift and the ripple offset, and it can jitter (for example while a
-                                // multiplayer host steps the game), so it is switched off. Only the two normal
-                                // maps move, on the game's own _NonlinearTime clock at the lake's speeds and tilings.
+                                // The shader's own clocks are all switched off: raw Unity Time (through these three
+                                // multipliers) can jitter, and _NonlinearTime is a hidden, game-fed global that did
+                                // not move the pool at all in v0.2.6 (it is not an exposed property, so it cannot be
+                                // overridden here). The bump-speed multipliers only scale that global, so they are zeroed too.
+                                // Motion comes from the mod sliding the surface's UV1 every frame, see TipsyTailWaterMesh.Animate.
                                 block.SetFloat("_WaterRippleSpeed", 0f);
                                 block.SetVector("_Albedo_Speed", Vector4.zero);
                                 block.SetVector("_Albedo_Speed2", Vector4.zero);
-                                block.SetVector("_BumpMap1Speed", new Vector4(0.01f, 0.008f, 0f, 0f));
-                                block.SetVector("_BumpMap2Speed", new Vector4(-0.008f, -0.01f, 0f, 0f));
+                                block.SetVector("_BumpMap1Speed", Vector4.zero);
+                                block.SetVector("_BumpMap2Speed", Vector4.zero);
+                                // Lake tilings. The second layer's is negative, so it drifts the opposite way to the first as
+                                // the UV1 slides, and the two ripple layers interfere and shimmer like the lake's do.
                                 block.SetFloat("_BumpMap1Tiling", 0.1f / TipsyTailWaterTuner.DefaultUv1Scale);
-                                block.SetFloat("_BumpMap2Tiling", 0.14f / TipsyTailWaterTuner.DefaultUv1Scale);
+                                block.SetFloat("_BumpMap2Tiling", -0.14f / TipsyTailWaterTuner.DefaultUv1Scale);
                                 block.SetFloat("_BumpMap1Strength", 0.5f);
                                 block.SetFloat("_BumpMap2Strength", 0.75f);
                                 // Lake water throws crisp white glints; the native gloss map is only about 0.3 smooth.
@@ -94,6 +109,7 @@ namespace Kyler.TipsyTail
                         }
                         TipsyTailWaterTuner.ApplyOverrides(block, material);
                         renderer.SetPropertyBlock(block, i);
+                        if (!_renderers.Contains(renderer)) _renderers.Add(renderer);
                     }
                 }
             }
@@ -159,6 +175,7 @@ namespace Kyler.TipsyTail
     // property overrides, so it cannot change gameplay or multiplayer state. Lines (# starts a comment):
     //   native                       use the game's untouched material (no tint)
     //   uv1 on|off                   give the surface a proper UV1 (default on); off reproduces the old behaviour
+    //   speed k                      ripple drift in blocks per second (default 0.02; 0.008 slower, 0.05 livelier); 0 stops it
     //   uv1scale k                   scale the UV1 coordinates (default 0.14 = lake scale; 1 = the fountain's own scale);
     //                                larger = finer ripples
     //   color NAME r g b [a]         set a colour property
@@ -185,6 +202,17 @@ namespace Kyler.TipsyTail
         internal const float DefaultUv1Scale = 0.14f;
         internal static float Uv1Scale { get; private set; } = DefaultUv1Scale;
 
+        // Ripple drift in blocks per second. Sampling the real normal map across the pool shows the ripple pattern is
+        // half-changed after about 6 seconds at 0.01, 3 seconds at 0.02 and 1 second at 0.05, so 0.02 is clearly
+        // moving yet calm; much faster boils. The drift is a position, integrated every frame from unscaled time,
+        // so it keeps moving while the game is paused and never jumps after a frame hitch.
+        internal const float DefaultMotionSpeed = 0.02f;
+        internal static float MotionSpeed { get; private set; } = DefaultMotionSpeed;
+        internal static float OffsetX { get; private set; }
+        internal static float OffsetZ { get; private set; }
+        internal static bool Animates { get { return !UseNativeMaterial && FixUv1 && MotionSpeed > 0f; } }
+        private static float _wander;
+
         private float _nextPoll, _nextContentCheck;
         private string _configPath, _lastSignature;
         private string _lastText;
@@ -208,6 +236,19 @@ namespace Kyler.TipsyTail
 
         private void Update()
         {
+            // Slide the surface's UV1 every frame while a pool is on screen. The heading wanders about 35 degrees either
+            // way over 90 seconds, so the ripples never march in a straight line. The step is capped so a frame hitch
+            // never makes them jump, and the offsets wrap far beyond anything visible.
+            if (Animates && AnyPoolVisible())
+            {
+                var dt = Mathf.Min(Time.unscaledDeltaTime, 0.05f);
+                _wander = (_wander + dt) % 90f;
+                var heading = 0.6f + 0.6f * Mathf.Sin(_wander * (2f * Mathf.PI / 90f));
+                OffsetX = (OffsetX + Mathf.Cos(heading) * MotionSpeed * dt) % 4096f;
+                OffsetZ = (OffsetZ + Mathf.Sin(heading) * MotionSpeed * dt) % 4096f;
+                TipsyTailWaterMesh.Animate();
+            }
+
             // Poll rarely and cheaply: this runs on the main thread, so file access must not add hitches.
             if (Time.unscaledTime < _nextPoll) return;
             _nextPoll = Time.unscaledTime + 2f;
@@ -217,7 +258,7 @@ namespace Kyler.TipsyTail
                 var info = path == null ? null : new FileInfo(path);
                 if (info == null || !info.Exists)
                 {
-                    if (_hadFile) { _hadFile = false; _lastSignature = null; Ops.Clear(); UseNativeMaterial = false; FixUv1 = true; Uv1Scale = DefaultUv1Scale; ReapplyAll(); }
+                    if (_hadFile) { _hadFile = false; _lastSignature = null; Ops.Clear(); UseNativeMaterial = false; FixUv1 = true; Uv1Scale = DefaultUv1Scale; MotionSpeed = DefaultMotionSpeed; ReapplyAll(); }
                     return;
                 }
                 // Size and timestamp are the fast check. Files copied from one zip can share a timestamp, so the
@@ -242,6 +283,13 @@ namespace Kyler.TipsyTail
             }
         }
 
+        private static bool AnyPoolVisible()
+        {
+            for (int i = 0; i < Pools.Count; i++)
+                if (Pools[i] != null && Pools[i].IsAlive && Pools[i].AnyVisible()) return true;
+            return false;
+        }
+
         private static void ReapplyAll()
         {
             Pools.RemoveAll(p => p == null || !p.IsAlive);
@@ -251,6 +299,12 @@ namespace Kyler.TipsyTail
         private static void LogPools()
         {
             var text = new StringBuilder("[TipsyTail] pool water report (" + Pools.Count + " pool(s))\n");
+            // The game's own hidden ripple clock, for reference; the pool no longer depends on it.
+            text.AppendLine("  game global _NonlinearTime = " + Shader.GetGlobalFloat("_NonlinearTime").ToString("0.####", CultureInfo.InvariantCulture) +
+                            " | mod drift offset = (" + OffsetX.ToString("0.###", CultureInfo.InvariantCulture) + ", " + OffsetZ.ToString("0.###", CultureInfo.InvariantCulture) + ") blocks" +
+                            " | animates=" + Animates + " speed=" + MotionSpeed.ToString("0.###", CultureInfo.InvariantCulture) + " blocks/s" +
+                            " | unscaledDeltaTime=" + Time.unscaledDeltaTime.ToString("0.#####", CultureInfo.InvariantCulture) +
+                            " timeScale=" + Time.timeScale.ToString("0.##", CultureInfo.InvariantCulture));
             foreach (var pool in Pools) pool.Describe(text);
             Debug.Log(text.ToString());
         }
@@ -272,7 +326,7 @@ namespace Kyler.TipsyTail
 
         private static void Parse(string[] lines)
         {
-            Ops.Clear(); UseNativeMaterial = false; FixUv1 = true; Uv1Scale = DefaultUv1Scale; _wantLog = false;
+            Ops.Clear(); UseNativeMaterial = false; FixUv1 = true; Uv1Scale = DefaultUv1Scale; MotionSpeed = DefaultMotionSpeed; _wantLog = false;
             foreach (var raw in lines)
             {
                 var line = raw; var hash = line.IndexOf('#');
@@ -284,6 +338,7 @@ namespace Kyler.TipsyTail
                     case "native": UseNativeMaterial = true; break;
                     case "uv1": FixUv1 = t.Length < 2 || t[1].ToLowerInvariant() != "off"; break;
                     case "uv1scale": Uv1Scale = Mathf.Max(0.001f, F(t[1])); break;
+                    case "speed": MotionSpeed = Mathf.Max(0f, F(t[1])); break;
                     case "log": _wantLog = true; break;
                     case "color":
                         { var n = t[1]; var c = new Color(F(t[2]), F(t[3]), F(t[4]), t.Length > 5 ? F(t[5]) : 1f); Ops.Add((b, m) => b.SetColor(n, c)); break; }
@@ -338,7 +393,36 @@ namespace Kyler.TipsyTail
     // FountainWater is double sided, so one quad is enough; the exported box only ever showed its top face.
     internal static class TipsyTailWaterMesh
     {
-        private static readonly Dictionary<string, Mesh> Cache = new Dictionary<string, Mesh>();
+        private sealed class Quad
+        {
+            public Mesh Mesh;
+            public float Width, Depth, Scale;
+            public readonly List<Vector2> Uv = new List<Vector2> { default(Vector2), default(Vector2), default(Vector2), default(Vector2) };
+        }
+
+        private static readonly Dictionary<string, Quad> Cache = new Dictionary<string, Quad>();
+
+        // UV1 is the surface position in blocks plus the current drift, times the UV scale.
+        private static void Fill(Quad q)
+        {
+            float ox = TipsyTailWaterTuner.OffsetX * q.Scale, oz = TipsyTailWaterTuner.OffsetZ * q.Scale;
+            q.Uv[0] = new Vector2(ox, oz);
+            q.Uv[1] = new Vector2(ox, oz + q.Depth);
+            q.Uv[2] = new Vector2(ox + q.Width, oz + q.Depth);
+            q.Uv[3] = new Vector2(ox + q.Width, oz);
+        }
+
+        // Called every frame while a pool is on screen. One shared quad serves every pool, so this costs the same
+        // no matter how many pools exist: four vertices of UV data, no allocation.
+        internal static void Animate()
+        {
+            foreach (var q in Cache.Values)
+            {
+                if (q.Mesh == null) continue;
+                Fill(q);
+                q.Mesh.SetUVs(1, q.Uv);
+            }
+        }
 
         internal static Mesh For(Mesh source)
         {
@@ -346,7 +430,7 @@ namespace Kyler.TipsyTail
             var scale = TipsyTailWaterTuner.Uv1Scale;
             var key = string.Format(CultureInfo.InvariantCulture, "{0:F4}|{1:F4}|{2:F4}|{3:F4}|{4:F4}|{5:F4}|{6:F4}",
                 b.min.x, b.max.x, b.min.z, b.max.z, b.max.y, scale, 0f);
-            if (Cache.TryGetValue(key, out var cached) && cached != null) return cached;
+            if (Cache.TryGetValue(key, out var cached) && cached.Mesh != null) return cached.Mesh;
 
             float width = b.size.x * scale, depth = b.size.z * scale, y = b.max.y;
             var mesh = new Mesh { name = "TipsyTail.PoolSurface", hideFlags = HideFlags.HideAndDontSave };
@@ -361,13 +445,13 @@ namespace Kyler.TipsyTail
                 new Vector4(1, 0, 0, 1), new Vector4(1, 0, 0, 1), new Vector4(1, 0, 0, 1), new Vector4(1, 0, 0, 1)
             };
             mesh.uv = new[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0) };
-            mesh.SetUVs(1, new List<Vector2>
-            {
-                new Vector2(0, 0), new Vector2(0, depth), new Vector2(width, depth), new Vector2(width, 0)
-            });
+            mesh.MarkDynamic();
+            var quad = new Quad { Mesh = mesh, Width = width, Depth = depth, Scale = scale };
+            Fill(quad);
+            mesh.SetUVs(1, quad.Uv);
             mesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
             mesh.bounds = new Bounds(b.center, b.size);
-            Cache[key] = mesh;
+            Cache[key] = quad;
             return mesh;
         }
     }

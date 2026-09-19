@@ -84,16 +84,28 @@ def validate_pool_water():
             gates={prop_ref(nodes[s]) for s in feeders[c] if kind(nodes[s])=='PropertyNode'}
             assert gates&time_speed_props,f'Time reaches a node that is not gated by a speed property: {gates}'
     assert any(prop_ref(n)=='_NonlinearTime' for n in nodes.values() if kind(n)=='PropertyNode'),'Expected the shader to read _NonlinearTime'
+    # _NonlinearTime is not an exposed property (unlike every property the mod overrides), so a per-renderer override
+    # cannot be relied on. Only the game can feed it, and in v0.2.6 it did not move the pool, so the mod must not need it.
+    exposed={o.get('m_OverrideReferenceName') or o.get('m_DefaultReferenceName'):o.get('m_GeneratePropertyBlock') for o in objs if o.get('m_Type','').endswith('ShaderProperty')}
+    assert exposed['_NonlinearTime'] is False,'_NonlinearTime is expected to be a hidden, game-fed global'
+    assert all(exposed[n] for n in ('_Color','_WaterRippleSpeed','_Albedo_Speed','_BumpMap1Speed','_BumpMap1Tiling','_BumpMap2Tiling','_GlossMapScale')),'Every property the mod overrides must be exposed'
 
     channels=pool_surface_vertex_channels()
     assert 'uv0' in channels and 'uv1' not in channels,'The exported pool surface is expected to lack UV1'
 
     src=(ROOT/'Source/Runtime/TipsyTailPoolWater.cs').read_text()
-    used=re.findall(r'\.(?:Set(?:Float|Vector|Color|Texture)|GetFloat|HasProperty)\(\s*"(_\w+)"',src)
+    used=re.findall(r'\.(?:Set(?:Float|Vector|Color|Texture)|GetFloat|GetGlobalFloat|HasProperty)\(\s*"(_\w+)"',src)
     setters=re.findall(r'\.Set(?:Float|Vector|Color|Texture)\(\s*"(_\w+)"',src)
     assert setters and set(used)<=props,f'C# uses properties the shader does not have: {sorted(set(used)-props)}'
-    for name in sorted(time_speed_props):
-        assert re.search(r'Set(?:Float|Vector)\(\s*"%s"\s*,\s*(?:0f|Vector4\.zero)\s*\)'%name,src),f'{name} must be zeroed to remove raw-Time motion'
+    # Raw Time is gated by three multipliers; the two bump-speed multipliers only scale the hidden _NonlinearTime. All are zeroed.
+    zeroed=sorted(time_speed_props|{'_BumpMap1Speed','_BumpMap2Speed'})
+    for name in zeroed:
+        assert re.search(r'Set(?:Float|Vector)\(\s*"%s"\s*,\s*(?:0f|Vector4\.zero)\s*\)'%name,src),f'{name} must be zeroed so no shader clock is used'
+    assert not re.search(r'Set\w+\(\s*"_NonlinearTime"',src),'The mod must not depend on overriding _NonlinearTime'
+    assert re.search(r'SetFloat\(\s*"_BumpMap2Tiling"\s*,\s*-',src),'The second ripple layer must have a negative tiling so it drifts the opposite way'
+    assert 'TipsyTailWaterMesh.Animate()' in src and re.search(r'q\.Mesh\.SetUVs\(\s*1\s*,\s*q\.Uv\)',src),'The mod must slide UV1 every frame'
+    speed=float(re.search(r'DefaultMotionSpeed\s*=\s*([\d.]+)f',src).group(1))
+    assert 0.005<=speed<=0.05,f'Default drift speed {speed} is outside the range that reads as calm moving water'
     assert re.search(r'SetUVs\(\s*1\s*,',src),'The runtime must supply UV1'
     assert 'TipsyTailWaterMesh.For' in src,'The surface mesh replacement must be applied'
 
@@ -110,8 +122,9 @@ def validate_pool_water():
       'shader':'Shader Graphs/FountainWaterURP',
       'shader_facts':{'surface_type':'Opaque' if target['m_SurfaceType']==0 else 'Transparent','uv_channels_read':sorted(uv_channels)},
       'exported_pool_surface_vertex_channels':sorted(channels),
-      'raw_time_speed_properties_zeroed':sorted(time_speed_props),
-      'remaining_motion':'two normal maps on the game _NonlinearTime clock',
+      'shader_clocks_zeroed':zeroed,
+      'motion':'the mod slides UV1 every frame; the two ripple layers drift in opposite directions (negative tiling on layer 2)',
+      'default_drift_blocks_per_second':speed,
       'runtime_supplies_uv1':True,
       'properties_overridden':sorted(set(setters)),
       'all_properties_exist_in_shader':True,

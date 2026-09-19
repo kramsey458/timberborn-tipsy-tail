@@ -14,12 +14,15 @@
     "tangent",
     "uv0"
   ],
-  "raw_time_speed_properties_zeroed": [
+  "shader_clocks_zeroed": [
     "_Albedo_Speed",
     "_Albedo_Speed2",
+    "_BumpMap1Speed",
+    "_BumpMap2Speed",
     "_WaterRippleSpeed"
   ],
-  "remaining_motion": "two normal maps on the game _NonlinearTime clock",
+  "motion": "the mod slides UV1 every frame; the two ripple layers drift in opposite directions (negative tiling on layer 2)",
+  "default_drift_blocks_per_second": 0.02,
   "runtime_supplies_uv1": true,
   "properties_overridden": [
     "_Albedo_Speed",

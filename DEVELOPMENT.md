@@ -1,8 +1,16 @@
-# The Tipsy Tail — prototype 0.2.6
+# The Tipsy Tail — prototype 0.2.7
 
 A timber-and-thatch swim-up pool bar for **Timberborn 1.1.2.4 public**, both factions.
 
-## What's new in v0.2.6
+## What's new in v0.2.7
+
+Self-driven ripples. In v0.2.6 the two normal maps were left to scroll on `_NonlinearTime`, assuming the game feeds it. The shader graph shows that property is not exposed (`m_GeneratePropertyBlock` is false, unlike every property the mod overrides), so it is a hidden global that a per-renderer override cannot be relied on to change, and it did not move the pool at all. The runtime now zeroes every shader clock (`_WaterRippleSpeed`, `_Albedo_Speed`, `_Albedo_Speed2`, and the two bump-speed multipliers that only scale `_NonlinearTime`) and animates UV1 itself. `TipsyTailWaterTuner.Update` integrates a drift offset in blocks every frame from `Time.unscaledDeltaTime` (capped at 0.05 s so a hitch never makes the ripples jump), with the heading wandering 35 degrees either way over 90 seconds, and `TipsyTailWaterMesh.Animate` rewrites the four UV1 vertices of the shared surface quad, so the cost does not depend on the number of pools and there is no allocation. It only runs while some pool renderer is visible. `_BumpMap2Tiling` is negative, so the second ripple layer drifts opposite to the first as the UV1 slides.
+
+The default speed is 0.02 blocks per second. Sampling the real `Water_N` texture across the pool with the mod's tilings gives the time for the ripple pattern to lose half its correlation: about 12 s at 0.005, 6 s at 0.01, 3 s at 0.02, 2 s at 0.03 and 1.2 s at 0.05, and at 0.2 the pattern is different after one second. `speed k` in `water.cfg` overrides it, and `Source/validate_pool_water.py` asserts that the default stays between 0.005 and 0.05.
+
+The validator now also asserts that `_NonlinearTime` is unexposed, that every overridden property is exposed, that all five clock multipliers are zeroed, that the mod never sets `_NonlinearTime`, that the second layer's tiling is negative and that `Animate` is wired in. The presets in `water-presets/` are now about speed: default, slower, livelier and no motion, plus the untouched vanilla fountain water, darker, lighter and finer variants. In-game appearance has not been verified; opaque water still cannot be see-through.
+
+## 0.2.6 still-lake water (motion revised in 0.2.7)
 
 Still-lake water. The shader graph shows that raw Unity Time reaches the material only through three speed multipliers (`_WaterRippleSpeed`, `_Albedo_Speed`, `_Albedo_Speed2`), and that the two normal maps are the only layers that also use the game's own `_NonlinearTime` (set by `Timberborn.TimeSystem`'s `NonlinearAnimationManager`). The runtime zeroes the three Time multipliers, so the albedo, gloss and noise are static like a still lake and only the normal maps move, at the lake's own speeds (0.01, 0.008 and -0.008, -0.01) and tilings (0.1 and 0.14 in lake units, set as 0.1 and 0.14 divided by the default UV scale). Bump strengths are the lake's (0.5, 0.75), the gloss scale is 2.2 so the sun throws crisp glints, and the tint is a slate teal-blue, `(0.15, 0.38, 0.46)`, because the earlier saturated blue rendered as blue plastic. The `Source/validate_pool_water.py` check now asserts that every Time node is gated by one of the three multipliers and that the runtime zeroes all three.
 

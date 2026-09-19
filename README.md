@@ -2,15 +2,19 @@
 
 A self-contained swim-up pool bar for **Timberborn**. Built from timber and thatch, supplied by haulers, and made for eight beavers to unwind.
 
-**[Download v0.2.6](https://github.com/kramsey458/timberborn-tipsy-tail/releases/download/v0.2.6/TipsyTail-v0.2.6-mod.zip) · [Project website](https://kramsey458.github.io/timberborn-tipsy-tail/) · [Report a bug](https://github.com/kramsey458/timberborn-tipsy-tail/issues/new/choose)**
+**[Download v0.2.7](https://github.com/kramsey458/timberborn-tipsy-tail/releases/download/v0.2.7/TipsyTail-v0.2.7-mod.zip) · [Project website](https://kramsey458.github.io/timberborn-tipsy-tail/) · [Report a bug](https://github.com/kramsey458/timberborn-tipsy-tail/issues/new/choose)**
 
 ![The Tipsy Tail model preview](docs/images/TipsyTail-preview.png)
 
 *Blender model preview with approximate water. The lower basin is buried in normal placement.*
 
+## What's new in v0.2.7
+
+Water animation fix: the pool water now actually moves. v0.2.6 left the ripples on a hidden ripple clock in the water shader that only the game can feed, and it never moved the pool, so the water was completely still. The mod now animates the ripples itself, every frame, by sliding the water surface's texture coordinates. It runs on real elapsed time, so it keeps moving while the game is paused, and the two ripple layers drift in opposite directions, like the lake's, so the pattern shimmers and evolves. The default speed was chosen by sampling the real ripple texture: the pattern half-changes in about 3 seconds, calm rather than busy. Colour is unchanged from v0.2.6. **The pool water still cannot be see-through like the real lake:** every standalone water material in the game is opaque. Only `Scripts/TipsyTail.Runtime.dll` changed since v0.2.6. Restart the game and reload your save after updating.
+
 ## What's new in v0.2.6
 
-Water look: reworked to behave like a still lake, as close to the in-game reference as the pool's material allows. The texture, gloss and noise are now static, and only the two ripple layers move, on the game's own animation clock at the lake's speeds and scale. Raw Unity time no longer drives any of the water, which can jitter in multiplayer. The tint is a slate teal-blue instead of v0.2.5's saturated blue, and the surface is glossier so the sun throws white glints off the ripples. **The pool water cannot be see-through like the real lake:** every standalone water material in the game is opaque, and the lake shader only works with the game's water simulation. Only `Scripts/TipsyTail.Runtime.dll` changed since v0.2.5. Restart the game and reload your save after updating.
+Water look: a slate teal-blue tint and a glossier surface so the sun throws white glints off the ripples, and all raw Unity time motion removed. Its ripple animation depended on a hidden game clock and did not move the pool; that was fixed in v0.2.7.
 
 ## What's new in v0.2.5
 
@@ -19,7 +23,7 @@ Water fix: the pool surface was missing the second UV set that the game's water 
 
 ## Prototype status
 
-**v0.2.6 is a prerelease targeting Timberborn 1.1.2.4.** Offline asset, blueprint, material and geometry checks pass. This release has not yet been verified in-game; water rendering, terrain cutouts, beaver alignment and save/reload need playtesting. Compatibility with other patches and multiplayer is unverified.
+**v0.2.7 is a prerelease targeting Timberborn 1.1.2.4.** Offline asset, blueprint, material and geometry checks pass. This release has not yet been verified in-game; water rendering, terrain cutouts, beaver alignment and save/reload need playtesting. Compatibility with other patches and multiplayer is unverified.
 
 ## Features
 
@@ -28,12 +32,12 @@ Water fix: the pool surface was missing the second UV set that the game's water 
 - Water hauled from your settlement: 60-unit reserve, draining 12 units per day while operating.
 - Recreation stops when dry; water and recreation return when supplies arrive.
 - Visitors also satisfy the native Wet fur need, at the same 0.5 points per hour as the Lido and Swimming Pool.
-- Still-lake style pool water, a slate teal-blue surface with ripples and glints (opaque, not see-through), and a campfire-style dirt-and-stakes construction site.
+- Lake-style pool water, a slate teal-blue surface with slowly drifting ripples and glints (opaque, not see-through), and a campfire-style dirt-and-stakes construction site.
 - Available to both Folktails and Iron Teeth under Well-being.
 
 ## Install
 
-1. Download **TipsyTail-v0.2.6-mod.zip** from [Releases](https://github.com/kramsey458/timberborn-tipsy-tail/releases/tag/v0.2.6), rather than GitHub's automatic source-code archive.
+1. Download **TipsyTail-v0.2.7-mod.zip** from [Releases](https://github.com/kramsey458/timberborn-tipsy-tail/releases/tag/v0.2.7), rather than GitHub's automatic source-code archive.
 2. Close Timberborn and extract the included **TipsyTail** folder into your `Documents/Timberborn/Mods` folder. `manifest.json` must be directly inside `Mods/TipsyTail`.
 3. Enable **The Tipsy Tail** in Mod Manager and restart when prompted.
 4. Start with a separate test save. Unlock the building under Well-being, connect the front entrance to a path, and provide a staffed Hauling Post with access to water.
@@ -42,7 +46,7 @@ Upgrading: replace the old TipsyTail folder with the new one; keep only one vers
 
 ## Optional water tuning
 
-The pool water can be adjusted live without restarting the game. Download **TipsyTail-v0.2.6-water-presets.zip** from the release, copy one preset into `Mods/TipsyTail` and rename it to `water.cfg`. The pool changes within about a second. Delete `water.cfg` to return to the default look. The presets cover a darker or lighter tint and finer ripples, plus three diagnostics: a no-motion preset, the previous raw-time motion, and the untouched vanilla fountain water. Those help tell whether the pool is the cause of any stutter or lag. The file only changes how the pool is drawn; it does not affect gameplay or multiplayer.
+The pool water can be adjusted live without restarting the game. Download **TipsyTail-v0.2.7-water-presets.zip** from the release, copy one preset into `Mods/TipsyTail` and rename it to `water.cfg`. The pool changes within about a second. Delete `water.cfg` to return to the default look. The presets cover slower and livelier ripple speeds, a darker or lighter tint and finer ripples, plus two diagnostics: a no-motion preset and the untouched vanilla fountain water. Those help tell whether the pool is the cause of any stutter or lag. The file only changes how the pool is drawn; it does not affect gameplay or multiplayer.
 
 ## Placement and balance
 
