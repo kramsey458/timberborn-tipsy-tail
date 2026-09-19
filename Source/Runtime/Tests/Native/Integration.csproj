@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><TargetFramework>net8.0</TargetFramework><OutputType>Exe</OutputType><Managed>C:\Program Files (x86)\Steam\steamapps\common\Timberborn\Timberborn_Data\Managed</Managed></PropertyGroup>
+<ItemGroup><Reference Include="$(Managed)\Timberborn.*.dll" Private="false"/><Reference Include="$(Managed)\UnityEngine.CoreModule.dll" Private="false"/><Reference Include="../../bin/Release/netstandard2.1/TipsyTail.Runtime.dll" /></ItemGroup>
+</Project>

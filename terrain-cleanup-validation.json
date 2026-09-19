@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "version": "0.2.1.0",
+  "game_version": "1.1.2.4",
+  "test_type": "Offline native-assembly integration and ownership tests; not in-game",
+  "native_reentrant_delete_leaked_references": 30,
+  "replacement_leaked_references": 0,
+  "ownership_unit_checks": 8,
+  "integration_cases": [
+    "finished deletion",
+    "repeated deletion",
+    "late callbacks",
+    "preview cancellation",
+    "unfinished deletion",
+    "model hiding",
+    "relocation",
+    "all four rotations"
+  ],
+  "terrain_data_mutated": false,
+  "other_cutout_owners_preserved": true,
+  "runtime_sha256": "414a7671c8115ea03fa59a7cdd52cb421d79c2e14c51273cae53b84fb1c818ec"
+}

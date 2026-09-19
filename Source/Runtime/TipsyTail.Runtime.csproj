@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>TipsyTail.Runtime</AssemblyName>
+    <Version>0.2.1</Version>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TimberbornManagedDir Condition="'$(TimberbornManagedDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Timberborn\Timberborn_Data\Managed</TimberbornManagedDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CutoutLease.cs;TipsyTailTerrainCutout.cs" />
+    <Reference Include="$(TimberbornManagedDir)\Timberborn.*.dll" Private="false" />
+    <Reference Include="$(TimberbornManagedDir)\Bindito.Core.dll" Private="false" />
+    <Reference Include="$(TimberbornManagedDir)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="$(TimberbornManagedDir)\System.Collections.Immutable.dll" Private="false" />
+  </ItemGroup>
+</Project>

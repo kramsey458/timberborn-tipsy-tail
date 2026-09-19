@@ -2,7 +2,7 @@
 
 A self-contained swim-up pool bar for **Timberborn**. Built from timber and thatch, supplied by haulers, and made for eight beavers to unwind.
 
-**[Download v0.2.0](https://github.com/kramsey458/timberborn-tipsy-tail/releases/download/v0.2.0/TipsyTail-v0.2.0-mod.zip) · [Project website](https://kramsey458.github.io/timberborn-tipsy-tail/) · [Report a bug](https://github.com/kramsey458/timberborn-tipsy-tail/issues/new/choose)**
+**[Download v0.2.1](https://github.com/kramsey458/timberborn-tipsy-tail/releases/download/v0.2.1/TipsyTail-v0.2.1-mod.zip) Â· [Project website](https://kramsey458.github.io/timberborn-tipsy-tail/) Â· [Report a bug](https://github.com/kramsey458/timberborn-tipsy-tail/issues/new/choose)**
 
 ![The Tipsy Tail model preview](docs/images/TipsyTail-preview.png)
 
@@ -10,11 +10,11 @@ A self-contained swim-up pool bar for **Timberborn**. Built from timber and that
 
 ## Prototype status
 
-**v0.2.0 is a prerelease targeting Timberborn 1.1.2.4.** Offline asset, blueprint, material and geometry checks pass. This release has not yet been verified in-game; water rendering, terrain cutouts, beaver alignment and save/reload need playtesting. Compatibility with other patches and multiplayer is unverified.
+**v0.2.1 is a prerelease targeting Timberborn 1.1.2.4.** Offline asset, blueprint, material and geometry checks pass. This release has not yet been verified in-game; water rendering, terrain cutouts, beaver alignment and save/reload need playtesting. Compatibility with other patches and multiplayer is unverified.
 
 ## Features
 
-- A 5 × 6 pool with an attached bar, four bar seats, two soaking seats and two swimming lanes.
+- A 5 Ã— 6 pool with an attached bar, four bar seats, two soaking seats and two swimming lanes.
 - A basin extending two blocks underground, with individually mapped wooden floor planks and an entry ladder.
 - Water hauled from your settlement: 60-unit reserve, draining 12 units per day while operating.
 - Recreation stops when dry; water and recreation return when supplies arrive.
@@ -23,7 +23,7 @@ A self-contained swim-up pool bar for **Timberborn**. Built from timber and that
 
 ## Install
 
-1. Download **TipsyTail-v0.2.0-mod.zip** from [Releases](https://github.com/kramsey458/timberborn-tipsy-tail/releases/tag/v0.2.0), rather than GitHub's automatic source-code archive.
+1. Download **TipsyTail-v0.2.1-mod.zip** from [Releases](https://github.com/kramsey458/timberborn-tipsy-tail/releases/tag/v0.2.1), rather than GitHub's automatic source-code archive.
 2. Close Timberborn and extract the included **TipsyTail** folder into your `Documents/Timberborn/Mods` folder. `manifest.json` must be directly inside `Mods/TipsyTail`.
 3. Enable **The Tipsy Tail** in Mod Manager and restart when prompted.
 4. Start with a separate test save. Unlock the building under Well-being, connect the front entrance to a path, and provide a staffed Hauling Post with access to water.
@@ -34,7 +34,7 @@ Upgrading: replace the old TipsyTail folder with the new one; keep only one vers
 
 | Requirement | Value |
 | --- | --- |
-| Ground footprint | 5 × 6, level ground |
+| Ground footprint | 5 Ã— 6, level ground |
 | Depth | Two solid soil layers underneath; no platforms or pre-dug empty pits |
 | Above-ground clearance | Three blocks |
 | Construction | 60 logs, 40 planks, 10 gears |
@@ -47,6 +47,12 @@ Upgrading: replace the old TipsyTail folder with the new one; keep only one vers
 The drain continues without visitors, but native pause/block rules pause consumption. The surface has a fixed height; this mod does not add water to the map simulation. No bartender job or custom drinking animation is included.
 
 The depth requirement changed in v0.2.0. Old placements on platforms, thin terrain or above other underground buildings may need rebuilding. Save migration has not been playtested.
+
+## What's new in v0.2.1
+
+Demolition now releases the pool's terrain cutout without changing the original soil. A bundled cleanup controller handles repeated callbacks and avoids separate preview cutouts. **To clear a hole left by an already-removed pool, update, restart and reload your save.** The game recreates its temporary cutout map during loading. Keep the bundled `Scripts/TipsyTail.Runtime.dll`; no external framework is needed.
+
+An offline native-assembly test reproduced the old leak and verified the replacement under the same callbacks, plus rotation, relocation and construction-cancellation tests. In-game and multiplayer verification remain outstanding.
 
 ## What's new in v0.2.0
 

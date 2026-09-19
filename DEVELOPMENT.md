@@ -1,8 +1,16 @@
-# The Tipsy Tail — prototype 0.2.0
+# The Tipsy Tail — prototype 0.2.1
 
 A timber-and-thatch swim-up pool bar for **Timberborn 1.1.2.4 public**, both factions.
 
-## Changes
+## 0.2.1 demolition fix
+
+Tipsy Tail now uses a bundled, building-specific terrain-cutout controller. It owns one reference per hidden tile and releases cached coordinates on demolition, even during reentrant model callbacks. Previews do not hide terrain. Ground heights, texture data and cutouts owned by other buildings are not changed.
+
+For an already-stranded hole after removing a pool, install this version, restart Timberborn and reload the save. The game rebuilds cutout masks on load. This does not require editing the save or filling terrain manually. The mod includes Scripts/TipsyTail.Runtime.dll; keep it with the installation. Multiplayer users need the same version on every machine.
+
+Eight ownership regression checks and a native-assembly integration harness pass, including a reproduction of the old handler leaking 30 references and the new handler releasing all 30. See terrain-cleanup-validation.json. In-game testing remains outstanding.
+
+## 0.2.0 visual changes
 
 - The unbuilt site uses the game's native dirt-and-stakes construction base, stretched from 5 × 5 to 5 × 6, matching the campfire construction-site style.
 - The basin extends two blocks below ground. Two underground block layers reserve soil beneath the footprint; the finished building uses the native terrain cutout. This is the underground-building mechanism, not permanent terrain deletion or simulated river water.
@@ -39,7 +47,7 @@ The drain is a chosen constant balance value and continues without visitors. Nat
 
 Copy Mod contents into Documents/Timberborn/Mods/TipsyTail. Restart Timberborn to load changed assets and blueprints. Enable The Tipsy Tail in Mod Manager. If updating manually, remove the obsolete Buildings/Wellbeing/TipsyTail/TipsyTail.ConstructionStage0.Model.timbermesh. Do not install multiple versions at once.
 
-The mod ZIP contains a TipsyTail folder ready to copy into Mods. The separate source ZIP includes editable Blender assets, scripts and reports. No Unity editor, Blender installation, BepInEx or DLL dependency is needed to play.
+The mod ZIP contains a TipsyTail folder ready to copy into Mods. The separate source ZIP includes editable Blender assets, scripts and reports. No Unity editor, Blender installation, BepInEx or separately installed dependency is needed to play. A small cleanup DLL is bundled with this version.
 
 ## Verification
 
@@ -51,7 +59,7 @@ User checks remaining: load/place in both factions, confirm terrain cutout and d
 
 ## Assets and rebuilding
 
-Source/TipsyTail.blend is the editable model. The preview and front PNGs in docs/images show the complete model including the normally buried basin. TipsyTail-dry.png shows the floor from above. These are Blender renders with approximate water, not game screenshots.
+Source/TipsyTail.blend is the editable model. Preview, front and side PNGs show the complete model including the normally buried basin. TipsyTail-dry.png shows the floor from above. These are Blender renders with approximate water, not game screenshots.
 
 ```text
 python Source/build_mod.py PATH_TO_EXTRACTED_BLUEPRINTS
@@ -60,6 +68,18 @@ blender -b --python-exit-code 1 --python Source/validate_assets.py -- PATH_TO_TI
 blender -b --python-exit-code 1 --python Source/validate_geometry.py
 ```
 
-Blueprint inputs come from the installed game's StreamingAssets/Modding/Blueprints.zip. The exporter directory is src/timbermesh_blender_plugin in [Mechanistry's Timbermesh repository](https://github.com/mechanistry/timbermesh). Generated with Blender 4.5.3. Geometry and scripts are original; the game supplies referenced materials and the native construction base. The public editable Blender file uses simple placeholder materials, preserving the game's material names for export. Rebuilding can load reference materials from your local game installation; set TIMBERBORN_PATH when installed outside the default Steam folder. Game reference textures and shaders are not included in the public Blender file.
+Blueprint inputs come from the installed game's StreamingAssets/Modding/Blueprints.zip. The exporter directory is src/timbermesh_blender_plugin in [Mechanistry's Timbermesh repository](https://github.com/mechanistry/timbermesh). Generated with Blender 4.5.3. Geometry and scripts are original; the game supplies referenced materials and the native construction base. The public Blender source uses placeholder materials. Game textures and shaders are not bundled. Set TIMBERBORN_PATH when rebuilding against another local game installation.
 
 To tune drain, change GoodConsumingBuildingSpec.ConsumedGoods[0].GoodPerHour. Inventory is ceil(FullInventoryWorkHours × GoodPerHour). Keep visitor capacity synchronized with model slots.
+
+## Build the bundled terrain controller
+
+Requires .NET SDK 8 and your installed game assemblies. Run before packaging:
+
+```text
+dotnet build Source/Runtime/TipsyTail.Runtime.csproj -c Release
+dotnet run --project Source/Runtime/Tests/Tests.csproj -c Release
+dotnet run --project Source/Runtime/Tests/Native/Integration.csproj -c Release
+```
+
+Copy only Source/Runtime/bin/Release/netstandard2.1/TipsyTail.Runtime.dll into Mod/Scripts. Game DLLs are referenced for compilation and tests, not redistributed. Override TimberbornManagedDir when building against a non-default game installation. The native integration harness also specifies its local Managed directory in its project and Program.cs.

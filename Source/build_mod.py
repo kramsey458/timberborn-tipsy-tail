@@ -26,7 +26,8 @@ b['BlockObjectSpec'].update(Size={'X':5,'Y':6,'Z':5},Entrance={'HasEntrance':Tru
 b['BlockObjectSpec']['Blocks']=[{'MatterBelow':'Ground' if h==2 else 'Any','Occupations':'None' if h<2 else 'Bottom, Top, Corners, Path, Middle','Stackable':'None','OccupyAllBelow':False,'Underground':h<2} for h in range(5) for z in range(6) for x in range(5)]
 # Cutout coordinates are grid-relative (BaseZ included); model/slot coordinates
 # are surface-relative because BlockObject.UpdateTransform adds BaseZ itself.
-b['BuildingTerrainCutoutSpec']={'CutoutTiles':[{'X':x,'Y':z,'Z':2} for x in range(5) for z in range(6)]}
+b.pop('BuildingTerrainCutoutSpec',None)
+b['TipsyTailTerrainCutoutSpec']={'CutoutTiles':[{'X':x,'Y':z,'Z':2} for x in range(5) for z in range(6)]}
 b['UndergroundDepthDescriberSpec']={'Depth':2}
 b['BuildingAccessibleSpec'].update(LocalAccess={'X':2.5,'Y':2.0,'Z':0.08},ForceOneFinalAccess=False)
 b['PlaceableBlockObjectSpec']['ToolOrder']=85
@@ -73,7 +74,7 @@ need=read('Needs/Need.Beaver.Campfire.blueprint.json')
 need['NeedSpec'].update(Id='TipsyTail',Order=45,DisplayNameLocKey='Building.TipsyTail.DisplayName',FavorableWellbeing=2)
 write(Path('Needs/Need.Beaver.TipsyTail.blueprint.json'),need)
 write(Path('Buildings/Wellbeing/TipsyTail/TipsyTailIcon.png.meta.json'),{'isSprite':True})
-write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':'0.2.0.0','Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. A two-block underground basin, teal fountain water, beaver-height counter and stock dirt-and-stakes construction site. Eight guests, hauled water and continuous evaporation while operating.','RequiredMods':[]})
+write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':'0.2.1.0','Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. Two-block underground basin, hauled water, and eight visitors. Includes scoped terrain-cutout cleanup so demolition reveals the original ground.','RequiredMods':[]})
 loc=MOD/'Localizations';loc.mkdir(exist_ok=True)
 with (loc/'enUS.csv').open('w',newline='',encoding='utf-8') as f:
     w=csv.writer(f);w.writerow(['ID','Text','Comment'])

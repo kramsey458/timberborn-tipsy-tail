@@ -1,23 +1,16 @@
-The first public prerelease of **The Tipsy Tail**, a hauled-water swim-up pool bar for both Timberborn factions.
+# The Tipsy Tail v0.2.1 — Demolition terrain cleanup
 
-Targets **Timberborn 1.1.2.4**. Offline checks pass; the latest version still needs in-game playtesting.
+Fixes a terrain-cutout cleanup failure that could leave a blue rectangle where a demolished Tipsy Tail stood.
 
-### Download and install
+- Tracks exactly which terrain tiles the building hides, releasing each once on demolition.
+- Handles repeated/reentrant model callbacks, hidden models, relocation and late deletion callbacks without leaking cutouts.
+- Avoids a separate placement-preview cutout owner; placing or cancelling a preview does not hide the ground.
+- Leaves soil heights and terrain data untouched, preserving the existing ground and other buildings' cutouts.
 
-Download **TipsyTail-v0.2.0-mod.zip**, extract the included **TipsyTail** folder into `Documents/Timberborn/Mods`, enable it in Mod Manager, and restart. Use a separate test save initially. The automatic GitHub source archives are for development, not direct installation.
+**Updating an affected save:** replace the old mod folder with this version, restart Timberborn, and reload your save. Terrain cutouts are rebuilt during loading, so an already-stranded cutout from a removed building should disappear. No save editing or manual terraforming is needed for this visual-cutout issue.
 
-### Included
+Download **TipsyTail-v0.2.1-mod.zip** and extract its TipsyTail folder into `Documents/Timberborn/Mods`. Keep the included `Scripts/TipsyTail.Runtime.dll` with the mod. No separate framework or mod is required. For multiplayer, every player must use the same version.
 
-- Eight visitors: four bar seats, two soaking seats and two swimming lanes.
-- Two-block-deep underground basin, improved plank floor, corrected entry steps and pool ladder.
-- Teal fountain water, a lower counter, and removal of the central hanging ornament.
-- Native dirt-and-stakes construction site and the previous initialization fixes.
-- 60-unit hauled-water reserve; 12 units consumed per day while operating, even without visitors.
+The fix was compiled against Timberborn 1.1.2.4. An offline test using the installed game's actual native handler reproduced 30 leaked cutout references after a reentrant callback; the replacement cleared all 30 in the same harness. Additional checks cover all four rotations, moving, construction cancellation, model hiding, other cutout owners and callbacks during deletion. Asset/blueprint checks pass. These are offline tests, not an in-game playtest; multiplayer remains unverified.
 
-### Placement and current limitations
-
-Requires level 5 × 6 ground with two solid soil layers below it and three blocks of clearance above. Platforms and pre-dug empty pits do not qualify. Previous placements may need rebuilding if they do not meet the new depth requirement.
-
-The water surface is decorative and fixed-height; paused/blocked buildings pause consumption. No bartender job or custom drinking animations. Game shader appearance, terrain cutout, visitor alignment and save migration still need verification; multiplayer is untested.
-
-Report issues with your game version, faction, reproduction steps and a redacted log excerpt. See the repository README for full instructions.
+The two-block depth requirement, pool model, water consumption and recreation balance are unchanged. This remains a prototype prerelease.

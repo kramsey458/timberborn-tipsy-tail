@@ -1263,7 +1263,7 @@
       }
     ]
   },
-  "BuildingTerrainCutoutSpec": {
+  "TipsyTailTerrainCutoutSpec": {
     "CutoutTiles": [
       {
         "X": 0,

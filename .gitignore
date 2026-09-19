@@ -3,3 +3,5 @@ __pycache__/
 *.blend1
 .DS_Store
 work/
+bin/
+obj/

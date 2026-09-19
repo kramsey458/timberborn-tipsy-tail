@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "checks": 149,
+  "checks": 151,
   "test_type": "Offline structural checks, NOT an in-game playtest",
   "triangles": 25840,
   "vertices": 57053,
@@ -154,7 +154,9 @@
     "Entrance stays at terrain surface above basin",
     "Two complete reserved underground soil layers",
     "Surface deck requires ground, not platforms",
-    "Terrain cutout covers footprint at surface",
+    "Owned terrain cutout covers footprint at surface",
+    "No second native cutout owner or preview handler",
+    "Bundled terrain cleanup runtime is present",
     "Underground slice model exported",
     "Contained teal FountainWater replaces breeding-pod water",
     "No visitor-dependent evaporation toggle",
