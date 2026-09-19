@@ -64,6 +64,27 @@ def validate_pool_water():
     uv_channels={o['m_OutputChannel'] for o in uv_nodes if o['m_ObjectId'] in fed}
     assert uv_channels=={1},f'Expected the connected UV nodes to read UV1 only, found channels {uv_channels}'
 
+    # Raw Unity Time must only ever reach the shader through three speed multipliers. The runtime zeroes all
+    # three, which removes every raw-Time motion and leaves only the game's own _NonlinearTime on the normals.
+    by={o['m_ObjectId']:o for o in objs if 'm_ObjectId' in o}
+    nodes={n['m_Id']:by[n['m_Id']] for n in objs[0]['m_Nodes']}
+    kind=lambda n:n['m_Type'].split('.')[-1].split(',')[0]
+    feeders={}
+    for e in objs[0]['m_Edges']:
+        feeders.setdefault(e['m_InputSlot']['m_Node']['m_Id'],[]).append(e['m_OutputSlot']['m_Node']['m_Id'])
+    def prop_ref(n):
+        p=by[n['m_Property']['m_Id']];return p.get('m_OverrideReferenceName') or p.get('m_DefaultReferenceName')
+    time_speed_props={'_WaterRippleSpeed','_Albedo_Speed','_Albedo_Speed2'}
+    time_nodes=[i for i,n in nodes.items() if kind(n)=='TimeNode']
+    assert time_nodes,'Expected the shader to read Time'
+    for tid in time_nodes:
+        consumers=[i for i,srcs in feeders.items() if tid in srcs]
+        assert consumers,'Time node feeds nothing'
+        for c in consumers:
+            gates={prop_ref(nodes[s]) for s in feeders[c] if kind(nodes[s])=='PropertyNode'}
+            assert gates&time_speed_props,f'Time reaches a node that is not gated by a speed property: {gates}'
+    assert any(prop_ref(n)=='_NonlinearTime' for n in nodes.values() if kind(n)=='PropertyNode'),'Expected the shader to read _NonlinearTime'
+
     channels=pool_surface_vertex_channels()
     assert 'uv0' in channels and 'uv1' not in channels,'The exported pool surface is expected to lack UV1'
 
@@ -71,6 +92,8 @@ def validate_pool_water():
     used=re.findall(r'\.(?:Set(?:Float|Vector|Color|Texture)|GetFloat|HasProperty)\(\s*"(_\w+)"',src)
     setters=re.findall(r'\.Set(?:Float|Vector|Color|Texture)\(\s*"(_\w+)"',src)
     assert setters and set(used)<=props,f'C# uses properties the shader does not have: {sorted(set(used)-props)}'
+    for name in sorted(time_speed_props):
+        assert re.search(r'Set(?:Float|Vector)\(\s*"%s"\s*,\s*(?:0f|Vector4\.zero)\s*\)'%name,src),f'{name} must be zeroed to remove raw-Time motion'
     assert re.search(r'SetUVs\(\s*1\s*,',src),'The runtime must supply UV1'
     assert 'TipsyTailWaterMesh.For' in src,'The surface mesh replacement must be applied'
 
@@ -87,6 +110,8 @@ def validate_pool_water():
       'shader':'Shader Graphs/FountainWaterURP',
       'shader_facts':{'surface_type':'Opaque' if target['m_SurfaceType']==0 else 'Transparent','uv_channels_read':sorted(uv_channels)},
       'exported_pool_surface_vertex_channels':sorted(channels),
+      'raw_time_speed_properties_zeroed':sorted(time_speed_props),
+      'remaining_motion':'two normal maps on the game _NonlinearTime clock',
       'runtime_supplies_uv1':True,
       'properties_overridden':sorted(set(setters)),
       'all_properties_exist_in_shader':True,

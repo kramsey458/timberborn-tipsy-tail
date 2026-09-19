@@ -24,9 +24,10 @@ namespace Kyler.TipsyTail
     public sealed class TipsyTailPoolWater : BaseComponent, IAwakableComponent,
         IInitializablePreview, IPostInitializableEntity
     {
-        // Lake blue, calibrated so the lit pool matches the lake's deep water rather than the fountain's teal.
-        internal static readonly Color WaterColor = new Color(0.09f, 0.27f, 0.61f, 1f);
-        internal static readonly Color FoamColor = new Color(0.16f, 0.40f, 0.72f, 1f);
+        // Lake tint: a slate teal-blue, a little darker and bluer than the fountain's own teal, which in daylight
+        // renders close to the lake. Anything brighter or more saturated turns into blue plastic.
+        internal static readonly Color WaterColor = new Color(0.15f, 0.38f, 0.46f, 1f);
+        internal static readonly Color FoamColor = new Color(0.30f, 0.62f, 0.72f, 1f);
 
         public void Awake() { TipsyTailWaterTuner.Register(this); Apply(); }
         public void InitializePreview() { Apply(); }
@@ -74,11 +75,21 @@ namespace Kyler.TipsyTail
                             block.SetColor("_FoamColor", FoamColor);
                             if (TipsyTailWaterTuner.FixUv1)
                             {
-                                // The ripple offset is added in UV1 space, so scale it with the UV to keep
-                                // the same drift in blocks per second; bump speeds are the lake's own.
-                                block.SetFloat("_WaterRippleSpeed", material.GetFloat("_WaterRippleSpeed") * TipsyTailWaterTuner.Uv1Scale);
+                                // Still lake: the texture, gloss and noise stay put. Raw Unity Time drives the
+                                // albedo drift and the ripple offset, and it can jitter (for example while a
+                                // multiplayer host steps the game), so it is switched off. Only the two normal
+                                // maps move, on the game's own _NonlinearTime clock at the lake's speeds and tilings.
+                                block.SetFloat("_WaterRippleSpeed", 0f);
+                                block.SetVector("_Albedo_Speed", Vector4.zero);
+                                block.SetVector("_Albedo_Speed2", Vector4.zero);
                                 block.SetVector("_BumpMap1Speed", new Vector4(0.01f, 0.008f, 0f, 0f));
                                 block.SetVector("_BumpMap2Speed", new Vector4(-0.008f, -0.01f, 0f, 0f));
+                                block.SetFloat("_BumpMap1Tiling", 0.1f / TipsyTailWaterTuner.DefaultUv1Scale);
+                                block.SetFloat("_BumpMap2Tiling", 0.14f / TipsyTailWaterTuner.DefaultUv1Scale);
+                                block.SetFloat("_BumpMap1Strength", 0.5f);
+                                block.SetFloat("_BumpMap2Strength", 0.75f);
+                                // Lake water throws crisp white glints; the native gloss map is only about 0.3 smooth.
+                                block.SetFloat("_GlossMapScale", 2.2f);
                             }
                         }
                         TipsyTailWaterTuner.ApplyOverrides(block, material);
@@ -174,7 +185,8 @@ namespace Kyler.TipsyTail
         internal const float DefaultUv1Scale = 0.14f;
         internal static float Uv1Scale { get; private set; } = DefaultUv1Scale;
 
-        private float _nextPoll;
+        private float _nextPoll, _nextContentCheck;
+        private string _configPath, _lastSignature;
         private string _lastText;
         private bool _hadFile;
         private bool _reportedError;
@@ -196,18 +208,24 @@ namespace Kyler.TipsyTail
 
         private void Update()
         {
+            // Poll rarely and cheaply: this runs on the main thread, so file access must not add hitches.
             if (Time.unscaledTime < _nextPoll) return;
-            _nextPoll = Time.unscaledTime + 0.5f;
+            _nextPoll = Time.unscaledTime + 2f;
             try
             {
-                var path = ConfigPath();
-                var exists = path != null && File.Exists(path);
-                if (!exists)
+                var path = _configPath ?? (_configPath = ConfigPath());
+                var info = path == null ? null : new FileInfo(path);
+                if (info == null || !info.Exists)
                 {
-                    if (_hadFile) { _hadFile = false; Ops.Clear(); UseNativeMaterial = false; FixUv1 = true; Uv1Scale = DefaultUv1Scale; ReapplyAll(); }
+                    if (_hadFile) { _hadFile = false; _lastSignature = null; Ops.Clear(); UseNativeMaterial = false; FixUv1 = true; Uv1Scale = DefaultUv1Scale; ReapplyAll(); }
                     return;
                 }
-                // Compare contents, not timestamps: files copied from a zip can share one timestamp.
+                // Size and timestamp are the fast check. Files copied from one zip can share a timestamp, so the
+                // contents are also compared every 10 seconds and whenever the fast check changes.
+                var signature = info.Length + "|" + info.LastWriteTimeUtc.Ticks;
+                if (_hadFile && signature == _lastSignature && Time.unscaledTime < _nextContentCheck) return;
+                _nextContentCheck = Time.unscaledTime + 10f;
+                _lastSignature = signature;
                 var text = File.ReadAllText(path);
                 if (_hadFile && text == _lastText) return;
                 _hadFile = true; _lastText = text;

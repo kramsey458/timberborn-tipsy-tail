@@ -14,12 +14,25 @@
     "tangent",
     "uv0"
   ],
+  "raw_time_speed_properties_zeroed": [
+    "_Albedo_Speed",
+    "_Albedo_Speed2",
+    "_WaterRippleSpeed"
+  ],
+  "remaining_motion": "two normal maps on the game _NonlinearTime clock",
   "runtime_supplies_uv1": true,
   "properties_overridden": [
+    "_Albedo_Speed",
+    "_Albedo_Speed2",
     "_BumpMap1Speed",
+    "_BumpMap1Strength",
+    "_BumpMap1Tiling",
     "_BumpMap2Speed",
+    "_BumpMap2Strength",
+    "_BumpMap2Tiling",
     "_Color",
     "_FoamColor",
+    "_GlossMapScale",
     "_WaterRippleSpeed"
   ],
   "all_properties_exist_in_shader": true,
@@ -29,9 +42,9 @@
     0.16
   ],
   "tint_gamma_rgb": [
-    0.09,
-    0.27,
-    0.61
+    0.15,
+    0.38,
+    0.46
   ],
   "scope": "Per-material-index property blocks and a replacement quad on #PoolWater only; shared material and mesh assets untouched",
   "bar_seats": 4,

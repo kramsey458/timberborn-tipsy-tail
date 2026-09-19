@@ -1,8 +1,16 @@
-# The Tipsy Tail — prototype 0.2.5
+# The Tipsy Tail — prototype 0.2.6
 
 A timber-and-thatch swim-up pool bar for **Timberborn 1.1.2.4 public**, both factions.
 
-## What's new in v0.2.5
+## What's new in v0.2.6
+
+Still-lake water. The shader graph shows that raw Unity Time reaches the material only through three speed multipliers (`_WaterRippleSpeed`, `_Albedo_Speed`, `_Albedo_Speed2`), and that the two normal maps are the only layers that also use the game's own `_NonlinearTime` (set by `Timberborn.TimeSystem`'s `NonlinearAnimationManager`). The runtime zeroes the three Time multipliers, so the albedo, gloss and noise are static like a still lake and only the normal maps move, at the lake's own speeds (0.01, 0.008 and -0.008, -0.01) and tilings (0.1 and 0.14 in lake units, set as 0.1 and 0.14 divided by the default UV scale). Bump strengths are the lake's (0.5, 0.75), the gloss scale is 2.2 so the sun throws crisp glints, and the tint is a slate teal-blue, `(0.15, 0.38, 0.46)`, because the earlier saturated blue rendered as blue plastic. The `Source/validate_pool_water.py` check now asserts that every Time node is gated by one of the three multipliers and that the runtime zeroes all three.
+
+Limit: every standalone water material in the game (fountain, breeding pod, bad water, the water good) is opaque; only `PhysicalWater_*` is transparent, and its vertex program is a water-tile engine that needs about ten simulation texture arrays. So the pool cannot be see-through or depth-shaded like the lake.
+
+The `water.cfg` check now runs every 2 seconds and reads the file only when its size or timestamp changes, with a content check every 10 seconds. The presets in `water-presets/` were replaced with a diagnostic set: no motion, the previous raw-time motion and the untouched vanilla fountain water, plus darker, lighter and finer variants. In-game appearance has not been verified.
+
+## 0.2.5 water surface fix (look revised in 0.2.6)
 
 Water surface fix. `FountainWaterURP` animates every layer through UV1: the albedo scroll, both normal maps, the gloss map, the noise blend and the ripple offset all sample through the one connected UV node, which reads channel 1. The exported `#PoolWater` node only has `position`, `normal`, `tangent` and `uv0` (the game's Timbermesh loader maps vertex properties by name, `uv0`, `uv1` and so on), so UV1 was zero everywhere. Every pixel sampled the same point in each texture and the whole surface pulsed together; a simulation with the game's textures shows zero spatial variation and large uniform swings over time. The v0.2.2 freeze and the v0.2.3 flat colour treated symptoms, and v0.2.3 also rendered far too bright.
 
