@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "test_type": "Offline comparison against the installed game blueprints and the generated mod blueprint; not an in-game test",
+  "need": {
+    "id": "WetFur",
+    "group": "BasicNeeds",
+    "daily_delta": -0.3,
+    "favorable_wellbeing": 1,
+    "in_common_collection": true
+  },
+  "tipsy_tail_effects": [
+    {
+      "NeedId": "TipsyTail",
+      "PointsPerHour": 0.6,
+      "SatisfyToMaxValue": false
+    },
+    {
+      "NeedId": "WetFur",
+      "PointsPerHour": 0.5,
+      "SatisfyToMaxValue": false
+    }
+  ],
+  "native_wet_fur_sources_points_per_hour": {
+    "DancePit.IronTeeth": 0.4,
+    "DomedGarden.Folktails": 0.4,
+    "DoubleShower.IronTeeth": 1.0,
+    "Lido.Folktails": 0.5,
+    "Shower.Folktails": 1.0,
+    "SwimmingPool.IronTeeth": 0.5
+  },
+  "matched_native_rate": 0.5,
+  "available_to_factions": [
+    "Folktails",
+    "IronTeeth"
+  ],
+  "runtime_code_changed": false,
+  "note": "Data-only change: the effect is applied by the native AttractionSpec, so no new runtime code or need collection is involved."
+}

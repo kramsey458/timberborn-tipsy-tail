@@ -16,7 +16,8 @@ for k in ['AttractionFireSpec','FireSpec','IlluminatorLightObjectsSpec','Templat
 b['BuildingSpec'].update(SelectionSoundName='Lido',BuildingCost=[{'Id':'Log','Amount':60},{'Id':'Plank','Amount':40},{'Id':'Gear','Amount':10}],ScienceCost=500)
 b['BuildingModelSpec'].update(UndergroundModelName='#Underground',UndergroundModelDepth=2)
 b['TemplateSpec']['TemplateName']='TipsyTail'
-b['AttractionSpec']['Effects']=[{'NeedId':'TipsyTail','PointsPerHour':0.6,'SatisfyToMaxValue':False}]
+# WetFur is a Common need, so both factions already load it. 0.5/hour matches Lido and SwimmingPool.
+b['AttractionSpec']['Effects']=[{'NeedId':'TipsyTail','PointsPerHour':0.6,'SatisfyToMaxValue':False},{'NeedId':'WetFur','PointsPerHour':0.5,'SatisfyToMaxValue':False}]
 b['EnterableSpec']['CapacityFinished']=8
 b['TransformSlotInitializerSpec']['Slots']=[{'SlotKeyword':'BarSeat','Animation':'Sitting','Inanimate':False,'RandomizeYRotation':False,'WaterSlot':False}]
 b['PatrollingSlotInitializerSpec']={'PatrollingSlots':[{'BaseMovementSpeed':0.45,'MaxRandomDeviationOfMovementSpeed':0.1,'SlotKeyword':'Swimming','Animation':'ForcedSwimming','WaterSlot':False}]}
@@ -75,11 +76,11 @@ need=read('Needs/Need.Beaver.Campfire.blueprint.json')
 need['NeedSpec'].update(Id='TipsyTail',Order=45,DisplayNameLocKey='Building.TipsyTail.DisplayName',FavorableWellbeing=2)
 write(Path('Needs/Need.Beaver.TipsyTail.blueprint.json'),need)
 write(Path('Buildings/Wellbeing/TipsyTail/TipsyTailIcon.png.meta.json'),{'isSprite':True})
-write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':'0.2.3.0','Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. Two-block underground basin, hauled water, and eight visitors. Includes scoped terrain-cutout cleanup so demolition reveals the original ground.','RequiredMods':[]})
+write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':'0.2.4.0','Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. Two-block underground basin, hauled water, and eight visitors. Includes scoped terrain-cutout cleanup so demolition reveals the original ground.','RequiredMods':[]})
 loc=MOD/'Localizations';loc.mkdir(exist_ok=True)
 with (loc/'enUS.csv').open('w',newline='',encoding='utf-8') as f:
     w=csv.writer(f);w.writerow(['ID','Text','Comment'])
     w.writerow(['Building.TipsyTail.DisplayName','The Tipsy Tail',''])
-    w.writerow(['Building.TipsyTail.Description','A self-contained pool and swim-up bar built two blocks into solid ground. Requires a level 5 x 6 site with two soil layers beneath it. Haulers supply water. Holds 60 water and evaporates 12 per day while operating, even without visitors. Recreation stops when dry. Requires a staffed Hauling Post.',''])
+    w.writerow(['Building.TipsyTail.Description','A self-contained pool and swim-up bar built two blocks into solid ground. Requires a level 5 x 6 site with two soil layers beneath it. Visitors also wet their fur here. Haulers supply water. Holds 60 water and evaporates 12 per day while operating, even without visitors. Recreation, including wet fur relief, stops when dry. Requires a staffed Hauling Post.',''])
     w.writerow(['Building.TipsyTail.FlavorDescription','Leave your worries on the shore. Bring your own tail.',''])
 print('Built mod data:',MOD)

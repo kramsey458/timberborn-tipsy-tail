@@ -35,6 +35,11 @@
         "NeedId": "TipsyTail",
         "PointsPerHour": 0.6,
         "SatisfyToMaxValue": false
+      },
+      {
+        "NeedId": "WetFur",
+        "PointsPerHour": 0.5,
+        "SatisfyToMaxValue": false
       }
     ]
   },

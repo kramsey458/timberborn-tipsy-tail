@@ -1,10 +1,11 @@
-# The Tipsy Tail v0.2.3 — Still pool water
+# The Tipsy Tail v0.2.4 — Wet fur relief
 
-- Replaces the pool's frozen fountain-water texture layers with one flat, glossy surface in Timberborn's own water tint. This removes the static blotches, dark patches and sparkle specks visible in v0.2.2.
-- Turns foam off entirely and makes the surface level, with no normal-map distortion.
-- Uses renderer-local overrides on the pool surface only, leaving the game's fountains and other water materials unchanged.
-- Only `Scripts/TipsyTail.Runtime.dll` changed since v0.2.2. The model, blueprint, capacity (four bar seats and four swimming lanes) and balance are identical, and v0.2.1 terrain cleanup on demolition is retained.
+- The Tipsy Tail now satisfies the game's native Wet fur need for every visitor, at 0.5 points per hour. That is the same rate the Lido and Swimming Pool use for their swimming visitors.
+- Works for both Folktails and Iron Teeth with no extra setup, because Wet fur is part of the game's common need set. Existing pools pick it up when you load your save.
+- Recreation and wet fur relief both stop while the pool is dry, and resume when haulers restore the water.
+- The in-game description now mentions wet fur.
+- Data-only change: the model and runtime code are the same as v0.2.3, including the flat still-water surface and v0.2.1 terrain cleanup on demolition. The DLL is rebuilt only to carry the new version number.
 
-Install by replacing the old TipsyTail folder with the folder from **TipsyTail-v0.2.3-mod.zip**, including Scripts/TipsyTail.Runtime.dll. Restart Timberborn and reload your save to load the updated runtime. Multiplayer players need matching versions.
+Install by replacing the old TipsyTail folder with the folder from **TipsyTail-v0.2.4-mod.zip**, including Scripts/TipsyTail.Runtime.dll. Restart Timberborn and reload your save. Multiplayer players need matching versions.
 
-Built against Timberborn 1.1.2.4. Runtime compilation, shader-property verification against the installed game (every overridden property exists and the foam and albedo math resolves to a flat tint), and terrain ownership/native integration regressions pass. Water appearance and behavior still require user testing in-game; no game session was launched for verification. This is a prototype prerelease.
+Built against Timberborn 1.1.2.4. The wet fur effect is checked offline against the game's own blueprints: the need exists, both factions load it, and the rate matches the native swimming venues. Runtime compilation and terrain ownership/native integration regressions pass. The effect and the water appearance still require user testing in-game; no game session was launched for verification. This is a prototype prerelease.
