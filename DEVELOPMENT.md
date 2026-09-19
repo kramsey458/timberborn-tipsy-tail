@@ -1,10 +1,16 @@
-# The Tipsy Tail — prototype 0.2.2
+# The Tipsy Tail — prototype 0.2.3
 
 A timber-and-thatch swim-up pool bar for **Timberborn 1.1.2.4 public**, both factions.
 
-## What's new in v0.2.2
+## What's new in v0.2.3
 
-Calm pool water: scrolling textures, ripple motion and foam are disabled for the pool only, with much gentler surface distortion. The two corner seats are removed. Eight visitors now use four bar seats and four swimming lanes. Restart the game and reload your save after updating.
+Still pool water. `FountainWaterURP` builds its colour from scrolling texture layers blended through a noise map, a detail layer and depth-based foam, and takes specular and normals from textures too. Freezing the scroll speeds in v0.2.2 left those layers as static blotches, dark patches and sparkle specks. The bundled runtime now replaces every texture input on the pool's `#PoolWater` renderer with a constant: white albedo, a neutral detail layer, a flat gloss map, zero normal-map strength and zero metallic. Foam is pushed out of range with a negative offset, which also avoids the divide by zero the v0.2.2 override could hit. The result is one flat, glossy surface in Timberborn's own water tint, (0.197, 0.573, 0.708) from WaterOutputParticleColors, at smoothness 0.7. Overrides are renderer-local property blocks, so the shared material, fountains and map water are untouched.
+
+Only `Scripts/TipsyTail.Runtime.dll` changed relative to v0.2.2; the model, blueprint and balance are identical. `Source/validate_pool_water.py` checks every overridden property against the installed game's shader graph and evaluates the foam and albedo math with the real constants (pool-water-validation.json). The in-game appearance has not been verified; the tint and smoothness are named constants in `Source/Runtime/TipsyTailPoolWater.cs` for tuning.
+
+## 0.2.2 calm water and swimming slots
+
+Scrolling textures, ripple motion and foam were disabled for the pool only, with much gentler surface distortion. The two corner seats were removed. Eight visitors use four bar seats and four swimming lanes.
 
 
 ## 0.2.1 demolition fix
@@ -71,7 +77,10 @@ python Source/build_mod.py PATH_TO_EXTRACTED_BLUEPRINTS
 blender -b --python-exit-code 1 --python Source/create_assets.py -- PATH_TO_TIMBERMESH_EXPORTER
 blender -b --python-exit-code 1 --python Source/validate_assets.py -- PATH_TO_TIMBERMESH_EXPORTER PATH_TO_EXTRACTED_BLUEPRINTS
 blender -b --python-exit-code 1 --python Source/validate_geometry.py
+python Source/validate_pool_water.py
 ```
+
+`validate_pool_water.py` reads the installed game's `Shaders.zip` and `Source/Runtime/TipsyTailPoolWater.cs`, confirms every overridden shader property exists, and evaluates the foam and albedo math with the real constants. It rewrites pool-water-validation.json.
 
 Blueprint inputs come from the installed game's StreamingAssets/Modding/Blueprints.zip. The exporter directory is src/timbermesh_blender_plugin in [Mechanistry's Timbermesh repository](https://github.com/mechanistry/timbermesh). Generated with Blender 4.5.3. Geometry and scripts are original; the game supplies referenced materials and the native construction base. The public Blender source uses placeholder materials. Game textures and shaders are not bundled. Set TIMBERBORN_PATH when rebuilding against another local game installation.
 
