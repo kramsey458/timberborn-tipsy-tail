@@ -95,4 +95,4 @@ See [DEVELOPMENT.md](DEVELOPMENT.md) for rebuild commands, limitations and valid
 
 For a bug report, include your game/mod versions, faction, screenshot and relevant exception from `Player.log`. Remove personal information from logs before posting them publicly.
 
-Unofficial community mod. Timberborn and its game assets belong to Mechanistry. See [CREDITS.md](CREDITS.md).
+Unofficial community mod. The original project files are MIT licensed (see [LICENSE](LICENSE)); Timberborn and its game assets belong to Mechanistry and are not covered. See [CREDITS.md](CREDITS.md).

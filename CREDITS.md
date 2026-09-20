@@ -8,4 +8,4 @@ The mod uses the native blueprint and Timbermesh formats. Meshes were exported w
 
 The public Blender source contains original geometry with simple placeholder materials. Rebuilding against your installed game can load Mechanistry's example materials locally for previewing. Screenshots on the project page are model renders, not in-game screenshots.
 
-No open-source license has been selected for the original project files. Third-party assets remain subject to their owners' terms.
+The original project files (the Blender model and generator scripts, the mod's blueprints, localization and runtime code, and the documentation) are released under the [MIT License](LICENSE). The license does not cover Timberborn or the Mechanistry assets described above, which remain subject to their owners' terms.
