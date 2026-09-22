@@ -11,7 +11,7 @@
     <TimberbornManagedDir Condition="'$(TimberbornManagedDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Timberborn\Timberborn_Data\Managed</TimberbornManagedDir>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CutoutLease.cs;TipsyTailTerrainCutout.cs;TipsyTailWaterGrid.cs;TipsyTailPoolWater.cs" />
+    <Compile Include="CutoutLease.cs;TipsyTailTerrainCutout.cs;TipsyTailWaterGrid.cs;TipsyTailPoolWater.cs;TipsyTailPaths.cs;TipsyTailModStarter.cs" />
     <Reference Include="$(TimberbornManagedDir)\Timberborn.*.dll" Private="false" />
     <Reference Include="$(TimberbornManagedDir)\Bindito.Core.dll" Private="false" />
     <Reference Include="$(TimberbornManagedDir)\UnityEngine.CoreModule.dll" Private="false" />

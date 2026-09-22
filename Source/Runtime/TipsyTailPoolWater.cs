@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using Timberborn.AssetSystem;
 using Timberborn.BaseComponentSystem;
@@ -683,15 +682,8 @@ namespace Kyler.TipsyTail
 
         private static string ConfigPath()
         {
-            var location = Assembly.GetExecutingAssembly().Location;
-            if (!string.IsNullOrEmpty(location))
-            {
-                var scripts = Path.GetDirectoryName(location);
-                var root = scripts == null ? null : Path.GetDirectoryName(scripts);
-                if (root != null) return Path.Combine(root, "water.cfg");
-            }
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "Timberborn", "Mods", "TipsyTail", "water.cfg");
+            return TipsyTailPaths.ResolveConfigPath(TipsyTailModStarter.ModPath,
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
         }
 
         private static float F(string s) { return float.Parse(s, CultureInfo.InvariantCulture); }

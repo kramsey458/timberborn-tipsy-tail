@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Kyler.TipsyTail;
@@ -45,6 +46,27 @@ static class Program
         Assert(counts.Count==0, "Unbuilt/cancelled entity deletion does not decrement unrelated cutouts");
         Console.WriteLine($"{tests} terrain ownership regression checks passed.");
         WaterGridChecks();
+        ConfigPathChecks();
+    }
+
+    // water.cfg is looked up in the folder the game loaded the mod from (IModEnvironment.ModPath). The game loads mod
+    // DLLs from bytes, so the assembly location is always empty and cannot stand in for it.
+    static void ConfigPathChecks()
+    {
+        int before = tests;
+        string documents = Path.Combine(Path.GetTempPath(), "Beaver", "Documents");
+        string documented = Path.Combine(documents, "Timberborn", "Mods", "TipsyTail");
+        string renamed = Path.Combine(documents, "Timberborn", "Mods", "TipsyTail-v1.0.0-mod");
+        Assert(TipsyTailPaths.ResolveConfigPath(renamed, documents) == Path.Combine(renamed, "water.cfg"), "A renamed mod folder reads water.cfg from inside itself");
+        // macOS keeps the user data folder (and so Mods) under Documents/Documents/Timberborn.
+        string mac = Path.Combine(documents, "Documents", "Timberborn", "Mods", "TipsyTail");
+        Assert(TipsyTailPaths.ResolveConfigPath(mac, documents) == Path.Combine(mac, "water.cfg"), "The macOS mods folder reads water.cfg from the mod folder, not Documents/Timberborn");
+        string elsewhere = Path.Combine(Path.GetTempPath(), "steamapps", "workshop", "content", "1062090", "123456");
+        Assert(TipsyTailPaths.ResolveConfigPath(elsewhere, documents) == Path.Combine(elsewhere, "water.cfg"), "A mod folder outside Documents reads water.cfg from inside itself");
+        Assert(TipsyTailPaths.ResolveConfigPath(documented, documents) == Path.Combine(documented, "water.cfg"), "The documented install folder still reads Mods/TipsyTail/water.cfg");
+        Assert(TipsyTailPaths.ResolveConfigPath(null, documents) == Path.Combine(documented, "water.cfg") && TipsyTailPaths.ResolveConfigPath("", documents) == Path.Combine(documented, "water.cfg"), "Without a mod path the documented Documents/Timberborn/Mods/TipsyTail folder is the fallback");
+        Assert(TipsyTailPaths.ResolveConfigPath(null, "") == null, "Without a mod path or a Documents folder there is no water.cfg, rather than a path relative to the game folder");
+        Console.WriteLine($"{tests - before} config path checks passed.");
     }
 
     // The pool's private water map must match the layout the game's water shader expects (see TipsyTailWaterGrid).

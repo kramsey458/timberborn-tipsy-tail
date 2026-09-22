@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
 using Timberborn.BlockSystem;
 using Timberborn.BlockObjectModelSystem;
+using Timberborn.ModManagerScene;
 using Timberborn.TerrainSystem;
 using UnityEngine;
 using Kyler.TipsyTail;
@@ -22,6 +23,7 @@ class Program
             return File.Exists(p)?context.LoadFromAssemblyPath(p):null;
         };
         Run();
+        StartMod();
     }
     static object Empty(Type t)=>RuntimeHelpers.GetUninitializedObject(t);
     static void Field(object o,string name,object value)=>o.GetType().GetField(name,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(o,value);
@@ -101,6 +103,24 @@ class Program
         }
         custom.DeleteEntity();CheckClear("All rotations and relocation delete cleanly");
     }
+    // Load the runtime DLL the way the game's ModCodeStarter does (from bytes) and start its IModStarter types the way
+    // the game picks them (assignable, not abstract, parameterless constructor), then ask the pool tuner for water.cfg.
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void StartMod()
+    {
+        var loaded=Assembly.Load(File.ReadAllBytes(typeof(TipsyTailTerrainCutout).Assembly.Location));
+        if(loaded.Location!="")throw new Exception("A byte-loaded assembly has a location: "+loaded.Location);
+        Console.WriteLine("PASS: The runtime DLL loaded from bytes, as the game loads it, has no Assembly.Location");
+        var starters=loaded.GetTypes().Where(t=>typeof(IModStarter).IsAssignableFrom(t)&&!t.IsAbstract&&t.GetConstructor(Type.EmptyTypes)!=null).ToList();
+        if(starters.Count!=1)throw new Exception("Expected one mod starter, found "+starters.Count);
+        Console.WriteLine("PASS: The game's mod loader finds exactly one mod starter: "+starters[0].FullName);
+        var modPath=Path.Combine(Path.GetTempPath(),"Mods","TipsyTail-v1.0.0-mod");
+        ((IModStarter)Activator.CreateInstance(starters[0])).StartMod(new ModEnvironment{ModPath=modPath,OriginPath=modPath});
+        var configPath=(string)loaded.GetType("Kyler.TipsyTail.TipsyTailWaterTuner").GetMethod("ConfigPath",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,null);
+        if(configPath!=Path.Combine(modPath,"water.cfg"))throw new Exception("water.cfg resolved to "+configPath);
+        Console.WriteLine("PASS: Once the mod has started, the pool tuner reads water.cfg from the renamed mod folder");
+    }
+    class ModEnvironment:IModEnvironment{public string ModPath{get;set;}public string OriginPath{get;set;}}
 }
 public class TerrainProxy:DispatchProxy
 {
