@@ -1,55 +1,97 @@
 {
   "status": "PASS",
-  "test_type": "Offline checks against the installed game shader graph, the exported model and the C# source; not an in-game rendering test",
-  "shader": "Shader Graphs/FountainWaterURP",
+  "test_type": "Offline checks against the installed game shader graph, HLSL, blueprints, the exported model and the C# source; not an in-game rendering test",
+  "shader": "Shader Graphs/PhysicalWaterURP_Opaque (the game map water), PhysicalWaterURP_Transparent while water is hidden",
   "shader_facts": {
     "surface_type": "Opaque",
-    "uv_channels_read": [
-      1
-    ]
+    "alpha_clip": true,
+    "depth_from_scene_depth": true,
+    "alpha_is_height_above_floor": true
   },
+  "materials": {
+    "opaque": "Environment/Water/Materials/PhysicalWater_Opaque",
+    "transparent": "Environment/Water/Materials/PhysicalWater_Transparent"
+  },
+  "water_data_arrays_bound_by_mod": [
+    "_NewBaseCornerLinks",
+    "_NewContaminations",
+    "_NewCornerLinks",
+    "_NewEdgeLinks",
+    "_NewOutflows",
+    "_NewSkirts",
+    "_NewWaterData",
+    "_NewWaterHeights",
+    "_NewWaterfalls",
+    "_OldBaseCornerLinks",
+    "_OldContaminations",
+    "_OldEdgeLinks",
+    "_OldOutflows",
+    "_OldSkirts",
+    "_OldWaterData",
+    "_OldWaterHeights",
+    "_OldWaterfalls",
+    "_WaterSourceMask"
+  ],
+  "all_arrays_hidden_globals": true,
+  "vertex_stage_arrays": [
+    "_NewBaseCornerLinks",
+    "_NewCornerLinks",
+    "_NewEdgeLinks",
+    "_NewSkirts",
+    "_NewWaterData",
+    "_NewWaterHeights",
+    "_OldBaseCornerLinks",
+    "_OldEdgeLinks",
+    "_OldSkirts",
+    "_OldWaterData",
+    "_OldWaterHeights"
+  ],
+  "mesh_layout": {
+    "vertices_per_cell": 48,
+    "indices_per_cell": 126,
+    "height_texels_per_cell": "4x4",
+    "flag_bits": {
+      "EDGE_VERTEX_BIT": 0,
+      "CORNER_VERTEX_BIT": 1,
+      "SKIRT_BIT": 2,
+      "LEFT_SKIRT_BIT": 3,
+      "RIGHT_SKIRT_BIT": 4,
+      "TOP_SKIRT_BIT": 5,
+      "BOTTOM_SKIRT_BIT": 6,
+      "FLOOR_SKIRT_BIT": 7
+    },
+    "private_map_layers": 2,
+    "padding_cells": 1
+  },
+  "edge_link_channels": {
+    "+x": 3,
+    "-x": 1,
+    "+z": 0,
+    "-z": 2
+  },
+  "corner_link_channels": {
+    "CornerMinusXMinusZ": 2,
+    "CornerPlusXMinusZ": 3,
+    "CornerMinusXPlusZ": 0,
+    "CornerPlusXPlusZ": 1
+  },
+  "water_layer": "Water",
+  "water_tile_prefab_layer": 4,
   "exported_pool_surface_vertex_channels": [
     "normal",
     "position",
     "tangent",
     "uv0"
   ],
-  "shader_clocks_zeroed": [
-    "_Albedo_Speed",
-    "_Albedo_Speed2",
-    "_BumpMap1Speed",
-    "_BumpMap2Speed",
-    "_WaterRippleSpeed"
-  ],
-  "motion": "the mod slides UV1 every frame; the two ripple layers drift in opposite directions (negative tiling on layer 2)",
-  "default_drift_blocks_per_second": 0.02,
-  "runtime_supplies_uv1": true,
-  "properties_overridden": [
-    "_Albedo_Speed",
-    "_Albedo_Speed2",
-    "_BumpMap1Speed",
-    "_BumpMap1Strength",
-    "_BumpMap1Tiling",
-    "_BumpMap2Speed",
-    "_BumpMap2Strength",
-    "_BumpMap2Tiling",
-    "_Color",
-    "_FoamColor",
-    "_GlossMapScale",
-    "_WaterRippleSpeed"
-  ],
-  "all_properties_exist_in_shader": true,
-  "default_uv1_scale": 0.14,
-  "lake_to_fountain_tiling_ratio_range": [
-    0.07,
-    0.16
-  ],
-  "tint_gamma_rgb": [
+  "surface_height_above_ground": 0.1625,
+  "surface_node_position": [
+    2.5,
     0.15,
-    0.38,
-    0.46
+    2.9
   ],
-  "scope": "Per-material-index property blocks and a replacement quad on #PoolWater only; shared material and mesh assets untouched",
+  "basin_depth_blocks": 2,
+  "legacy_fallback": "FountainWater quad with UV1 and zeroed shader clocks (v0.2.7 look) via water.cfg `legacy`, or if the game water cannot be set up",
+  "scope": "A private mesh, material copies, property block and data textures under #PoolWater only; the map water, its textures and the shared materials are untouched",
   "bar_seats": 4,
   "swimming_lanes": 4
 }

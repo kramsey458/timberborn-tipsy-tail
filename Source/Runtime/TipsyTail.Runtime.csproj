@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <AssemblyName>TipsyTail.Runtime</AssemblyName>
-    <Version>0.2.7</Version>
+    <Version>0.2.8</Version>
     <Deterministic>true</Deterministic>
     <DebugType>none</DebugType>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -11,7 +11,7 @@
     <TimberbornManagedDir Condition="'$(TimberbornManagedDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Timberborn\Timberborn_Data\Managed</TimberbornManagedDir>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CutoutLease.cs;TipsyTailTerrainCutout.cs;TipsyTailPoolWater.cs" />
+    <Compile Include="CutoutLease.cs;TipsyTailTerrainCutout.cs;TipsyTailWaterGrid.cs;TipsyTailPoolWater.cs" />
     <Reference Include="$(TimberbornManagedDir)\Timberborn.*.dll" Private="false" />
     <Reference Include="$(TimberbornManagedDir)\Bindito.Core.dll" Private="false" />
     <Reference Include="$(TimberbornManagedDir)\UnityEngine.CoreModule.dll" Private="false" />
