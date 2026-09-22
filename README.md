@@ -2,11 +2,15 @@
 
 A self-contained swim-up pool bar for **Timberborn**. Built from timber and thatch, supplied by haulers, and made for eight beavers to unwind.
 
-**[Download v0.2.8](https://github.com/timbermods/timberborn-tipsy-tail/releases/download/v0.2.8/TipsyTail-v0.2.8-mod.zip) · [Project website](https://timbermods.github.io/timberborn-tipsy-tail/) · [Report a bug](https://github.com/timbermods/timberborn-tipsy-tail/issues/new/choose)**
+**[Download v1.0.0](https://github.com/timbermods/timberborn-tipsy-tail/releases/download/v1.0.0/TipsyTail-v1.0.0-mod.zip) · [Project website](https://timbermods.github.io/timberborn-tipsy-tail/) · [Report a bug](https://github.com/timbermods/timberborn-tipsy-tail/issues/new/choose)**
 
 ![The Tipsy Tail model preview](docs/images/TipsyTail-preview.png)
 
 *Blender model preview with approximate water. The lower basin is buried in normal placement.*
+
+## What's new in v1.0.0
+
+The first full release. The pool keeps the game's own lake water from v0.2.8, swimmers now sit at the water surface like the game's own swimmers instead of floating above it, and the recreation, wet fur, slot, access and water-supply wiring was audited against the game's code. Only `Scripts/TipsyTail.Runtime.dll` and the manifest changed since v0.2.8. Restart the game and reload your save after updating.
 
 ## What's new in v0.2.8
 
@@ -25,9 +29,9 @@ Water look: a slate teal-blue tint and a glossier surface so the sun throws whit
 Water fix: the pool surface was missing the second UV set that the game's water material animates everything through, so the whole surface pulsed together. It now has one, at the lake's ripple scale. This replaced the neon-cyan pool of v0.2.3 and v0.2.4; its saturated-blue tint was revised in v0.2.6.
 
 
-## Prototype status
+## Release status
 
-**v0.2.8 is a prerelease targeting Timberborn 1.1.2.4.** Offline asset, blueprint, material, geometry and water checks pass. This release has not yet been verified in-game; water rendering, terrain cutouts, beaver alignment and save/reload need playtesting. Compatibility with other patches and multiplayer is unverified.
+**v1.0.0 is the first full release, for Timberborn 1.1.2.4.** Offline asset, blueprint, material, geometry, wet fur, terrain-cutout and water checks pass against the game's own files, and the recreation, wet fur and supply logic was audited in the game's code. Please report anything odd in your colonies with a screenshot and your Player.log. Compatibility with other game versions is unverified.
 
 ## Features
 
@@ -41,7 +45,7 @@ Water fix: the pool surface was missing the second UV set that the game's water 
 
 ## Install
 
-1. Download **TipsyTail-v0.2.8-mod.zip** from [Releases](https://github.com/timbermods/timberborn-tipsy-tail/releases/tag/v0.2.8), rather than GitHub's automatic source-code archive.
+1. Download **TipsyTail-v1.0.0-mod.zip** from [Releases](https://github.com/timbermods/timberborn-tipsy-tail/releases/tag/v1.0.0), rather than GitHub's automatic source-code archive.
 2. Close Timberborn and extract the included **TipsyTail** folder into your `Documents/Timberborn/Mods` folder. `manifest.json` must be directly inside `Mods/TipsyTail`.
 3. Enable **The Tipsy Tail** in Mod Manager and restart when prompted.
 4. Start with a separate test save. Unlock the building under Well-being, connect the front entrance to a path, and provide a staffed Hauling Post with access to water.
@@ -50,7 +54,7 @@ Upgrading: replace the old TipsyTail folder with the new one; keep only one vers
 
 ## Optional water diagnostics
 
-The pool water is the game's own, so there is nothing to tune, but a `water.cfg` file in `Mods/TipsyTail` is still read every few seconds without a restart. Download **TipsyTail-v0.2.8-water-presets.zip** from the release and copy one preset in as `water.cfg`: the default game water (its `log` line writes the pool's real mesh, material and shader values to Player.log), the v0.2.7 legacy ripples, or the untouched vanilla fountain water. Delete the file to return to the default. The file only changes how the pool is drawn; it does not affect gameplay or multiplayer.
+The pool water is the game's own, so there is nothing to tune, but a `water.cfg` file in `Mods/TipsyTail` is still read every few seconds without a restart. Download **TipsyTail-v1.0.0-water-presets.zip** from the release and copy one preset in as `water.cfg`: the default game water (its `log` line writes the pool's real mesh, material and shader values to Player.log), the v0.2.7 legacy ripples, or the untouched vanilla fountain water. Delete the file to return to the default. The file only changes how the pool is drawn; it does not affect gameplay or multiplayer.
 
 ## Placement and balance
 

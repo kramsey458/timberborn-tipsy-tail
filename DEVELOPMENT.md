@@ -1,8 +1,16 @@
-# The Tipsy Tail — prototype 0.2.8
+# The Tipsy Tail — 1.0.0
 
 A timber-and-thatch swim-up pool bar for **Timberborn 1.1.2.4 public**, both factions.
 
-## What's new in v0.2.8
+## What's new in 1.0.0
+
+First full release. An audit against the game's own code (Timberborn 1.1.2.4, decompiled) confirmed the gameplay wiring. `Attraction` applies both `AttractionSpec` effects, the Tipsy Tail need and Wet fur, to every visitor for as long as they stay, multiplied by the building's efficiency; `GoodConsumingBuilding` is that efficiency provider and reports 0 once the reserve and the unit being consumed are both gone, so recreation, wet fur relief and the pool surface (`GoodConsumingAttractionSurfaceController`) stop together and return on resupply. The need is filtered through `FactionNeedService`, which is why both need-collection appends are needed. `FixedSlotManager` throws unless there are at least as many `#Slot#` nodes as the capacity of eight; the model has four `#Slot#BarSeat` and four `#Slot#Swimming` nodes, each lane with one `#MiscStart` and one `#MiscEnd` child, which is exactly what `SlotRetriever` looks for. `BuildingAccessibleSpec.LocalAccess` is transformed through the block object's placement, so its Y of 2.0 is the base-relative ground level in the same way the native Underground Pile uses 1.0. Consumption pauses with the native pause and blocking rules, and the game's `LocalizationLoader` falls back to the English text (with a log warning) for languages the mod does not ship.
+
+One correction came out of it. The game keeps a swimming slot at the water surface (`PatrollingSlot.MoveDestinationToWaterLevel` for `WaterSlot: true`, which is how the Lido and the Swimming Pool place swimmers), but the exported lanes sat 0.64 blocks above ground, 0.48 above the pool surface, so swimmers floated. The runtime now moves every `#MiscStart` and `#MiscEnd` under a `#Slot#Swimming` node to the surface height of the `#PoolWater` placeholder when the building wakes and again after initialization, taking positions through the building root so it is independent of the building's own transform and safe to repeat. The model is unchanged (Blender is not needed).
+
+The legacy fountain path also no longer touches the game-water object during the frame it is being destroyed. Version strings, docs and the website are updated for the release.
+
+## 0.2.8 the game's own water
 
 The game's own water. The pool surface is drawn with `PhysicalWater_Opaque`, the material the map's lakes and rivers are drawn with, instead of an imitation built from the fountain material. That shader takes nothing from the mesh but a cell coordinate, a vertex index and a flag mask per vertex (UV0); every vertex position and every colour comes from a set of map-sized texture arrays that the game's `WaterRenderer` and its `WaterColumnPostprocessor` compute shader fill from the simulation each tick: `_NewWaterData` (depth, floor and ceiling per column), `_NewEdgeLinks`, `_NewCornerLinks`, `_NewBaseCornerLinks`, `_NewSkirts`, a 4 × 4-per-cell `_NewWaterHeights`, `_NewOutflows`, `_NewContaminations`, `_NewWaterfalls`, their `_Old*` twins and `_WaterSourceMask`, all set as hidden shader globals together with `_MapSize`. The colour by depth comes from the scene depth buffer and the see-through shallows from the camera opaque texture, so the pool floor drawn under the surface shades it exactly as a lake bed does.
 
@@ -109,7 +117,7 @@ Offline checks cover both exported meshes, triangle indices and finite buffers, 
 
 See validation.json, geometry-validation.json and material-regression.json. These are **not in-game playtests**. The game was not launched, restarted or controlled for testing, as requested.
 
-User checks remaining: load/place in both factions, confirm terrain cutout and depth placement, inspect water under game lighting and seated adults/kits, confirm hauling and swimming, run dry/refill, and save/reload. Multiplayer has not been tested.
+In-game checks worth repeating after any change: placement in both factions, the terrain cutout and depth, seated adults and kits, swimmers at the water surface, hauling, run dry and refill, and save/reload. Multiplayer has been played with matching versions on both sides.
 
 ## Assets and rebuilding
 

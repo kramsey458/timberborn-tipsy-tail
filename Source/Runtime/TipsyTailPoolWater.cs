@@ -55,12 +55,42 @@ namespace Kyler.TipsyTail
         {
             _block = GetComponent<BlockObject>();
             TipsyTailWaterTuner.Register(this);
+            AlignSwimmingLanes();
             Apply();
         }
 
         public void InitializePreview() { Apply(); }
-        public void PostInitializeEntity() { _isEntity = true; Apply(); }
+        public void PostInitializeEntity() { _isEntity = true; AlignSwimmingLanes(); Apply(); }
         public void OnPostPlacementChanged() { Apply(); }
+
+        // The game keeps a swimming slot at the water surface (PatrollingSlot moves a WaterSlot's destination to
+        // WaterHeightOrFloor, which is how the Lido and Swimming Pool place their swimmers). The pool's lanes cannot
+        // be WaterSlots, there is no simulated water, so their #MiscStart/#MiscEnd ends are moved to the surface
+        // height of the exported #PoolWater placeholder here. Positions are taken through the building root, so
+        // this works before the building's own transform is final and is safe to repeat.
+        private void AlignSwimmingLanes()
+        {
+            if (!IsAlive) return;
+            var root = GameObject.transform;
+            float? surface = null;
+            foreach (var node in SurfaceNodes())
+            {
+                var filter = PlaceholderFilter(node);
+                if (filter == null || OriginalMesh(filter) == null) continue;
+                var b = OriginalMesh(filter).bounds;
+                surface = root.InverseTransformPoint(filter.transform.TransformPoint(new Vector3(b.center.x, b.max.y, b.center.z))).y;
+                break;
+            }
+            if (!surface.HasValue) return;
+            foreach (var t in GameObject.GetComponentsInChildren<Transform>(true))
+            {
+                if (!t.name.StartsWith("#MiscStart") && !t.name.StartsWith("#MiscEnd")) continue;
+                if (t.parent == null || !t.parent.name.StartsWith("#Slot#Swimming")) continue;
+                var local = root.InverseTransformPoint(t.position);
+                if (Mathf.Abs(local.y - surface.Value) < 1e-4f) continue;
+                t.position = root.TransformPoint(new Vector3(local.x, surface.Value, local.z));
+            }
+        }
 
         public void DeleteEntity()
         {
@@ -99,11 +129,18 @@ namespace Kyler.TipsyTail
             return _originalMeshes[filter];
         }
 
-        private bool IsOwnWater(Renderer renderer)
+        // The game-water object lives under #PoolWater; the placeholder loops below must leave it alone, including
+        // in the frame it is being destroyed (Unity destroys at the end of the frame).
+        private static bool IsOwnWater(Component component)
         {
-            foreach (var physical in _physical)
-                if (physical.Renderer == renderer) return true;
-            return false;
+            return component != null && component.gameObject.name == TipsyTailPhysicalWater.ObjectName;
+        }
+
+        private MeshFilter PlaceholderFilter(Transform node)
+        {
+            foreach (var filter in node.GetComponentsInChildren<MeshFilter>(true))
+                if (!IsOwnWater(filter)) return filter;
+            return null;
         }
 
         // Game water: one physical-water block per #PoolWater node, covering the exported surface's rectangle.
@@ -116,7 +153,7 @@ namespace Kyler.TipsyTail
                 int built = 0;
                 foreach (var node in nodes)
                 {
-                    var filter = node.GetComponentInChildren<MeshFilter>(true);
+                    var filter = PlaceholderFilter(node);
                     if (filter == null) continue;
                     var original = OriginalMesh(filter);
                     if (original == null) continue;
@@ -182,7 +219,7 @@ namespace Kyler.TipsyTail
         {
             foreach (var filter in node.GetComponentsInChildren<MeshFilter>(true))
             {
-                if (filter == null) continue;
+                if (filter == null || IsOwnWater(filter)) continue;
                 var original = OriginalMesh(filter);
                 if (original == null) continue;
                 filter.sharedMesh = TipsyTailWaterTuner.FixUv1 ? TipsyTailWaterMesh.For(original) : original;
@@ -205,6 +242,7 @@ namespace Kyler.TipsyTail
                 ApplyLegacyMesh(node);
                 foreach (var renderer in node.GetComponentsInChildren<Renderer>(true))
                 {
+                    if (IsOwnWater(renderer)) continue;
                     renderer.enabled = true;
                     var materials = renderer.sharedMaterials;
                     for (int i = 0; i < materials.Length; i++)
@@ -283,13 +321,14 @@ namespace Kyler.TipsyTail
             {
                 foreach (var filter in node.GetComponentsInChildren<MeshFilter>(true))
                 {
-                    if (filter == null) continue;
+                    if (filter == null || IsOwnWater(filter)) continue;
                     _originalMeshes.TryGetValue(filter, out var original);
                     text.AppendLine($"  mesh now: {Describe(filter.sharedMesh)}");
                     text.AppendLine($"  mesh originally: {Describe(original)}");
                 }
                 foreach (var renderer in node.GetComponentsInChildren<Renderer>(true))
                 {
+                    if (IsOwnWater(renderer)) continue;
                     text.AppendLine($"  renderer {renderer.GetType().Name} on '{renderer.gameObject.name}' enabled={renderer.enabled} " +
                                     $"receiveShadows={renderer.receiveShadows} shadowCasting={renderer.shadowCastingMode} " +
                                     $"materials={renderer.sharedMaterials.Length} layer={renderer.gameObject.layer}");
