@@ -44,6 +44,7 @@ def copies(version):
     dll=dll_versions(ROOT/'Mod/Scripts/TipsyTail.Runtime.dll')
     rows.extend(('Mod/Scripts/TipsyTail.Runtime.dll '+('FileVersion' if s.count('.')==3 else 'InformationalVersion'),s.split('+')[0],
                  manifest_version() if s.count('.')==3 else version) for s in dll)
+    if not any(s.count('.')==3 for s in dll): rows.append(('Mod/Scripts/TipsyTail.Runtime.dll FileVersion',None,manifest_version()))
     if not any(s.count('.')==2 for s in dll): rows.append(('Mod/Scripts/TipsyTail.Runtime.dll InformationalVersion',None,version))
     every('docs/index.html','data-release-pinned',r'data-release-pinned="v?'+V+'"')
     every('docs/index.html','data-release="tag" fallback',r'data-release="tag">v'+V+'<')
