@@ -1,6 +1,6 @@
 # Credits
 
-The Tipsy Tail is a community mod maintained by [Timbermods](https://github.com/timbermods). Original building geometry and generator scripts were developed with assistance from OpenAI Codex.
+The Tipsy Tail is a community mod by Kyler Ramsey, published by [Timbermods](https://github.com/timbermods). Original building geometry and generator scripts were developed with assistance from OpenAI Codex.
 
 Timberborn, the referenced game materials, native animations and construction-base assets belong to Mechanistry. A purchased installation of Timberborn is required. This project is not affiliated with or endorsed by Mechanistry.
 
