@@ -7,9 +7,10 @@ assignees: ''
 ---
 
 **Game version:**
-**Tipsy Tail version:**
+**The Tipsy Tail version:**
 **Faction:**
 **Other enabled mods:**
+**Multiplayer (yes/no):**
 
 **What happened?**
 
@@ -18,4 +19,4 @@ assignees: ''
 **Expected behavior**
 
 **Screenshot / relevant log exception**
-Please remove personal information from logs before posting them publicly.
+On Windows, Player.log is in `%USERPROFILE%\AppData\LocalLow\Mechanistry\Timberborn`. Please remove personal information from logs before posting them publicly.
