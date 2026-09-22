@@ -3,7 +3,8 @@ name: Tests
 # The runtime DLL, the native integration harness, build_mod.py and most validators need the game's own files, which
 # cannot be redistributed. So this runs the game-free checks: the Tests project (terrain cutout ownership and the water
 # grid layout, compiled from Source/Runtime without the game) and validate_version.py. The validators that read the
-# installed game run only on a runner whose TIMBERBORN_PATH points at one.
+# installed game run only when TIMBERBORN_PATH points at one. GitHub's hosted runners never have the game, so that step
+# always skips here; running it in CI would need runs-on changed to a self-hosted runner with the game and TIMBERBORN_PATH.
 on:
   push:
     branches: [main]

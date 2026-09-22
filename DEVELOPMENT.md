@@ -151,7 +151,7 @@ The runtime build below is reproducible: the csproj keeps the git commit out of 
 
 ## Continuous integration
 
-`.github/workflows/tests.yml` runs on every pull request and every push to main. It runs the Tests project and `validate_version.py`, which need no game files. The runtime build, the native integration harness, `build_mod.py`, `validate_runtime_dll.py` and the Blender checks need the game or Blender, so run them locally before packaging. `validate_pool_water.py` and `validate_wet_fur.py` also run in the workflow when the runner's `TIMBERBORN_PATH` points at an installed game, such as a self-hosted runner; GitHub's hosted runners skip them.
+`.github/workflows/tests.yml` runs on every pull request and every push to main. It runs the Tests project and `validate_version.py`, which need no game files. The runtime build, the native integration harness, `build_mod.py`, `validate_runtime_dll.py` and the Blender checks need the game or Blender, so run them locally before packaging. `validate_pool_water.py` and `validate_wet_fur.py` need the installed game too. The workflow has a step for them that runs only when `TIMBERBORN_PATH` points at an installed game, but the job runs on GitHub's hosted Ubuntu runners, which never have one, so that step always skips. Run them locally, or point the job's `runs-on` at a self-hosted runner with the game installed and `TIMBERBORN_PATH` set.
 
 ## Build the bundled terrain controller
 
