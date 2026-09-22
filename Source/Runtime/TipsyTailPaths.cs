@@ -10,7 +10,9 @@ namespace Kyler.TipsyTail
         // The file sits in the mod folder the game loaded the mod from (IModEnvironment.ModPath, kept by
         // TipsyTailModStarter), whatever that folder is called and wherever it is. The game loads mod DLLs from bytes
         // (ModCodeStarter.LoadAssemblies), so Assembly.Location is always empty and cannot stand in for it. If the
-        // starter never ran, fall back to the documented install folder, Documents/Timberborn/Mods/TipsyTail.
+        // starter never ran, fall back to the documented install folder, Documents/Timberborn/Mods/TipsyTail. In the
+        // game that cannot happen (it starts every mod's starters before it leaves the mod manager, and stops there if
+        // one throws); the fallback is for hosts such as the tests.
         internal static string ResolveConfigPath(string modPath, string documents)
         {
             if (!string.IsNullOrEmpty(modPath)) return Path.Combine(modPath, ConfigFileName);

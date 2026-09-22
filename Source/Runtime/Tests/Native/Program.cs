@@ -115,7 +115,9 @@ class Program
         if(starters.Count!=1)throw new Exception("Expected one mod starter, found "+starters.Count);
         Console.WriteLine("PASS: The game's mod loader finds exactly one mod starter: "+starters[0].FullName);
         var modPath=Path.Combine(Path.GetTempPath(),"Mods","TipsyTail-v1.0.0-mod");
-        ((IModStarter)Activator.CreateInstance(starters[0])).StartMod(new ModEnvironment{ModPath=modPath,OriginPath=modPath});
+        // OriginPath differs from ModPath (as it does for a version-x.y layout) so the check pins that the starter keeps
+        // ModPath, the folder that holds manifest.json.
+        ((IModStarter)Activator.CreateInstance(starters[0])).StartMod(new ModEnvironment{ModPath=modPath,OriginPath=Path.GetDirectoryName(modPath)});
         var configPath=(string)loaded.GetType("Kyler.TipsyTail.TipsyTailWaterTuner").GetMethod("ConfigPath",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,null);
         if(configPath!=Path.Combine(modPath,"water.cfg"))throw new Exception("water.cfg resolved to "+configPath);
         Console.WriteLine("PASS: Once the mod has started, the pool tuner reads water.cfg from the renamed mod folder");

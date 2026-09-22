@@ -58,7 +58,8 @@ static class Program
         string documented = Path.Combine(documents, "Timberborn", "Mods", "TipsyTail");
         string renamed = Path.Combine(documents, "Timberborn", "Mods", "TipsyTail-v1.0.0-mod");
         Assert(TipsyTailPaths.ResolveConfigPath(renamed, documents) == Path.Combine(renamed, "water.cfg"), "A renamed mod folder reads water.cfg from inside itself");
-        // macOS keeps the user data folder (and so Mods) under Documents/Documents/Timberborn.
+        // On macOS the game puts its user data folder (and so Mods) under MyDocuments/Documents/Timberborn, which is
+        // ~/Documents/Timberborn on disk, not MyDocuments/Timberborn.
         string mac = Path.Combine(documents, "Documents", "Timberborn", "Mods", "TipsyTail");
         Assert(TipsyTailPaths.ResolveConfigPath(mac, documents) == Path.Combine(mac, "water.cfg"), "The macOS mods folder reads water.cfg from the mod folder, not Documents/Timberborn");
         string elsewhere = Path.Combine(Path.GetTempPath(), "steamapps", "workshop", "content", "1062090", "123456");
