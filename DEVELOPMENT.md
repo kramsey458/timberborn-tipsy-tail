@@ -1,8 +1,14 @@
-# The Tipsy Tail — 1.0.0
+# The Tipsy Tail — 1.0.1
 
 A timber-and-thatch swim-up pool bar for **Timberborn 1.1.2.4 public**, both factions.
 
-## What's new in 1.0.0
+## What's new in 1.0.1
+
+`water.cfg` is found through the mod's own folder. The game loads every mod DLL from bytes (`ModCodeStarter.LoadAssemblies`), so `Assembly.Location` is always empty and the pool tuner always fell back to `Documents/Timberborn/Mods/TipsyTail`; a renamed folder, the macOS mods folder and any folder outside Documents were ignored. The new `TipsyTailModStarter` (an `IModStarter`) keeps `IModEnvironment.ModPath`, and the game-free `TipsyTailPaths.ResolveConfigPath` reads `water.cfg` from there, falling back to the documented Documents folder only where no starter ran (the tests). Render-only: no simulation, save or co-op change.
+
+Release tooling: the version is chosen once, in the runtime csproj (see Version number), the runtime DLL builds reproducibly and is checked against the source (see Reproducible runtime DLL), and CI runs the game-free checks on every pull request. The website's version 1.0 notes and earlier-version FAQ were brought up to date.
+
+## 1.0.0 first full release
 
 First full release. An audit against the game's own code (Timberborn 1.1.2.4, decompiled) confirmed the gameplay wiring. `Attraction` applies both `AttractionSpec` effects, the Tipsy Tail need and Wet fur, to every visitor for as long as they stay, multiplied by the building's efficiency; `GoodConsumingBuilding` is that efficiency provider and reports 0 once the reserve and the unit being consumed are both gone, so recreation, wet fur relief and the pool surface (`GoodConsumingAttractionSurfaceController`) stop together and return on resupply. The need is filtered through `FactionNeedService`, which is why both need-collection appends are needed. `FixedSlotManager` throws unless there are at least as many `#Slot#` nodes as the capacity of eight; the model has four `#Slot#BarSeat` and four `#Slot#Swimming` nodes, each lane with one `#MiscStart` and one `#MiscEnd` child, which is exactly what `SlotRetriever` looks for. `BuildingAccessibleSpec.LocalAccess` is transformed through the block object's placement, so its Y of 2.0 is the base-relative ground level in the same way the native Underground Pile uses 1.0. Consumption pauses with the native pause and blocking rules, and the game's `LocalizationLoader` falls back to the English text (with a log warning) for languages the mod does not ship.
 
@@ -147,7 +153,7 @@ The version is chosen in one place: `<Version>` in `Source/Runtime/TipsyTail.Run
 
 ## Reproducible runtime DLL
 
-The runtime build below is reproducible: the csproj keeps the git commit out of the informational version, so the same source, game assemblies and .NET SDK always give the same bytes. `python Source/validate_runtime_dll.py` builds the runtime in place and from a copy outside git, requires the two to be byte-identical, and requires Mod/Scripts/TipsyTail.Runtime.dll to be byte-identical to them, so a source change without a rebuilt DLL copied in is caught. Run it before packaging; it needs the game assemblies (TIMBERBORN_PATH). The v1.0.0 DLL predates this and still carries its build commit (`1.0.0+faec863…`), so the check rebuilds with that stamp to compare; the stamp disappears when the DLL is next rebuilt and copied in.
+The runtime build below is reproducible: the csproj keeps the git commit out of the informational version, so the same source, game assemblies and .NET SDK always give the same bytes. `python Source/validate_runtime_dll.py` builds the runtime in place and from a copy outside git, requires the two to be byte-identical, and requires Mod/Scripts/TipsyTail.Runtime.dll to be byte-identical to them, so a source change without a rebuilt DLL copied in is caught. Run it before packaging; it needs the game assemblies (TIMBERBORN_PATH). A DLL built before v1.0.1 carries its build commit (for example `1.0.0+faec863…`); for such a DLL the check rebuilds with that stamp restored to compare.
 
 ## Continuous integration
 
