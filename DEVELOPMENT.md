@@ -141,6 +141,18 @@ Blueprint inputs come from the installed game's StreamingAssets/Modding/Blueprin
 
 To tune drain, change GoodConsumingBuildingSpec.ConsumedGoods[0].GoodPerHour. Inventory is ceil(FullInventoryWorkHours × GoodPerHour). Keep visitor capacity synchronized with model slots.
 
+## Version number
+
+The version is chosen in one place: `<Version>` in `Source/Runtime/TipsyTail.Runtime.csproj`. The DLL is compiled with it and `build_mod.py` writes it into `Mod/manifest.json` with a fourth `.0`. The README download links, first What's new heading and release status, the website's fallback tag and `data-release-pinned`, the title of this file and RELEASE_NOTES.md are written by hand for each release, and the committed DLL must be rebuilt. `python Source/validate_version.py` lists every copy and fails if one disagrees or can no longer be found. It needs no game files and runs in CI.
+
+## Reproducible runtime DLL
+
+The runtime build below is reproducible: the csproj keeps the git commit out of the informational version, so the same source, game assemblies and .NET SDK always give the same bytes. `python Source/validate_runtime_dll.py` builds the runtime in place and from a copy outside git, requires the two to be byte-identical, and requires Mod/Scripts/TipsyTail.Runtime.dll to be byte-identical to them, so a source change without a rebuilt DLL copied in is caught. Run it before packaging; it needs the game assemblies (TIMBERBORN_PATH). The v1.0.0 DLL predates this and still carries its build commit (`1.0.0+faec863…`), so the check rebuilds with that stamp to compare; the stamp disappears when the DLL is next rebuilt and copied in.
+
+## Continuous integration
+
+`.github/workflows/tests.yml` runs on every pull request and every push to main. It runs the Tests project and `validate_version.py`, which need no game files. The runtime build, the native integration harness, `build_mod.py`, `validate_runtime_dll.py` and the Blender checks need the game or Blender, so run them locally before packaging. `validate_pool_water.py` and `validate_wet_fur.py` need the installed game too. The workflow has a step for them that runs only when `TIMBERBORN_PATH` points at an installed game, but the job runs on GitHub's hosted Ubuntu runners, which never have one, so that step always skips. Run them locally, or point the job's `runs-on` at a self-hosted runner with the game installed and `TIMBERBORN_PATH` set.
+
 ## Build the bundled terrain controller
 
 Requires .NET SDK 8 and your installed game assemblies. Run before packaging:

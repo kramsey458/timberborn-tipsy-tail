@@ -4,6 +4,8 @@ Assets are generated separately by create_assets.py in Blender.
 """
 import csv,copy,json,sys
 from pathlib import Path
+# The version is chosen only in Runtime/TipsyTail.Runtime.csproj; validate_version.py checks every copy.
+from validate_version import manifest_version
 ROOT=Path(__file__).resolve().parents[1]
 MOD=ROOT/'Mod'; BASE=Path(sys.argv[1])
 def read(p):return json.loads((BASE/p).read_text(encoding='utf-8-sig'))
@@ -76,7 +78,7 @@ need=read('Needs/Need.Beaver.Campfire.blueprint.json')
 need['NeedSpec'].update(Id='TipsyTail',Order=45,DisplayNameLocKey='Building.TipsyTail.DisplayName',FavorableWellbeing=2)
 write(Path('Needs/Need.Beaver.TipsyTail.blueprint.json'),need)
 write(Path('Buildings/Wellbeing/TipsyTail/TipsyTailIcon.png.meta.json'),{'isSprite':True})
-write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':'1.0.0.0','Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. Two-block underground basin, hauled water, and eight visitors. Includes scoped terrain-cutout cleanup so demolition reveals the original ground.','RequiredMods':[]})
+write(Path('manifest.json'),{'Name':'The Tipsy Tail','Version':manifest_version(),'Id':'Kyler.TipsyTail','MinimumGameVersion':'1.1.2.4','Description':'A self-contained swim-up pool bar for both factions. Two-block underground basin, hauled water, and eight visitors. Includes scoped terrain-cutout cleanup so demolition reveals the original ground.','RequiredMods':[]})
 loc=MOD/'Localizations';loc.mkdir(exist_ok=True)
 with (loc/'enUS.csv').open('w',newline='',encoding='utf-8') as f:
     w=csv.writer(f);w.writerow(['ID','Text','Comment'])

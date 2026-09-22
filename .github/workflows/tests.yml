@@ -1,0 +1,50 @@
+name: Tests
+
+# The runtime DLL, the native integration harness, build_mod.py and most validators need the game's own files, which
+# cannot be redistributed. So this runs the game-free checks: the Tests project (terrain cutout ownership and the water
+# grid layout, compiled from Source/Runtime without the game) and validate_version.py. The validators that read the
+# installed game run only when TIMBERBORN_PATH points at one. GitHub's hosted runners never have the game, so that step
+# always skips here; running it in CI would need runs-on changed to a self-hosted runner with the game and TIMBERBORN_PATH.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_NOLOGO: 1
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        id: dotnet
+        with:
+          dotnet-version: 8.0.x
+      # Source/Runtime/NuGet.Config clears every package source, so the build must use the net8.0 targeting pack that
+      # comes with a .NET 8 SDK. The runner may also have newer SDKs, and without a global.json the dotnet CLI picks the
+      # newest, so pin the one just installed, on the runner only.
+      - name: Pin the .NET 8 SDK
+        run: dotnet new globaljson --sdk-version ${{ steps.dotnet.outputs.dotnet-version }} --force
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+      - name: Runtime tests
+        run: dotnet run --project Source/Runtime/Tests/Tests.csproj -c Release
+      - name: Every copy of the version agrees
+        run: python Source/validate_version.py
+      - name: Validators that read the installed game
+        shell: bash
+        run: |
+          if [ -z "$TIMBERBORN_PATH" ] || [ ! -d "$TIMBERBORN_PATH/Timberborn_Data" ]; then
+            echo "TIMBERBORN_PATH does not point at an installed game on this runner; skipping validate_pool_water.py and validate_wet_fur.py."
+            exit 0
+          fi
+          python Source/validate_pool_water.py
+          python Source/validate_wet_fur.py
