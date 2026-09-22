@@ -4,7 +4,7 @@ The csproj <Version> is the only place the version is chosen. build_mod.py deriv
 version from it and the runtime DLL is compiled with it. The README, the website fallback, the
 DEVELOPMENT.md title and RELEASE_NOTES.md are written by hand for each release, so every copy is
 listed and the check fails if any disagrees or can no longer be found. Game-free: it reads only
-files in this repository, so CI can run it.
+files in this repository, so CI runs it.
 """
 import json,re,sys
 from pathlib import Path
