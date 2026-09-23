@@ -1,15 +1,245 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Tipsy Tail — A Timberborn swim-up pool bar</title>
-<meta name="description" content="A timber-and-thatch swim-up pool bar for Timberborn. Download The Tipsy Tail, learn how to install it, and report anything odd.">
-<meta name="theme-color" content="#182b25"><meta property="og:title" content="The Tipsy Tail"><meta property="og:description" content="A little water. A little timber. A place for happy tails."><meta property="og:image" content="https://timbermods.github.io/timberborn-tipsy-tail/images/TipsyTail-preview.png">
-<link rel="stylesheet" href="style.css"></head><body>
-<header class="wrap"><a class="brand" href="#">THE TIPSY TAIL<span>A TIMBERBORN COMMUNITY MOD</span></a><nav aria-label="Main"><a href="#install">Install</a><a href="#details">Details</a><a href="https://github.com/timbermods/timberborn-tipsy-tail">GitHub ↗</a></nav></header>
-<main><section class="hero wrap"><div class="intro"><p class="eyebrow">TIMBER, THATCH & A WELL-EARNED BREAK</p><h1>Leave your worries<br>on the shore.</h1><p class="lead">A self-contained swim-up pool bar for your beavers. Haul in the water, settle into a seat, and bring your own tail.</p><div class="actions"><a class="button" href="https://github.com/timbermods/timberborn-tipsy-tail/releases/latest" data-release-href="download"><span>Download <span data-release="tag">v1.0.1</span></span> <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/timbermods/timberborn-tipsy-tail/releases/latest" data-release-href="notes">Release notes ↗</a></div><p class="release"><span data-release-show="prerelease" hidden>Pre-release · </span>Targets Timberborn 1.1.2.4</p></div><figure class="hero-art"><img src="images/TipsyTail-preview.png" width="1400" height="1200" alt="Timber-and-thatch pool bar with four swim-up stools, a low counter and entry steps"><figcaption>Model render · Lower basin is buried when placed · Water shown approximately</figcaption></figure></section>
-<section class="status wrap" aria-label="Release status"><strong>Version 1.0, the first full release.</strong><p>The pool is drawn with the game's own lake water, and swimmers sit at the surface. The recreation, wet fur and water-supply wiring was audited against the game's code. Report anything odd with a screenshot and your Player.log.</p></section>
-<section class="wrap details" id="details"><div><p class="eyebrow">BUILT FOR BEAVERS</p><h2>A small retreat.<br>A proper deep end.</h2><p>A rustic pool recessed two blocks into the ground, with a plank-lined basin, entry ladder and attached bar. Four bar seats and four swimming lanes make room for eight.</p><p>Available to Folktails and Iron Teeth under Well-being. When the water runs out, recreation and wet fur relief stop until haulers replenish it.</p></div><dl><div><dt>5 × 6</dt><dd>Level ground footprint</dd></div><div><dt>2 blocks</dt><dd>Solid soil required below</dd></div><div><dt>8 guests</dt><dd>Seats and swimming lanes</dd></div><div><dt>60 water</dt><dd>Reserve supplied by haulers</dd></div></dl></section>
-<section class="gallery wrap"><figure><img src="images/TipsyTail-dry.png" width="1400" height="1200" loading="lazy" alt="Top-down model view showing individually mapped floor planks and the recessed pool ladder"><figcaption>Individual floor planks and a ladder into the basin.</figcaption></figure><div data-release-pinned="1.0.1"><p class="eyebrow">IN VERSION 1.0</p><h2>Closer to the colony.</h2><ul><li>The game's own lake water in the pool: it darkens with depth, shows the floor and swimmers through the shallows, and ripples and glints like the map's still water.</li><li>Swimmers sit at the water surface, as they do in the Lido and Swimming Pool.</li><li>When the reserve runs out, recreation and wet fur relief stop and the water surface disappears. All three return when haulers resupply the pool.</li><li>Satisfies the native Wet fur need at 0.5 points per hour, like the Lido and Swimming Pool.</li><li>Four bar seats and four swimming lanes for eight visitors.</li><li>Demolition reveals the original ground again.</li><li>Dirt and perimeter stakes while under construction.</li><li>Saves from v1.0.0 and v0.2.x load unchanged.</li><li>New in 1.0.1: the optional <code>water.cfg</code> is read from the mod folder, whatever it is called and wherever it is.</li></ul><p class="small">The images are Blender renders with approximate water. In game, the pool uses the game's own lighting and water.</p></div></section>
-<section class="install" id="install"><div class="wrap"><p class="eyebrow">WELCOME TO THE POOL</p><h2>Get it into your colony.</h2><ol class="steps"><li><span>01</span><h3>Download & extract</h3><p>Close Timberborn. Download the mod ZIP under <strong>Assets</strong> on the release page and extract its <code>TipsyTail</code> folder into <code>Documents\Timberborn\Mods</code>.</p></li><li><span>02</span><h3>Enable the mod</h3><p>Enable <strong>The Tipsy Tail</strong> in the in-game mod manager and restart when prompted. Keep only one version installed.</p></li><li><span>03</span><h3>Build & supply</h3><p>Use level ground with two soil layers below and three blocks of clearance above. Connect a path and provide a staffed Hauling Post with access to water.</p></li></ol><p class="install-note">No other mods needed. Unlock: 500 science. Build: 60 logs, 40 planks, 10 gears. In multiplayer, every player installs the same version of the mod and runs the same game version.</p><a class="button" href="https://github.com/timbermods/timberborn-tipsy-tail/releases/latest" data-release-href="download">Download the mod ZIP ↓</a></div></section>
-<section class="wrap faq"><h2>Before your first dip.</h2><details><summary>Does the pool consume river water?</summary><p>No. Haulers supply the Water resource. The reserve drains at 0.5 per hour (12 per day) while operating, including without visitors. Native paused or blocked building rules pause consumption. The decorative surface stays at a fixed height.</p></details><details><summary>Can I put it on a platform or dig a pit first?</summary><p>The building requires two solid layers of ground beneath its 5 × 6 footprint. Its native underground-building setup reveals the basin when finished. Platforms and empty pre-dug pits do not qualify.</p></details><details><summary>What if I used an earlier version?</summary><p>Replace the old mod folder, restart, and reload your save. Saves from v1.0.0 and v0.2.x load unchanged, and the reload also clears any hole left by a pool removed under v0.2.0. Keep the included <code>Scripts/TipsyTail.Runtime.dll</code>. Pools placed before v0.2.0 on thin ground or platforms may need rebuilding. Migration from those builds has not been playtested, so test on a separate save.</p></details><details><summary>Does it help with wet fur?</summary><p>Yes. Every visitor, whether seated at the bar or swimming, satisfies the native Wet fur need at 0.5 points per hour, the same rate as the Lido and Swimming Pool. Wet fur relief stops along with recreation while the pool is dry.</p></details><details><summary>Why does the pool water look like the lake?</summary><p>Because it is drawn with the game's own lake water material and mesh layout, fed by a small private copy of the data the game keeps for map water. The map's water and its simulation are untouched. A <code>water.cfg</code> file in the mod folder can switch back to the older hand-tuned look (<code>legacy</code>) or log the pool's real values, and the presets in the release cover both. Delete the file to go back to the default.</p></details><details><summary>Where can I report a problem?</summary><p><a href="https://github.com/timbermods/timberborn-tipsy-tail/issues/new/choose">Open a GitHub issue</a> with your game version, mod version, faction and steps to reproduce. Include a screenshot and relevant log exception, with personal information removed.</p></details></section>
-</main><footer class="wrap"><div class="brand">THE TIPSY TAIL<span>BRING YOUR OWN TAIL.</span></div><p>Maintained by <a href="https://github.com/timbermods">Timbermods</a> · <a href="https://timbermods.github.io/">More mods from Timbermods</a><br>An unofficial community mod for Timberborn. Not affiliated with or endorsed by Mechanistry.<br>Timberborn and its game assets belong to Mechanistry.</p><a href="https://github.com/timbermods/timberborn-tipsy-tail">Source & feedback ↗</a></footer><script src="release.js" defer data-repo="timbermods/timberborn-tipsy-tail" data-asset="-mod\.zip$"></script>
-</body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tipsy Tail: a swim-up pool bar for Timberborn</title>
+<meta name="description" content="A timber-and-thatch swim-up pool bar for Timberborn. Eight beavers at once, a Social Life need of its own worth up to +2 well-being, and Wet fur relief like the Lido. Haulers keep it filled with water.">
+<meta name="theme-color" content="#cfa972" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#3a2a1c" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://timbermods.github.io/timberborn-tipsy-tail/">
+<meta property="og:title" content="The Tipsy Tail">
+<meta property="og:description" content="A swim-up pool bar for your beavers: eight at once, up to +2 well-being, and Wet fur relief like the Lido.">
+<meta property="og:image" content="https://timbermods.github.io/timberborn-tipsy-tail/images/TipsyTail-preview.png">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/shrikhand-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="images/tipsytail-preview-cut.webp" as="image" type="image/webp">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#main">The Tipsy Tail</a>
+    <nav aria-label="Main">
+      <a href="#details">Details</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/timbermods/timberborn-tipsy-tail">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1 class="sign">The Tipsy Tail</h1>
+        <p class="pitch">A swim-up pool bar for your beavers.</p>
+        <p class="lead">A timber-and-thatch pool bar, recessed into the ground, where eight beavers unwind at once. It relieves a <b>Social Life</b> need of its own, the Tipsy Tail, worth up to <b>+2 well-being</b>, and the game's <b>Wet fur</b> need at the same rate as the Lido. Haulers keep it filled with water.</p>
+        <p class="asks"><b>It asks for:</b> a level 5 × 6 site on solid ground, a staffed Hauling Post with water, and 500 science. No other mods.</p>
+        <div class="btn-row">
+          <a class="btn" href="https://github.com/timbermods/timberborn-tipsy-tail/releases/latest" data-release-href="download">Download <span data-release="tag">v1.0.1</span></a>
+          <a class="btn btn-ghost" href="#install">How to install</a>
+        </div>
+        <p class="small-print"><span data-release-show="prerelease" hidden>Pre-release · </span>For Timberborn 1.1.2.4 · Folktails and Iron Teeth · <a href="https://github.com/timbermods/timberborn-tipsy-tail/releases/latest" data-release-href="notes">Release notes</a></p>
+      </div>
+      <figure class="bar-top">
+        <img src="images/tipsytail-preview-cut.webp" width="1000" height="953" fetchpriority="high" alt="Model render of The Tipsy Tail: a timber-and-thatch pool bar with four swim-up stools, a low counter, barrels and entry steps, above its buried plank-walled basin">
+        <ul class="hero-coasters" aria-hidden="true">
+          <li class="mini-coaster c-aqua"><b>8</b><span>at once</span></li>
+          <li class="mini-coaster c-ochre"><b>+2</b><span>well-being</span></li>
+        </ul>
+        <figcaption>Model render. In game the basin is buried and the water uses the game's own lighting.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="details" id="details">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>On the house</h2>
+        <p>Four coasters from the bar, one fact each. Hover or tap one to turn it over.</p>
+      </div>
+      <ul class="coasters">
+        <li class="coaster c-aqua" tabindex="0">
+          <div class="face front"><b>8</b><span>beavers at once</span></div>
+          <div class="face back"><h3>Four seats, four lanes</h3><p>Four bar seats and four swimming lanes. Both factions get it, under Well-being.</p></div>
+        </li>
+        <li class="coaster c-ochre" tabindex="0">
+          <div class="face front"><b>+2</b><span>well-being</span></div>
+          <div class="face back"><h3>A need of its own</h3><p>The Tipsy Tail need, in Social Life. An extra source of well-being, not a replacement for the Lido.</p></div>
+        </li>
+        <li class="coaster c-aqua" tabindex="0">
+          <div class="face front"><b>0.5</b><span>Wet fur an hour</span></div>
+          <div class="face back"><h3>Dries off like the Lido</h3><p>Every visitor, seated or swimming, relieves Wet fur at the same rate as the Lido and Swimming Pool.</p></div>
+        </li>
+        <li class="coaster c-ochre" tabindex="0">
+          <div class="face front"><b>12</b><span>water a day</span></div>
+          <div class="face back"><h3>Kept full by haulers</h3><p>A 60-water reserve, draining 0.5 an hour while it runs. No workers, no power.</p></div>
+        </li>
+      </ul>
+
+      <div class="menu-card card-stock">
+        <div class="menu-col">
+          <h3>What it gives</h3>
+          <ul class="ruled-list">
+            <li><span>Visitors</span><span>8: four seats, four lanes</span></li>
+            <li><span>Need</span><span>Tipsy Tail, in Social Life</span></li>
+            <li><span>Well-being</span><span>up to +2</span></li>
+            <li><span>Wet fur</span><span>0.5 an hour, like the Lido</span></li>
+            <li><span>Factions</span><span>Folktails and Iron Teeth</span></li>
+          </ul>
+          <div class="meters" role="group" aria-label="The two needs each visitor relieves, in points per hour">
+            <div class="meter m-aqua"><span class="m-name">Tipsy Tail need</span><span class="m-track"><span class="m-fill" style="--v: .6"></span></span><span class="m-val">0.6 an hour</span></div>
+            <div class="meter m-ochre"><span class="m-name">Wet fur</span><span class="m-track"><span class="m-fill" style="--v: .5"></span></span><span class="m-val">0.5 an hour</span></div>
+          </div>
+          <p class="next-to"><b>Next to the Lido:</b> the same 0.5 an hour for Wet fur, and a Social Life need of its own on top, so it adds to a Lido rather than replacing it.</p>
+        </div>
+        <div class="menu-col">
+          <h3>What it asks</h3>
+          <ul class="ruled-list">
+            <li><span>Site</span><span>5 × 6, level</span></li>
+            <li><span>Ground</span><span>two solid soil layers below</span></li>
+            <li><span>Clearance</span><span>three blocks above</span></li>
+            <li><span>Supply</span><span>a path, a staffed Hauling Post with water</span></li>
+            <li><span>Build</span><span>60 logs, 40 planks, 10 gears</span></li>
+            <li><span>Unlock</span><span>500 science, under Well-being</span></li>
+            <li><span>Not on</span><span>platforms or empty pre-dug pits</span></li>
+            <li><span>Removed</span><span>the original ground comes back</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="renders">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>On the bar</h2>
+        <p>Model renders from Blender. The lower basin you see here is buried when the building is placed, and the water in game uses the game's own lake water and lighting.</p>
+      </div>
+      <div class="render-row">
+        <figure><img src="images/tipsytail-side-cut.webp" width="933" height="922" loading="lazy" alt="Model render from the side: the gabled thatch bar at one end, the pool between, the ladder and entry at the other"><figcaption>Bar at one end, swimming at the other.</figcaption></figure>
+        <figure><img src="images/tipsytail-front-cut.webp" width="759" height="855" loading="lazy" alt="Model render from the front: thatch roof on posts, the counter with barrels, four seat pads in the pool and the entry steps"><figcaption>Four seats at the counter, entry steps at the front.</figcaption></figure>
+        <figure><img src="images/tipsytail-dry-cut.webp" width="814" height="1000" loading="lazy" alt="Top-down model view, drained: individually mapped floor planks and the recessed pool ladder"><figcaption>Drained, from above: the plank floor and the ladder.</figcaption></figure>
+      </div>
+      <p class="slot-note">In-game screenshots are welcome: a view of your own pool bar in a colony would sit here.</p>
+    </div>
+  </section>
+
+  <section class="keeping">
+    <div class="wrap">
+      <div class="slip card-stock">
+        <div class="slip-head"><span class="sign small">Delivery slip</span><span>Water, by haulers</span></div>
+        <dl class="slip-rows">
+          <div><dt>Reserve</dt><dd>60 water, brought from your stores by haulers from a staffed Hauling Post</dd></div>
+          <div><dt>Drain</dt><dd>0.5 an hour (12 a day) while it's open, even with nobody in it; the game's pause and blocking rules pause it</dd></div>
+          <div><dt>Runs dry</dt><dd>recreation and Wet fur relief stop and the pool surface disappears; all three come back when haulers refill it</dd></div>
+          <div><dt>Map water</dt><dd>untouched; the pool adds no water to the map</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="status-sec">
+    <div class="wrap">
+      <div class="status card-stock" data-release-pinned="1.0.1">
+        <h2>What is tested, and what isn't</h2>
+        <div class="two-col">
+          <div>
+            <h3>Tested</h3>
+            <ul class="checks">
+              <li>Earlier builds were played in game, including multiplayer with every player on the same version.</li>
+              <li>The recreation, Wet fur and water-supply wiring was checked against the game's own code.</li>
+              <li>Offline checks against the game's own files cover the model, blueprints, materials, geometry, Wet fur, the terrain cutout and the water data.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Not confirmed in game yet</h3>
+            <ul class="checks open">
+              <li>The pool's lake-water look.</li>
+              <li>Swimmers sitting at the water surface. Worth a glance in your own colony.</li>
+              <li>An optional <code>water.cfg</code> in a renamed mod folder (proven outside the game).</li>
+              <li>Pools placed with the very first builds, on thin ground or platforms, may need rebuilding.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="status-foot">Please report anything odd with a screenshot and your <code>Player.log</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="install" id="install">
+    <div class="wrap install-grid">
+      <div class="matchbook">
+        <div class="flap"><span class="sign small">The Tipsy Tail</span><span>Install inside</span></div>
+        <div class="book">
+          <h2>Install in four steps</h2>
+          <ol class="steps">
+            <li><b>Close Timberborn.</b></li>
+            <li><b>Download <code>TipsyTail-v…-mod.zip</code></b> under <b>Assets</b> on the release page. Not "Source code", and not the water-presets or public-source zips.</li>
+            <li><b>Extract the <code>TipsyTail</code> folder</b> into <code>Documents\Timberborn\Mods</code>, so <code>manifest.json</code> sits directly in <code>Mods\TipsyTail</code>. Keep only one version installed.</li>
+            <li><b>Enable The Tipsy Tail</b> in the mod manager and restart when asked.</li>
+          </ol>
+          <div class="btn-row">
+            <a class="btn" href="https://github.com/timbermods/timberborn-tipsy-tail/releases/latest" data-release-href="download">Download the mod zip</a>
+          </div>
+        </div>
+        <div class="striker" aria-hidden="true"></div>
+      </div>
+      <div class="install-notes">
+        <h3>Updating</h3>
+        <p>Close the game, replace the old <code>TipsyTail</code> folder with the new one, restart, and reload your save. Existing saves load unchanged. Keep the included <code>Scripts/TipsyTail.Runtime.dll</code>.</p>
+        <h3>Co-op</h3>
+        <p>Every player installs the same version of the mod and runs the same game version.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="wrap narrow">
+      <h2>Before your first dip</h2>
+      <details class="q">
+        <summary>Does the pool use river or lake water?</summary>
+        <div class="a"><p>No. Haulers supply the Water resource. The reserve drains 0.5 an hour (12 a day) while it's open, even without visitors; the game's pause and blocking rules pause it. The pool's surface stays at a fixed height, and the map's water and its simulation are untouched.</p></div>
+      </details>
+      <details class="q">
+        <summary>Can I put it on a platform or dig a pit first?</summary>
+        <div class="a"><p>No. It needs two solid layers of ground under its 5 × 6 footprint; the game's own underground-building setup reveals the basin when it's finished. Platforms and empty pre-dug pits don't qualify.</p></div>
+      </details>
+      <details class="q">
+        <summary>Does it replace the Lido or the Swimming Pool?</summary>
+        <div class="a"><p>No, it adds to them. It relieves Wet fur at the same 0.5 an hour, and on top of that its own Tipsy Tail need in Social Life, worth up to +2 well-being. Every visitor, seated or swimming, gets both. Both stop while the pool is dry.</p></div>
+      </details>
+      <details class="q">
+        <summary>Why does the pool water look like the lake?</summary>
+        <div class="a"><p>It's drawn with the game's own lake-water material, fed by a small private copy of the data the game keeps for map water. The map's water isn't changed. An optional <code>water.cfg</code> in the mod folder can switch to an older hand-tuned look (<code>legacy</code>) or log the pool's real values; the presets on the release page cover both. Delete the file to go back to the default.</p></div>
+      </details>
+      <details class="q">
+        <summary>How do I report a problem?</summary>
+        <div class="a"><p><a href="https://github.com/timbermods/timberborn-tipsy-tail/issues/new/choose">Open a GitHub issue</a> with your game and mod versions, faction, other mods, whether you play in multiplayer, the steps to reproduce, a screenshot, and any exception from <code>%USERPROFILE%\AppData\LocalLow\Mechanistry\Timberborn\Player.log</code>, with personal information removed.</p></div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div>
+      <p class="sign small">The Tipsy Tail</p>
+      <p>Leave your worries on the shore. Bring your own tail.</p>
+    </div>
+    <div>
+      <p>Maintained by <a href="https://github.com/timbermods">Timbermods</a> · <a href="https://timbermods.github.io/">More mods from Timbermods</a> · <a href="https://github.com/timbermods/timberborn-tipsy-tail">Source and feedback</a></p>
+      <p>An unofficial community mod for Timberborn. Not affiliated with or endorsed by Mechanistry. Timberborn and its game assets belong to Mechanistry.</p>
+    </div>
+  </div>
+</footer>
+<script src="release.js" defer data-repo="timbermods/timberborn-tipsy-tail" data-asset="-mod\.zip$"></script>
+</body>
+</html>
