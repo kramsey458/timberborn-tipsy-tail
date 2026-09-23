@@ -20,6 +20,7 @@ colors:
   focus-day: "#1f5f6a"
   focus-dusk: "#f1e7d2"
   flap-cream: "#f7efdf"
+  step-cream: "#fff8ea"
 typography:
   display:
     fontFamily: "Shrikhand, Georgia, serif"
@@ -131,7 +132,7 @@ components:
     padding: "18px 24px 16px"
   step-number:
     backgroundColor: "{colors.thatch-ochre}"
-    textColor: "{colors.flap-cream}"
+    textColor: "{colors.step-cream}"
     rounded: "{rounded.coaster}"
     size: "32px"
   faq-item:
@@ -187,7 +188,7 @@ Warm timber and pulpboard, printed in two darkened spot inks over a deep bark in
 - **Faded Bark** (`bark-muted`): secondary text printed on pulpboard (slip heading note, status foot, pinned note).
 - **Bar Text** (`on-bar-day` / `on-bar-dusk`) and **Bar Text Muted** (`on-bar-day-muted` / `on-bar-dusk-muted`): text lying directly on the bar (hero, section intros, captions, footer), switched per theme.
 - **Links on the Bar** (`link-day` / `link-dusk`) and **Focus** (`focus-day` / `focus-dusk`): per-theme link and 3px focus-ring colours for things lying on the bar.
-- **Flap Cream** (`flap-cream`): reversed-out lettering on aqua and ochre fills (matchbook flap, step numbers); button labels use plain white.
+- **Flap Cream** (`flap-cream`): reversed-out lettering on the aqua matchbook flap and its perforation. **Step Cream** (`step-cream`, #fff8ea), a slightly warmer cream, is the digits on the ochre step-number discs; button labels use plain white.
 
 ### Named Rules
 **The Two Inks Rule.** A printed piece uses bark ink plus at most pool aqua and thatch ochre, as flat fills. No third hue, no CSS gradients on a piece; the only tonal variation is the pulpboard texture itself.
@@ -223,7 +224,7 @@ Warm timber and pulpboard, printed in two darkened spot inks over a deep bark in
 
 A single centred column capped at 1160px with a fluid gutter (clamp(16px, 4vw, 32px)); the FAQ narrows to 820px, section intros to 740px, the slip to 760px, the coaster stack to 980px. Sections breathe on clamp(48px, 7vw, 88px) vertical padding with no dividers between them: the bar is continuous.
 
-Two-column grids (hero, menu card, status, install) split with a clamp(24px, 5vw, 56px) gap; the install grid is weighted 1.15 : 0.85 toward the matchbook. The render row is three columns, bottom-aligned so the cut-outs stand on a common bar line.
+Two-column grids split with a clamp(24px, 5vw, 56px) gap (menu card, status, install), except the hero, which uses clamp(24px, 4vw, 56px); the install grid is weighted 1.15 : 0.85 toward the matchbook. The render row is three columns, bottom-aligned so the cut-outs stand on a common bar line.
 
 The coaster stack is a flex row of four 27%-wide discs overlapping by 2.5% each side, turned −11°, 7°, −3°, 12° and nudged vertically (0, 18px, −6px, 14px) with a deliberate stacking order; the focused or hovered coaster rises to the top.
 
@@ -283,7 +284,7 @@ A pulpboard slip turned −1.2°, centred at 760px: a head with a small aqua Shr
 The status as a pulpboard card: a bark-ink Shrikhand headline, two columns titled aqua (confirmed, check marks) and ochre (not yet confirmed, dashed rings), a muted foot line. It carries `data-release-pinned`; release.js may append a pinned note on a 6% bark-ink ground at 4px corners.
 
 ### Matchbook
-The install as a matchbook: an aqua flap with the bar's name in flap cream and a dashed perforation, folded 10px over the pulpboard book; inside, numbered steps with ochre Shrikhand number discs (32px) and dotted rules, then the download ticket; a produced striker strip (22px) along the bottom under a 2px bark rule.
+The install as a matchbook: an aqua flap with the bar's name in flap cream and a dashed perforation, folded 10px over the pulpboard book; inside, numbered steps with ochre Shrikhand number discs (32px, digits in #fff8ea) and dotted rules, then the download ticket; a produced striker strip (22px) along the bottom under a 2px bark rule.
 
 ### Question Card
 FAQ items as pulpboard cards (6px, lip shadow, 10px apart): a bold 56px summary row with an aqua plus mask that turns 45° to an x when open (0.2s), answer padded 18px.
