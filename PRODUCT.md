@@ -79,8 +79,10 @@ BepInEx). It is the one building mod in the Timbermods catalog; don't compare it
 
 ## Capabilities and Constraints
 
-- **Stack and hosting:** one static page, `docs/index.html`, with `docs/style.css`, `docs/release.js`, `docs/images/`
-  and `docs/.nojekyll`. Plain HTML/CSS, no build step, no framework, system fonts. GitHub Pages (legacy build) serves
+- **Stack and hosting:** one static page, `docs/index.html`, with `docs/style.css`, `docs/release.js`, `docs/images/`,
+  `docs/fonts/` and `docs/.nojekyll`. Plain HTML/CSS, no build step, no framework. Shrikhand 400 is self-hosted
+  (`docs/fonts/shrikhand-latin-400-normal.woff2`, OFL) for display lettering; body text uses the system-ui stack; nothing
+  loads from a CDN at runtime. GitHub Pages (legacy build) serves
   `main:/docs` at https://timbermods.github.io/timberborn-tipsy-tail/, so the site goes live when the change is merged
   to `main`. It is one of the timbermods sites (MixedStorage's and MultiColony's are siblings) and should stay light
   and work at phone width.
@@ -114,11 +116,10 @@ BepInEx). It is the one building mod in the Timbermods catalog; don't compare it
   current release), the blueprints and `Mod/Localizations/enUS.csv`. There is no separate CHANGELOG file: version
   history lives in the README's "Earlier versions" section and the GitHub release notes. Where the site and README
   disagree, flag it; don't guess.
-- **Describe the mod as it is now.** The current page still carries history (the pinned "In version 1.0" list with
-  "New in 1.0.1", and an earlier-versions FAQ); history belongs in the changelog. Keep only the upgrade facts players
-  need (replace the folder, one version installed, restart and reload, which saves load unchanged, pre-v0.2.0
-  placements may need rebuilding). Whatever replaces the pinned block must still satisfy the `data-release-pinned`
-  check above.
+- **Describe the mod as it is now.** The page carries no version history; that lives in the README and the release
+  notes. It keeps only the upgrade facts players need (the "Updating" note beside the install matchbook, and the
+  pre-v0.2.0 rebuild line in the status notice). `data-release-pinned` sits on the status notice
+  (`.status.card-stock`, "What is tested, and what isn't"), which satisfies the check above.
 - **Honest status:** earlier builds were played in game, including multiplayer with matching versions (players
   reported the too-bright v0.2.3 water and a stutter in multiplayer host sessions). The current release has **not been
   confirmed in game** for: the lake-water look (v0.2.8), swimmers at the surface (v1.0.0; "worth a glance in your own
@@ -143,16 +144,18 @@ BepInEx). It is the one building mod in the Timbermods catalog; don't compare it
 ## Evidence on Hand
 
 - **Blender model renders, not game screenshots** (1400 × 1200 PNG, about 2 to 2.5 MB each), in `docs/images/`:
-  `TipsyTail-preview.png` (three-quarter view; hero and og:image), `TipsyTail-front.png` and `TipsyTail-side.png`
-  (not used on the page yet), `TipsyTail-dry.png` (top-down view of the floor planks and ladder, drained). They show
+  `TipsyTail-preview.png` (three-quarter view; og:image), `TipsyTail-front.png`, `TipsyTail-side.png` and
+  `TipsyTail-dry.png` (top-down view of the floor planks and ladder, drained). The page shows them as cut-outs
+  (`tipsytail-*-cut.webp`, made by `docs/images/make_cutouts.py`): the preview in the hero, the other three in the
+  "On the bar" row. They show
   the whole model including the lower basin, which is buried in normal placement, on a flat grey background, and the
   water as a flat pale-blue approximation, not the game's lake water. Every use needs a caption saying so.
 - `Mod/thumbnail.png` and `Mod/Buildings/Wellbeing/TipsyTail/TipsyTailIcon.png` (256 × 256, the same render, used
   in game as the mod thumbnail and building icon).
 - The Blender source (`Source/TipsyTail.blend`) could produce further renders; the water presets are text files.
-- **No in-game screenshots or clips exist** (CREDITS.md says the page shows model renders). Leave marked slots for the
-  maintainer's own shots (the pool in a colony, beavers at the bar and swimming, the dry pool, the building panel)
-  and never fake or paint over a render to pass it off as in-game.
+- **No in-game screenshots or clips exist** (CREDITS.md says the page shows model renders). The "On the bar" section
+  keeps a marked slot (`.slot-note`) for the maintainer's own shots (the pool in a colony, beavers at the bar and
+  swimming, the dry pool, the building panel); never fake or paint over a render to pass it off as in-game.
 - No testimonials, download counts, player quotes or press. Don't invent any.
 
 ## Product Principles
