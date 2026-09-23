@@ -1,0 +1,539 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T20:50:45+00:00",
+  "title": "Design System: The Tipsy Tail",
+  "extensions": {
+    "colorMeta": {
+      "bar-honey": {
+        "role": "neutral",
+        "displayName": "Honey Plank",
+        "canonical": "#cfa972",
+        "tonalRamp": [
+          "#130900",
+          "#322004",
+          "#563902",
+          "#79561e",
+          "#9a7640",
+          "#bd9761",
+          "#e4bd86",
+          "#ffecd1"
+        ]
+      },
+      "bar-dusk": {
+        "role": "neutral",
+        "displayName": "Bar After Dusk",
+        "canonical": "#3a2a1c",
+        "tonalRamp": [
+          "#150800",
+          "#302013",
+          "#4d3c2d",
+          "#6c5a4a",
+          "#8c7969",
+          "#ae9a8a",
+          "#d5c0af",
+          "#feebda"
+        ]
+      },
+      "pulpboard": {
+        "role": "neutral",
+        "displayName": "Pulpboard",
+        "canonical": "#f1e7d2",
+        "tonalRamp": [
+          "#110a00",
+          "#2b2313",
+          "#473f2e",
+          "#655d4b",
+          "#857c69",
+          "#a79d8a",
+          "#cdc3af",
+          "#f8eed8"
+        ]
+      },
+      "bark-ink": {
+        "role": "neutral",
+        "displayName": "Bark Ink",
+        "canonical": "#2d2118",
+        "tonalRamp": [
+          "#130803",
+          "#2d2118",
+          "#4a3d33",
+          "#695a50",
+          "#897a6f",
+          "#ab9b90",
+          "#d1c1b5",
+          "#fcebdf"
+        ]
+      },
+      "bark-muted": {
+        "role": "neutral",
+        "displayName": "Faded Bark",
+        "canonical": "#5b4a39",
+        "tonalRamp": [
+          "#140800",
+          "#302111",
+          "#4d3c2c",
+          "#6c5a49",
+          "#8c7a67",
+          "#ae9b88",
+          "#d4c0ad",
+          "#feebd9"
+        ]
+      },
+      "on-bar-day": {
+        "role": "neutral",
+        "displayName": "Bar Text (day)",
+        "canonical": "#2d2118",
+        "tonalRamp": [
+          "#130803",
+          "#2d2118",
+          "#4a3d33",
+          "#695a50",
+          "#897a6f",
+          "#ab9b90",
+          "#d1c1b5",
+          "#fcebdf"
+        ]
+      },
+      "on-bar-day-muted": {
+        "role": "neutral",
+        "displayName": "Bar Text Muted (day)",
+        "canonical": "#4c3a28",
+        "tonalRamp": [
+          "#150800",
+          "#31200f",
+          "#4e3c2a",
+          "#6d5a47",
+          "#8d7965",
+          "#af9a86",
+          "#d6c0aa",
+          "#feebd9"
+        ]
+      },
+      "on-bar-dusk": {
+        "role": "neutral",
+        "displayName": "Bar Text (dusk)",
+        "canonical": "#f3e6cf",
+        "tonalRamp": [
+          "#110a00",
+          "#2c2210",
+          "#493e2b",
+          "#675c48",
+          "#877c67",
+          "#a99d87",
+          "#cfc2ac",
+          "#faedd6"
+        ]
+      },
+      "on-bar-dusk-muted": {
+        "role": "neutral",
+        "displayName": "Bar Text Muted (dusk)",
+        "canonical": "#d8c4a3",
+        "tonalRamp": [
+          "#120a00",
+          "#302103",
+          "#4d3d20",
+          "#6c5b3d",
+          "#8d7a5c",
+          "#af9c7c",
+          "#d5c1a0",
+          "#ffeccd"
+        ]
+      },
+      "pool-aqua": {
+        "role": "primary",
+        "displayName": "Pool Aqua",
+        "canonical": "#1a6773",
+        "tonalRamp": [
+          "#000e11",
+          "#022a30",
+          "#0b4851",
+          "#1c6975",
+          "#428996",
+          "#64abb8",
+          "#8ad2df",
+          "#cef7ff"
+        ]
+      },
+      "thatch-ochre": {
+        "role": "secondary",
+        "displayName": "Thatch Ochre",
+        "canonical": "#74520e",
+        "tonalRamp": [
+          "#120900",
+          "#322000",
+          "#543a06",
+          "#795715",
+          "#9a773a",
+          "#bd985b",
+          "#e4be80",
+          "#ffeccf"
+        ]
+      },
+      "pool-aqua-print": {
+        "role": "tertiary",
+        "displayName": "Print Aqua",
+        "canonical": "#2c8c9a",
+        "tonalRamp": [
+          "#000e11",
+          "#03292f",
+          "#0d4850",
+          "#0c6a76",
+          "#2b8c9a",
+          "#53aebc",
+          "#7ad4e3",
+          "#cff7fe"
+        ]
+      },
+      "thatch-ochre-print": {
+        "role": "tertiary",
+        "displayName": "Print Ochre",
+        "canonical": "#b8862f",
+        "tonalRamp": [
+          "#120900",
+          "#312003",
+          "#563900",
+          "#7b550c",
+          "#a47313",
+          "#c7943f",
+          "#efba67",
+          "#feecd0"
+        ]
+      },
+      "link-day": {
+        "role": "neutral",
+        "displayName": "Link on the Bar (day)",
+        "canonical": "#1f6a76",
+        "tonalRamp": [
+          "#000e11",
+          "#022930",
+          "#0c4851",
+          "#1d6975",
+          "#428996",
+          "#65abb8",
+          "#8bd2df",
+          "#cef7ff"
+        ]
+      },
+      "link-dusk": {
+        "role": "neutral",
+        "displayName": "Link on the Bar (dusk)",
+        "canonical": "#8fd9e2",
+        "tonalRamp": [
+          "#000e10",
+          "#012a2e",
+          "#07494f",
+          "#196972",
+          "#408a93",
+          "#63acb5",
+          "#89d2db",
+          "#c9f9fe"
+        ]
+      },
+      "focus-day": {
+        "role": "neutral",
+        "displayName": "Focus Ring (day)",
+        "canonical": "#1f5f6a",
+        "tonalRamp": [
+          "#000e11",
+          "#022930",
+          "#0c4851",
+          "#296873",
+          "#4b8893",
+          "#6caab6",
+          "#92d0dc",
+          "#d2f6fd"
+        ]
+      },
+      "focus-dusk": {
+        "role": "neutral",
+        "displayName": "Focus Ring (dusk)",
+        "canonical": "#f1e7d2",
+        "tonalRamp": [
+          "#110a00",
+          "#2b2313",
+          "#473f2e",
+          "#655d4b",
+          "#857c69",
+          "#a79d8a",
+          "#cdc3af",
+          "#f8eed8"
+        ]
+      },
+      "flap-cream": {
+        "role": "neutral",
+        "displayName": "Flap Cream",
+        "canonical": "#f7efdf",
+        "tonalRamp": [
+          "#100a02",
+          "#292317",
+          "#453f32",
+          "#645d4f",
+          "#847c6e",
+          "#a59e8f",
+          "#cbc3b4",
+          "#f6eede"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Sign",
+        "purpose": "The bar's name in the hero, as its sign."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles; smaller inside the matchbook."
+      },
+      "pitch": {
+        "displayName": "Pitch",
+        "purpose": "The one-line pitch under the sign."
+      },
+      "coaster-number": {
+        "displayName": "Coaster Number",
+        "purpose": "The game's figure on a coaster front."
+      },
+      "sign-small": {
+        "displayName": "Sign Small",
+        "purpose": "Headings on printed pieces: menu columns, slip, flap, footer name."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "System h3 on the bar and on the status notice."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All reading text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Ruled-list keys, meter names and values, captions, small print."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "File names, paths and code chips."
+      }
+    },
+    "surfaces": {
+      "bar-day": "background: url(images/wash-day.webp) top center / 100% auto no-repeat, #cfa972 url(images/bar-day.webp)",
+      "bar-dusk": "background: url(images/wash-dusk.webp) top center / 100% auto no-repeat, #3a2a1c url(images/bar-dusk.webp)",
+      "pulpboard": "background: #f1e7d2 url(images/pulpboard.webp)",
+      "striker": "background: url(images/striker.webp) center / 100% 100%",
+      "provenance": "Textures from docs/images/make_textures.py, cut-outs from docs/images/make_cutouts.py; each raster has a .json provenance sidecar."
+    },
+    "shadows": [
+      {
+        "name": "stock-on-bar",
+        "value": "0 1px 0 rgba(0,0,0,.12), 0 14px 22px -16px rgba(40,24,10,.6)",
+        "purpose": "Menu card, slip, printed notice."
+      },
+      {
+        "name": "coaster",
+        "value": "0 1px 0 rgba(0,0,0,.12), 0 14px 18px -14px rgba(40,24,10,.6)",
+        "purpose": "Each coaster face."
+      },
+      {
+        "name": "mini-coaster",
+        "value": "0 1px 0 rgba(0,0,0,.12), 0 10px 14px -10px rgba(40,24,10,.6)",
+        "purpose": "Mini coasters under the hero render."
+      },
+      {
+        "name": "matchbook",
+        "value": "0 1px 0 rgba(0,0,0,.15), 0 18px 26px -18px rgba(40,24,10,.7)",
+        "purpose": "The thickest piece."
+      },
+      {
+        "name": "flap-fold",
+        "value": "0 6px 8px -4px rgba(0,0,0,.35)",
+        "purpose": "The matchbook flap over its book."
+      },
+      {
+        "name": "question-card",
+        "value": "0 1px 0 rgba(0,0,0,.1)",
+        "purpose": "FAQ cards, lip only."
+      },
+      {
+        "name": "render-hero",
+        "value": "drop-shadow(0 22px 18px rgba(40,22,8,.38))",
+        "purpose": "filter on the hero cut-out render."
+      },
+      {
+        "name": "render-row",
+        "value": "drop-shadow(0 16px 14px rgba(40,22,8,.35))",
+        "purpose": "filter on the render row cut-outs."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-set-down",
+        "value": "cubic-bezier(.2, .8, .2, 1)",
+        "purpose": "All state transitions."
+      },
+      {
+        "name": "ticket-lift",
+        "value": "transform .15s; translateY(-1px) on hover",
+        "purpose": "Buttons."
+      },
+      {
+        "name": "coaster-raise",
+        "value": "transform .3s",
+        "purpose": "Coaster stacking on hover/focus."
+      },
+      {
+        "name": "coaster-turn",
+        "value": "transform .6s; rotateY(180deg)",
+        "purpose": "Coaster turns over on hover/focus."
+      },
+      {
+        "name": "faq-plus",
+        "value": "transform .2s; rotate(45deg) when open",
+        "purpose": "Question card plus to x."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition: none; animation: none; scroll-behavior: auto",
+        "purpose": "prefers-reduced-motion: reduce; states still change, instantly."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "phone",
+        "value": "560px"
+      }
+    ],
+    "themes": {
+      "light": "prefers-color-scheme light (default): bar-honey, wash-day, bar text bark ink, link-day, focus-day",
+      "dark": "prefers-color-scheme dark: bar-dusk, wash-dusk, on-bar-dusk text, link-dusk, focus-dusk; printed pieces unchanged"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button (printed ticket)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The download ticket: one per job, on the bar or inside the matchbook.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Download <span>v1.0.1</span></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border-radius:999px;background:#1a6773;color:#fff;font:750 1.05rem/1.2 system-ui,sans-serif;text-decoration:none;border:2px solid #1a6773;transition:transform .15s cubic-bezier(.2,.8,.2,1)}.ds-btn:hover{transform:translateY(-1px)}.ds-btn:focus-visible{outline:3px solid #1f5f6a;outline-offset:3px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary ticket beside the primary, lying on the bar.",
+      "html": "<div class=\"ds-bar\"><a class=\"ds-ghost\" href=\"#\">How to install</a></div>",
+      "css": ".ds-bar{background:#cfa972;padding:20px}.ds-ghost{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;border:2px solid #2d2118;color:#2d2118;font:750 1.05rem/1.2 system-ui,sans-serif;text-decoration:none;transition:transform .15s cubic-bezier(.2,.8,.2,1)}.ds-ghost:hover{transform:translateY(-1px)}.ds-ghost:focus-visible{outline:3px solid #1f5f6a;outline-offset:3px}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Shrikhand brand left, system links right, on the bar.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\">The Tipsy Tail</a><nav><a href=\"#\">Details</a><a href=\"#\">Install</a><a href=\"#\">FAQ</a><a href=\"#\">GitHub</a></nav></header>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 24px;min-height:68px;padding:0 24px;background:#cfa972;border-bottom:2px solid rgba(45,33,24,.35)}.ds-brand{font:400 1.5rem/1 Shrikhand,Georgia,serif;color:#2d2118;text-decoration:none}.ds-nav nav{display:flex;flex-wrap:wrap}.ds-nav nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:#2d2118;font:650 1rem system-ui,sans-serif;text-decoration:none}.ds-nav nav a:hover{text-decoration:underline}.ds-nav a:focus-visible{outline:3px solid #1f5f6a;outline-offset:3px}"
+    },
+    {
+      "name": "Coaster",
+      "kind": "custom",
+      "refersTo": "coaster",
+      "description": "Signature: a pulpboard disc printed in one ink; turns over on hover or focus to the detail.",
+      "html": "<ul class=\"ds-stack\"><li class=\"ds-coaster\" tabindex=\"0\" style=\"color:#1a6773;transform:rotate(-11deg)\"><div class=\"ds-face ds-front\"><b>8</b><span>beavers at once</span></div><div class=\"ds-face ds-back\"><h3>Four seats, four lanes</h3><p>Four bar seats and four swimming lanes.</p></div></li><li class=\"ds-coaster\" tabindex=\"0\" style=\"color:#74520e;transform:rotate(7deg) translateY(18px)\"><div class=\"ds-face ds-front\"><b>+2</b><span>well-being</span></div><div class=\"ds-face ds-back\"><h3>A need of its own</h3><p>An extra source, not a replacement for the Lido.</p></div></li></ul>",
+      "css": ".ds-stack{list-style:none;margin:0;padding:24px;display:flex;justify-content:center;background:#cfa972}.ds-coaster{position:relative;width:200px;aspect-ratio:1;perspective:900px;border-radius:50%;margin:0 -6px;outline-offset:6px}.ds-coaster:hover,.ds-coaster:focus{z-index:5}.ds-coaster:focus-visible{outline:3px solid #1f5f6a}.ds-face{position:absolute;inset:0;border-radius:50%;display:grid;place-content:center;text-align:center;padding:18%;background:#f1e7d2;box-shadow:0 1px 0 rgba(0,0,0,.12),0 14px 18px -14px rgba(40,24,10,.6);backface-visibility:hidden;transition:transform .6s cubic-bezier(.2,.8,.2,1);border:7px solid #f1e7d2;outline:2.5px solid currentColor;outline-offset:-15px;font-family:system-ui,sans-serif}.ds-front b{font:400 3rem/1 Shrikhand,Georgia,serif}.ds-front span{font-weight:750;font-size:.9rem}.ds-back{transform:rotateY(180deg);color:#2d2118}.ds-back h3{font-size:1rem;margin:0 0 .3em}.ds-back p{margin:0;font-size:.85rem;line-height:1.4}.ds-coaster:hover .ds-front,.ds-coaster:focus .ds-front{transform:rotateY(180deg)}.ds-coaster:hover .ds-back,.ds-coaster:focus .ds-back{transform:rotateY(360deg)}"
+    },
+    {
+      "name": "Menu Card",
+      "kind": "card",
+      "refersTo": "card-stock",
+      "description": "Pulpboard card with ruled lists in two inks and need meters on one scale.",
+      "html": "<div class=\"ds-menu\"><div><h3 class=\"ds-aq\">What it gives</h3><ul class=\"ds-ruled\"><li><span>Visitors</span><span>8: four seats, four lanes</span></li><li><span>Well-being</span><span>up to +2</span></li></ul><div class=\"ds-meter\"><span>Tipsy Tail need</span><span class=\"ds-track\"><span style=\"width:60%;background:#1a6773\"></span></span><span>0.6 an hour</span></div><div class=\"ds-meter\"><span>Wet fur</span><span class=\"ds-track\"><span style=\"width:50%;background:#74520e\"></span></span><span>0.5 an hour</span></div></div><div><h3 class=\"ds-oc\">What it asks</h3><ul class=\"ds-ruled\"><li><span>Site</span><span>5 × 6, level</span></li><li><span>Build</span><span>60 logs, 40 planks, 10 gears</span></li></ul></div></div>",
+      "css": ".ds-menu{display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;padding:30px;background:#f1e7d2;color:#2d2118;border-radius:6px;box-shadow:0 1px 0 rgba(0,0,0,.12),0 14px 22px -16px rgba(40,24,10,.6);font:400 1rem/1.5 system-ui,sans-serif}.ds-menu h3{font:400 1.6rem/1.1 Shrikhand,Georgia,serif;margin:0 0 .5em}.ds-aq{color:#1a6773}.ds-oc{color:#74520e}.ds-ruled{list-style:none;margin:0;padding:0}.ds-ruled li{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:9px 0;border-bottom:1.5px dotted rgba(45,33,24,.35)}.ds-ruled li span:first-child{font-weight:700}.ds-meter{display:grid;grid-template-columns:8.5em 1fr 6em;gap:12px;align-items:center;margin-top:8px;font-size:.95rem;font-weight:700}.ds-meter>span:last-child{text-align:right;font-variant-numeric:tabular-nums}.ds-track{height:14px;background:rgba(45,33,24,.1);border-radius:7px;overflow:hidden}.ds-track span{display:block;height:100%;border-radius:7px}"
+    },
+    {
+      "name": "Delivery Slip",
+      "kind": "card",
+      "refersTo": "card-stock",
+      "description": "A pulpboard slip turned -1.2deg with ruled definition rows.",
+      "html": "<div class=\"ds-slip\"><div class=\"ds-slip-head\"><span>Delivery slip</span><span>Water, by haulers</span></div><dl><div><dt>Reserve</dt><dd>60 water, brought by haulers</dd></div><div><dt>Drain</dt><dd>0.5 an hour (12 a day)</dd></div></dl></div>",
+      "css": ".ds-slip{max-width:520px;margin:20px auto;background:#f1e7d2;color:#2d2118;border-radius:6px;transform:rotate(-1.2deg);box-shadow:0 1px 0 rgba(0,0,0,.12),0 14px 22px -16px rgba(40,24,10,.6);font:400 1rem/1.5 system-ui,sans-serif;overflow:hidden}.ds-slip-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 24px;border-bottom:2px solid #2d2118}.ds-slip-head span:first-child{font:400 1.6rem Shrikhand,Georgia,serif;color:#1a6773}.ds-slip-head span:last-child{font-weight:700;color:#5b4a39}.ds-slip dl{margin:0;padding:4px 24px 8px}.ds-slip dl div{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding:10px 0;border-bottom:1.5px dotted rgba(45,33,24,.35)}.ds-slip dl div:last-child{border-bottom:0}.ds-slip dt{font-weight:700}.ds-slip dd{margin:0}"
+    },
+    {
+      "name": "Matchbook",
+      "kind": "custom",
+      "refersTo": "matchbook-flap",
+      "description": "The install: aqua flap folded over a pulpboard book with ochre-numbered steps and a striker strip (a produced texture on the site; approximated here).",
+      "html": "<div class=\"ds-mb\"><div class=\"ds-flap\"><span>The Tipsy Tail</span><span>Install inside</span></div><div class=\"ds-book\"><ol><li><b>Close Timberborn.</b></li><li><b>Enable The Tipsy Tail</b> and restart.</li></ol></div><div class=\"ds-striker\"></div></div>",
+      "css": ".ds-mb{max-width:440px;border-radius:8px;overflow:hidden;box-shadow:0 1px 0 rgba(0,0,0,.15),0 18px 26px -18px rgba(40,24,10,.7);font:400 1rem/1.5 system-ui,sans-serif}.ds-flap{position:relative;z-index:2;margin-bottom:-10px;border-radius:0 0 14px 14px;box-shadow:0 6px 8px -4px rgba(0,0,0,.35);display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:18px 24px 16px;background:#1a6773;color:#f7efdf;border-bottom:3px dashed rgba(247,239,223,.6)}.ds-flap span:first-child{font:400 1.6rem Shrikhand,Georgia,serif}.ds-flap span:last-child{font-weight:700}.ds-book{background:#f1e7d2;color:#2d2118;padding:34px 24px 24px}.ds-book ol{list-style:none;margin:0;padding:0;counter-reset:s}.ds-book li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1.5px dotted rgba(45,33,24,.35)}.ds-book li::before{content:counter(s);position:absolute;left:0;top:8px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#74520e;color:#fff8ea;font:400 1.05rem/1 Shrikhand,Georgia,serif}.ds-striker{height:22px;background:#5a3e26;border-top:2px solid rgba(45,33,24,.5)}"
+    },
+    {
+      "name": "Question Card",
+      "kind": "custom",
+      "refersTo": "faq-item",
+      "description": "FAQ as pulpboard cards with an aqua plus that turns to an x.",
+      "html": "<details class=\"ds-q\"><summary>Does the pool use river or lake water?</summary><div><p>No. Haulers supply the Water resource.</p></div></details>",
+      "css": ".ds-q{background:#f1e7d2;color:#2d2118;border-radius:6px;box-shadow:0 1px 0 rgba(0,0,0,.1);font:400 1rem/1.5 system-ui,sans-serif;max-width:560px}.ds-q summary{list-style:none;display:grid;grid-template-columns:1fr 22px;gap:12px;align-items:center;min-height:56px;padding:10px 18px;cursor:pointer;font-weight:700}.ds-q summary::-webkit-details-marker{display:none}.ds-q summary::after{content:'';width:18px;height:18px;background:#1a6773;-webkit-mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 4v12M4 10h12' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E\") center/contain no-repeat;mask:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 4v12M4 10h12' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E\") center/contain no-repeat;transition:transform .2s}.ds-q[open] summary::after{transform:rotate(45deg)}.ds-q summary:focus-visible{outline:3px solid #1f5f6a;outline-offset:3px}.ds-q>div{padding:0 18px 16px}.ds-q p{margin:0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Bar Ephemera",
+    "overview": "The site is the bar's own printed matter, laid out on the bar top. The page ground is a plank of oiled timber (a produced texture) under a pale sun wash; after dusk the same bar darkens under a lamp pool. Everything that carries information is a printed piece sitting on that timber: pulpboard coasters, a menu card, a delivery slip, a printed notice, a matchbook, question cards. Each printed piece is pulpboard stock printed in bark ink plus at most two spot inks, pool aqua and thatch ochre. The building itself appears as its real model renders, cut out of their grey studio backgrounds and standing on the bar with a soft contact shadow, always captioned as model renders.\n\nDensity is relaxed but exact: big Shrikhand numbers carry the game's figures, and the detail sits in ruled lists that fit their card. Pieces are laid slightly askew (coasters turned −11° to 12°, the slip at −1.2°), the way things land on a counter, but text inside them is never rotated beyond that. The system follows the operating system's light/dark preference; the printed pieces stay daylight pulpboard in both, only the bar under them changes.\n\nThe world explicitly replaced a calm editorial template (cream paper, forest green, Georgia, tracked-caps eyebrows, a stat grid, a numbered 01–03 band); none of those return.",
+    "keyCharacteristics": [
+      "Timber bar top as the page ground, textured, with a sun wash (day) or lamp pool (dusk).",
+      "Printed pieces on pulpboard stock: bark ink plus pool aqua and thatch ochre, flat fills.",
+      "Shrikhand lettering for the bar's name, section titles, big numbers and small signs; system-ui for everything read.",
+      "Real renders cut out and standing on the bar, labelled as model renders.",
+      "Pieces set a few degrees askew; soft cast shadows, never hard offsets.",
+      "One signature interaction: coasters turn over on hover or focus."
+    ],
+    "rules": [
+      {
+        "name": "The Two Inks Rule",
+        "body": "A printed piece uses bark ink plus at most pool aqua and thatch ochre, as flat fills. No third hue, no CSS gradients on a piece; the only tonal variation is the pulpboard texture itself.",
+        "section": "colors"
+      },
+      {
+        "name": "The Darkened Ink Rule",
+        "body": "Any ink carrying text, rules or a meter uses the darkened values (`pool-aqua`, `thatch-ochre`). The print values are for selection and marks too big or too wordless to need contrast.",
+        "section": "colors"
+      },
+      {
+        "name": "The Stock Stays Daylight Rule",
+        "body": "Printed pieces never invert in dark mode. Only the bar, the wash and text lying on the bar change with the theme.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sign Lettering Rule",
+        "body": "Shrikhand is for names, titles and numbers only, never a sentence longer than the pitch, never bold, never tracked.",
+        "section": "typography"
+      },
+      {
+        "name": "The Game's Numbers Rule",
+        "body": "Every big number is a figure the game uses (8, +2, 0.5, 12, 0.6), set in Shrikhand with a short system-type caption under it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lying Flat Rule",
+        "body": "Shadows are cast downward onto the bar with a negative spread and a warm brown tint; nothing hovers. Hover lifts a ticket by 1px, no more.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** put information on a printed piece (pulpboard with texture, bark ink) and let the bar carry only the sign, the pitch, section intros, renders and captions.",
+      "**Do** print each piece in bark ink plus pool aqua and/or thatch ochre, using the darkened ink values for any text, rule or meter.",
+      "**Do** set the game's own numbers in Shrikhand with a short system-type caption.",
+      "**Do** lay pieces a few degrees askew (within about ±12° for coasters, about 1° for large cards) and keep text horizontal inside anything larger.",
+      "**Do** cut renders out and stand them on the bar with a silhouette drop shadow, captioned as model renders.",
+      "**Do** keep every printed piece's texture and raster produced by the repository scripts, with a provenance sidecar next to it.",
+      "**Do** keep interactive targets at 44px or more and every turnover or open state reachable by keyboard focus."
+    ],
+    "donts": [
+      "**Don't** bring back the replaced template: cream paper ground, forest green, Georgia headings, tracked-caps eyebrows or kickers, a stat grid, a numbered 01–03 band.",
+      "**Don't** use hard offset shadows, glows or floating panels; pieces lie on the bar.",
+      "**Don't** set sentences, body copy or bold weights in Shrikhand.",
+      "**Don't** add a third spot ink or a CSS gradient to a printed piece.",
+      "**Don't** invert the pulpboard pieces for dark mode.",
+      "**Don't** present a render or an edited render as an in-game screenshot."
+    ]
+  }
+}
