@@ -84,7 +84,7 @@ BepInEx). It is the one building mod in the Timbermods catalog; don't compare it
   (`docs/fonts/shrikhand-latin-400-normal.woff2`, OFL) for display lettering; body text uses the system-ui stack; nothing
   loads from a CDN at runtime. GitHub Pages (legacy build) serves
   `main:/docs` at https://timbermods.github.io/timberborn-tipsy-tail/, so the site goes live when the change is merged
-  to `main`. It is one of the timbermods sites (MixedStorage's and MultiColony's are siblings) and should stay light
+  to `main`. It is one of the timbermods sites (MixedStorage's and Timber Together's are siblings) and should stay light
   and work at phone width.
 - **Contracts CI enforces** (`.github/workflows/tests.yml` runs `python Source/validate_version.py` on every pull
   request and push to `main`; the version is chosen only in `<Version>` in `Source/Runtime/TipsyTail.Runtime.csproj`):
