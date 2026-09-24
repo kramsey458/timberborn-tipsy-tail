@@ -10,7 +10,7 @@ validators need the installed game or Blender; see DEVELOPMENT.md.
 ## Standing rules
 
 - Never launch or drive Timberborn, and never touch installed mods or saves. The maintainer (Kyler) playtests himself.
-- Commit on a branch and open a PR. Merge only when Kyler says so in the chat.
+- Commit on a branch and open a PR. Kyler has said to merge PRs automatically: merge, then check the page live.
 - Assume fresh games: no old-save compatibility notes beyond the upgrade facts in PRODUCT.md.
 - The version is chosen only in `<Version>` of `Source/Runtime/TipsyTail.Runtime.csproj`; every other copy is written
   by hand and checked by `validate_version.py` (see step 2 below).
@@ -21,6 +21,11 @@ validators need the installed game or Blender; see DEVELOPMENT.md.
   `.nojekyll`. Live at https://timbermods.github.io/timberborn-tipsy-tail/.
 - **Published:** GitHub Pages (legacy build) serves `main:/docs`, so merging to main publishes; a build takes about a
   minute. No build step.
+- **Latest releases update themselves:** when a release becomes GitHub's Latest, `.github/workflows/latest-release.yml`
+  (the shared timbermods workflow) appends the standard footer to its notes, sets the site's
+  `data-release="version|tag|asset-name"` fallback text and the README lines ending in `<!-- latest -->` to the new
+  version, runs the site checks and commits to main. Pre-releases change nothing. Descriptions, status lists and FAQs
+  stay manual (the checklist below). Dry run: Actions → Latest release → Run workflow.
 - **Look:** "Bar Ephemera", a poolside bar. The page is the bar's own printed matter on its timber bar top: coasters,
   a menu card with need meters, a delivery slip, a printed status notice, a matchbook install, question cards, and the
   cut-out model renders standing on the bar. The look is fixed: updates extend it and never restyle it.

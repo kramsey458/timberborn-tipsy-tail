@@ -2,7 +2,7 @@
 
 A self-contained swim-up pool bar for **Timberborn**. Built from timber and thatch, supplied by haulers, and made for eight beavers to unwind.
 
-**[Download v1.0.1](https://github.com/timbermods/timberborn-tipsy-tail/releases/download/v1.0.1/TipsyTail-v1.0.1-mod.zip) · [Project website](https://timbermods.github.io/timberborn-tipsy-tail/) · [Report a bug](https://github.com/timbermods/timberborn-tipsy-tail/issues/new/choose)**
+**[Download v1.0.1](https://github.com/timbermods/timberborn-tipsy-tail/releases/download/v1.0.1/TipsyTail-v1.0.1-mod.zip) · [Project website](https://timbermods.github.io/timberborn-tipsy-tail/) · [Report a bug](https://github.com/timbermods/timberborn-tipsy-tail/issues/new/choose)** <!-- latest -->
 
 ![The Tipsy Tail model preview](docs/images/TipsyTail-preview.png)
 
@@ -35,7 +35,7 @@ Changes in earlier versions are listed under [Earlier versions](#earlier-version
 
 ## Install
 
-1. Download **TipsyTail-v1.0.1-mod.zip** from under **Assets** on the [release page](https://github.com/timbermods/timberborn-tipsy-tail/releases/tag/v1.0.1), not GitHub's automatic "Source code" archive.
+1. Download **TipsyTail-v1.0.1-mod.zip** from under **Assets** on the [release page](https://github.com/timbermods/timberborn-tipsy-tail/releases/tag/v1.0.1), not GitHub's automatic "Source code" archive. <!-- latest -->
 2. Close Timberborn and extract the included **TipsyTail** folder into your `Documents\Timberborn\Mods` folder. `manifest.json` must be directly inside `Mods\TipsyTail`.
 3. Enable **The Tipsy Tail** in the in-game mod manager and restart when prompted.
 4. Unlock the building under Well-being, connect the front entrance to a path, and provide a staffed Hauling Post with access to water.
