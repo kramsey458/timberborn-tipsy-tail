@@ -4,7 +4,7 @@ The Tipsy Tail: a Timberborn mod that adds one building, a swim-up pool bar (`Mo
 runtime DLL; `Source/`: the Blender model, generator/validator scripts, `Source/Runtime/` C# runtime and its `Tests`).
 Changes land on `main` by PR → merge. CI (`.github/workflows/tests.yml`, on every PR and push to main) runs:
 `dotnet run --project Source/Runtime/Tests/Tests.csproj -c Release` (8 terrain + 58 water grid + 6 config path checks
-pass) and `python Source/validate_version.py` (20 of 20 copies agree). Building the DLL, `build_mod.py` and the other
+pass) and `python Source/validate_version.py` (18 of 18 copies agree). Building the DLL, `build_mod.py` and the other
 validators need the installed game or Blender; see DEVELOPMENT.md.
 
 ## Standing rules
@@ -14,6 +14,24 @@ validators need the installed game or Blender; see DEVELOPMENT.md.
 - Assume fresh games: no old-save compatibility notes beyond the upgrade facts in PRODUCT.md.
 - The version is chosen only in `<Version>` of `Source/Runtime/TipsyTail.Runtime.csproj`; every other copy is written
   by hand and checked by `validate_version.py` (see step 2 below).
+
+## Writing README and website text
+
+Kyler, 2026-09-24: "simplicity and elegance is effective and desirable." Every change to the README, the website
+text and the player docs follows these rules.
+
+- **Write for a Timberborn player** who wants to download, install and use the mod. Developer detail goes in
+  DEVELOPMENT.md and version history in CHANGELOG.md; link to them rather than repeating them.
+- **Short.** One idea per sentence, most under about 20 words. A paragraph or FAQ answer is one to three sentences,
+  a troubleshooting answer a few numbered steps.
+- **Lead with the action.** Menu paths as arrow chains; on-screen labels in bold, exactly as in game.
+- **Say each thing once**, where a player would look for it; link to it elsewhere.
+- **Plain words.** No internals (class names, ids, formats) unless the player needs them to act.
+- **Cut** filler, repeated caveats, edge cases a player won't meet, and history ("since …", "no longer", older
+  builds). Describe the mod as it is now.
+- **Check every fact against the code** before writing it; changelogs lag.
+- **Keep, briefly:** credits, the unofficial line, the status, and safety facts.
+- **Reread as a new player before publishing.** Every step works as written, and nothing is said twice.
 
 ## Website
 
@@ -79,10 +97,12 @@ validators need the installed game or Blender; see DEVELOPMENT.md.
 
 ### Content rules
 
-- Describe the mod as it is now. No "New in 1.x", "added in …" or version history on the page; that lives in the
-  README's "What's new"/"Earlier versions", RELEASE_NOTES.md and the GitHub release notes.
+- Every text change follows *Writing README and website text* above.
+- Describe the mod as it is now. No "New in 1.x", "added in …" or version history on the page; that lives in
+  CHANGELOG.md, the README's "What's new", RELEASE_NOTES.md and the GitHub release notes.
 - The status notice ("What is tested, and what isn't") matches the README's release status and PRODUCT.md's honest
-  status exactly. Never invent numbers, reviews, download counts or screenshots.
+  status exactly; its Tested and Not confirmed lists are the README's, word for word. Never invent numbers, reviews,
+  download counts or screenshots.
 - Every game number comes from the mod's files; re-check them there, never from memory:
   - `Mod/Buildings/Wellbeing/TipsyTail/TipsyTail.blueprint.json`: 8 at once (`EnterableSpec.CapacityFinished`; four
     `BarSeat` slots sitting, four `Swimming` patrol slots); 0.6 an hour Tipsy Tail and 0.5 an hour Wet fur
@@ -94,7 +114,7 @@ validators need the installed game or Blender; see DEVELOPMENT.md.
     (`NeedGroupId`), decays 0.1 a day (`DailyDelta`).
   - `Mod/TemplateCollections/*.Folktails|IronTeeth.blueprint.json`: both factions. `Mod/manifest.json`:
     `MinimumGameVersion` 1.1.2.4, name "The Tipsy Tail". `Mod/Localizations/enUS.csv`: in-game text and flavour line.
-  - Clearance (three blocks), "platforms/pre-dug pits don't qualify": README "Placement and balance", DEVELOPMENT.md.
+  - Clearance (three blocks), "platforms/pre-dug pits don't qualify": README "What it needs", DEVELOPMENT.md.
 - Meter fills are `style="--v: <points per hour>"` on one shared 0–1 scale; change `--v` with the number.
 - Keep the credits and the footer's "unofficial … not affiliated with or endorsed by Mechanistry" line and Timbermods
   links. Terminology per PRODUCT.md: Tipsy Tail need, Social Life, Well-being, Wet fur, staffed Hauling Post, haulers,
@@ -127,7 +147,7 @@ When asked to "update the website for the latest release, consistent with the de
    → a coaster (keep four in the stack); played/unplayed items → the status `.checks` / `.checks.open` lists; a new
    install or update step → the matchbook `.steps` or `.install-notes`; a question → a new `details.q`. Remove
    claims that stopped being true. Don't restyle anything.
-5. Test: `python Source/validate_version.py` (must print "N of N copies agree"; 20 of 20 at 1.0.1) and
+5. Test: `python Source/validate_version.py` (must print "N of N copies agree"; 18 of 18 at 1.0.1) and
    `dotnet run --project Source/Runtime/Tests/Tests.csproj -c Release` (exit 0). Nothing else tests the site.
 6. Preview: `python -m http.server 8787 -d docs` (background), open http://localhost:8787/. With the personal
    `impeccable-site-flow` skill: `python ~/.claude/skills/impeccable-site-flow/scripts/capsite.py http://localhost:8787/
@@ -142,7 +162,8 @@ When asked to "update the website for the latest release, consistent with the de
    .9/.8rem captions, 1.02rem coaster-back h3, 1.7rem mini number, clamp(1.7rem, 3vw, 2.2rem) matchbook h2 (all
    documented in DESIGN.md prose). Anything beyond these is new: fix it or record it in DESIGN.md.
 8. If the look changed (a new component or layout), update DESIGN.md and `.impeccable/design.json`.
-9. Update the README if it repeats the facts.
+9. Update the README if it repeats the facts, and add the release at the top of CHANGELOG.md. All of it, and the site
+   text, follows *Writing README and website text* above.
 10. Ship: branch → commit → push → `gh pr create`. After Kyler says merge: `gh pr merge <n> --merge` (that publishes
     `main:/docs`), then verify:
     - `gh api repos/timbermods/timberborn-tipsy-tail/pages/builds/latest -q .status` is `built`;

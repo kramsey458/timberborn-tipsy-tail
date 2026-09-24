@@ -113,10 +113,9 @@ BepInEx). It is the one building mod in the Timbermods catalog; don't compare it
   swimming lanes; reserve; Assets; `Documents\Timberborn\Mods`; `water.cfg`; `Player.log`. Use `5 × 6` with the
   multiplication sign.
 - **Sources of truth:** README.md (player facts), DEVELOPMENT.md (mechanics and validation), RELEASE_NOTES.md (the
-  current release), the blueprints and `Mod/Localizations/enUS.csv`. There is no separate CHANGELOG file: version
-  history lives in the README's "Earlier versions" section and the GitHub release notes. Where the site and README
-  disagree, flag it; don't guess.
-- **Describe the mod as it is now.** The page carries no version history; that lives in the README and the release
+  current release), the blueprints and `Mod/Localizations/enUS.csv`. Version history lives in CHANGELOG.md and the
+  GitHub release notes. Where the site and README disagree, flag it; don't guess.
+- **Describe the mod as it is now.** The page carries no version history; that lives in CHANGELOG.md and the release
   notes. It keeps only the upgrade facts players need (the "Updating" note beside the install matchbook, and the
   pre-v0.2.0 rebuild line in the status notice). `data-release-pinned` sits on the status notice
   (`.status.card-stock`, "What is tested, and what isn't"), which satisfies the check above.
@@ -132,7 +131,8 @@ BepInEx). It is the one building mod in the Timbermods catalog; don't compare it
 
 - Voice: a fellow player sharing a fun building. Warm and a little playful where the game itself is ("Leave your
   worries on the shore. Bring your own tail." is the building's in-game flavor text), then clear and exact for
-  numbers, placement and install. Never hype.
+  numbers, placement and install. Never hype. Short and plain: one idea per sentence, each thing said once, no
+  internals and no history (see CLAUDE.md, *Writing README and website text*).
 - No official Timberborn logos or key art. The game's own item icons (Water, Log, Plank, Gear, science) are allowed
   where used and credited as Timberborn's; the current site uses none.
 - License: MIT for the original project files (model, generator scripts, blueprints, localization, runtime code,
